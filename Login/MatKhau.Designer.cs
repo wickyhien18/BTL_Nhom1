@@ -138,6 +138,7 @@
             this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(309, 38);
             this.txtMatKhau.TabIndex = 46;
+            this.txtMatKhau.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMatKhau_KeyPress);
             // 
             // btnCloseXN
             // 
@@ -168,6 +169,7 @@
             this.txtXN.PasswordChar = '*';
             this.txtXN.Size = new System.Drawing.Size(309, 38);
             this.txtXN.TabIndex = 49;
+            this.txtXN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMatKhau_KeyPress);
             // 
             // label2
             // 

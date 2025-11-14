@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace BTL___Nhóm_1
 {
@@ -18,6 +19,7 @@ namespace BTL___Nhóm_1
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.KeyPreview =  true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -58,7 +60,16 @@ namespace BTL___Nhóm_1
                 SqlDataAdapter sda = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
-                if (dt.Rows.Count > 0)
+                
+                if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin đăng nhập", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtTen.Clear();
+                    txtMatKhau.Clear();
+                    txtTen.Focus();
+                }
+
+                else if (dt.Rows.Count > 0)
                 {
                     username = txtTen.Text;
                     password = txtMatKhau.Text;
@@ -101,6 +112,14 @@ namespace BTL___Nhóm_1
         private void fmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && (e.KeyChar != '_'))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -88,6 +88,7 @@
             this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(309, 38);
             this.txtMatKhau.TabIndex = 19;
+            this.txtMatKhau.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTen_KeyPress);
             // 
             // txtTen
             // 
@@ -96,6 +97,7 @@
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(309, 38);
             this.txtTen.TabIndex = 18;
+            this.txtTen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTen_KeyPress);
             // 
             // label2
             // 
@@ -147,6 +149,7 @@
             this.btnClose.Size = new System.Drawing.Size(55, 37);
             this.btnClose.TabIndex = 24;
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnOpen
             // 
@@ -157,6 +160,7 @@
             this.btnOpen.Size = new System.Drawing.Size(55, 37);
             this.btnOpen.TabIndex = 23;
             this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // pictureBox1
             // 

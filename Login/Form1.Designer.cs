@@ -104,6 +104,7 @@
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(309, 38);
             this.txtTen.TabIndex = 5;
+            this.txtTen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTen_KeyPress);
             // 
             // txtMatKhau
             // 
@@ -113,6 +114,7 @@
             this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(309, 38);
             this.txtMatKhau.TabIndex = 6;
+            this.txtMatKhau.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTen_KeyPress);
             // 
             // linkQuenMK
             // 

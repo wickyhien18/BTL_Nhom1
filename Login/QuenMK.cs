@@ -31,7 +31,15 @@ namespace BTL___Nhóm_1
                 SqlDataAdapter sda = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
-                if (dt.Rows.Count > 0)
+
+                if (String.IsNullOrEmpty(username))
+                {
+                    MessageBox.Show("Vui lòng nhập tên đăng nhập", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtTen.Clear();
+                    txtTen.Focus();
+                }
+
+                else if (dt.Rows.Count > 0)
                 {
                     fmMatKhau matkhau = new fmMatKhau(username);
                     matkhau.Show();
@@ -64,6 +72,14 @@ namespace BTL___Nhóm_1
             fmLogin login = new fmLogin();
             login.Show();
             this.Hide();
+        }
+
+        private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

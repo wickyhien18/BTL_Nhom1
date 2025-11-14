@@ -44,7 +44,16 @@ namespace BTL___Nhóm_1
                 SqlDataAdapter sda = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
-                if (dt.Rows.Count > 0)
+
+                if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin đăng ký", "Lỗi đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtTen.Clear();
+                    txtMatKhau.Clear();
+                    txtTen.Focus();
+                }
+
+                else  if (dt.Rows.Count > 0)
                 {
                     MessageBox.Show("Tài khoản đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtTen.Clear();
@@ -72,10 +81,35 @@ namespace BTL___Nhóm_1
                 conn.Close();
             }
         }
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            if (txtMatKhau.PasswordChar == '*')
+            {
+                btnClose.BringToFront();
+                txtMatKhau.PasswordChar = '\0';
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (txtMatKhau.PasswordChar == '\0')
+            {
+                btnOpen.BringToFront();
+                txtMatKhau.PasswordChar = '*';
+            }
+        }
 
         private void fmDangKy_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

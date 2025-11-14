@@ -86,5 +86,13 @@ namespace BTL___Nhóm_1
         {
             Application.Exit();
         }
+
+        private void txtMatKhau_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
