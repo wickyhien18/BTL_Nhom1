@@ -74,6 +74,7 @@
             this.linkDangNhap.TabIndex = 33;
             this.linkDangNhap.TabStop = true;
             this.linkDangNhap.Text = "Đăng nhập";
+            this.linkDangNhap.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkDangNhap_LinkClicked);
             // 
             // txtTen
             // 

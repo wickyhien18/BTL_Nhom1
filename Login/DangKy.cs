@@ -40,7 +40,7 @@ namespace BTL___Nhóm_1
             password = txtMatKhau.Text;
             try
             {
-                String query = "SELECT * FROM Users WHERE UserName = '" + username + "' and UserPassword = '" + password + "'";
+                String query = "SELECT * FROM Users WHERE UserName = '" + username + "'";
                 SqlDataAdapter sda = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);

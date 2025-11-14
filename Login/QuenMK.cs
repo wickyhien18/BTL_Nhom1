@@ -58,5 +58,12 @@ namespace BTL___Nhóm_1
         {
             Application.Exit();
         }
+
+        private void linkDangNhap_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            fmLogin login = new fmLogin();
+            login.Show();
+            this.Hide();
+        }
     }
 }
