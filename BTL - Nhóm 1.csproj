@@ -61,48 +61,48 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DangKy.cs">
+    <Compile Include="Login\DangKy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DangKy.Designer.cs">
+    <Compile Include="Login\DangKy.Designer.cs">
       <DependentUpon>DangKy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Login\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Login\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main.cs">
+    <Compile Include="Login\Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="Login\Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="MatKhau.cs">
+    <Compile Include="Login\MatKhau.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MatKhau.Designer.cs">
+    <Compile Include="Login\MatKhau.Designer.cs">
       <DependentUpon>MatKhau.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QuenMK.cs">
+    <Compile Include="Login\QuenMK.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuenMK.Designer.cs">
+    <Compile Include="Login\QuenMK.Designer.cs">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DangKy.resx">
+    <EmbeddedResource Include="Login\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Login\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
+    <EmbeddedResource Include="Login\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MatKhau.resx">
+    <EmbeddedResource Include="Login\MatKhau.resx">
       <DependentUpon>MatKhau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -115,7 +115,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="QuenMK.resx">
+    <EmbeddedResource Include="Login\QuenMK.resx">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
