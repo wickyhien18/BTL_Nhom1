@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Globalization;
+using BTL___Nhóm_1.DAL;
 
 namespace BTL___Nhóm_1
 {
@@ -71,9 +72,14 @@ namespace BTL___Nhóm_1
 
                 else if (dt.Rows.Count > 0)
                 {
-                    username = txtTen.Text;
-                    password = txtMatKhau.Text;
-                    fmMain main = new fmMain();
+                    User user = new User
+                    {
+                        Id = Convert.ToInt32(dt.Rows[0]["UserID"]),
+                        TenDN = dt.Rows[0]["UserName"].ToString(),
+                        MatKhau = dt.Rows[0]["UserPassword"].ToString(),
+                        VaiTro = dt.Rows[0]["UserRole"].ToString()
+                    };
+                    fmMain main = new fmMain(user);
                     main.Show();
                     this.Hide();
                 }

@@ -38,6 +38,7 @@
             this.Name = "fmMain";
             this.Text = "Trang chủ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmMain_FormClosing);
+            this.Load += new System.EventHandler(this.fmMain_Load);
             this.ResumeLayout(false);
 
         }

@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,6 +24,7 @@ namespace BTL___Nhóm_1
         private void fmDangKy_Load(object sender, EventArgs e)
         {
             btnOpen.BringToFront();
+            btnXNOpen.BringToFront();
             linkDangNhap.LinkBehavior = LinkBehavior.NeverUnderline;
         }
 
@@ -35,34 +37,56 @@ namespace BTL___Nhóm_1
 
         private void btnDangKy_Click(object sender, EventArgs e)
         {
-            String username, password;
+            String username, password, role, confirm;
             username = txtTen.Text;
             password = txtMatKhau.Text;
-            try
+            confirm = txtXacnhan.Text;
+            if (rdbtnSinhvien.Checked)
             {
-                String query = "SELECT * FROM Users WHERE UserName = '" + username + "'";
-                SqlDataAdapter sda = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
+                role = "Sinh viên";
+            }
+            else if (rdbtnGiangvien.Checked)
+            {
+                role = "Giảng viên";
+            }
+            else
+            {
+                role = null;
+            }
+            try
+                {
+                    String query = "SELECT * FROM Users WHERE UserName = '" + username + "'";
+                    SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
 
-                if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
-                {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin đăng ký", "Lỗi đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtTen.Clear();
-                    txtMatKhau.Clear();
-                    txtTen.Focus();
-                }
+                    if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+                    {
+                        MessageBox.Show("Vui lòng nhập đầy đủ thông tin đăng ký", "Lỗi đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtTen.Clear();
+                        txtMatKhau.Clear();
+                        txtXacnhan.Clear();
+                        txtTen.Focus();
+                    }
 
-                else  if (dt.Rows.Count > 0)
-                {
-                    MessageBox.Show("Tài khoản đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    txtTen.Clear();
-                    txtMatKhau.Clear();
-                    txtTen.Focus();
-                }
-                else
-                {
-                    String insertQuery = "INSERT INTO Users (UserName, UserPassword) VALUES ('" + username + "', '" + password + "')";
+                    else if (dt.Rows.Count > 0)
+                    {
+                        MessageBox.Show("Tài khoản đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtTen.Clear();
+                        txtMatKhau.Clear();
+                        txtXacnhan.Clear();
+                        txtTen.Focus();
+                    }
+                    else if (password != confirm)
+                    {
+                        MessageBox.Show("Mật khẩu xác nhận không khớp", "Lỗi đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtMatKhau.Clear();
+                        txtXacnhan.Clear();
+                        txtMatKhau.Focus();
+                    }
+                    else
+                    {
+                    String insertQuery = "INSERT INTO Users (UserName, UserPassword,UserRole) VALUES ('" + username + "', '" + password + "', N'" + role + "')";
                     SqlCommand cmd = new SqlCommand(insertQuery, conn);
                     conn.Open();
                     cmd.ExecuteNonQuery();
@@ -70,23 +94,25 @@ namespace BTL___Nhóm_1
                     fmLogin login = new fmLogin();
                     login.Show();
                     this.Hide();
+                    }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Lỗi");
-            }
-            finally
-            {
-                conn.Close();
-            }
+                catch
+                {
+                    MessageBox.Show("Lỗi");
+                }
+                finally
+                {
+                    conn.Close();
+                }
         }
         private void btnOpen_Click(object sender, EventArgs e)
         {
             if (txtMatKhau.PasswordChar == '*')
             {
                 btnClose.BringToFront();
+                btnXNClose.BringToFront();
                 txtMatKhau.PasswordChar = '\0';
+                txtXacnhan.PasswordChar = '\0';
             }
         }
 
@@ -95,7 +121,9 @@ namespace BTL___Nhóm_1
             if (txtMatKhau.PasswordChar == '\0')
             {
                 btnOpen.BringToFront();
+                btnXNOpen.BringToFront();
                 txtMatKhau.PasswordChar = '*';
+                txtXacnhan.PasswordChar = '*';
             }
         }
 
