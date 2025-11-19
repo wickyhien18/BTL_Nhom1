@@ -1,15 +1,17 @@
-﻿using System;
+﻿using BTL___Nhóm_1.DAL;
+using Microsoft.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.IdentityModel.Protocols;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Microsoft.Data;
+using System.Configuration;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.Globalization;
-using BTL___Nhóm_1.DAL;
 
 namespace BTL___Nhóm_1
 {
@@ -66,7 +68,7 @@ namespace BTL___Nhóm_1
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-WICKY\SQLEXPRESS01;Initial Catalog=DeCuong;Integrated Security=True;Encrypt=True;TrustServerCertificate=True")) {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString)) {
                     connection.Open();
                     string select = "SELECT * FROM Users WHERE UserName = @username AND UserPassword = @password";
                     using (SqlCommand cmd = new SqlCommand(select, connection))
