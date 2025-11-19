@@ -54,7 +54,7 @@ namespace BTL___Nhóm_1
         {
             String username, password;
 
-            username = txtTen.Text;
+            username = txtTen.Text.Trim();
             password = txtMatKhau.Text;
 
             if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
