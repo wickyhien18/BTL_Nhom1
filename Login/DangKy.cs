@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.Data;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
@@ -14,7 +15,7 @@ namespace BTL___Nhóm_1
 {
     public partial class fmDangKy : Form
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""D:\BTL - Nhóm 1\BTL - Nhóm 1\DeCuong.mdf"";Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-WICKY\SQLEXPRESS01;Initial Catalog=DeCuong;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
         public fmDangKy()
         {
             InitializeComponent();
@@ -41,68 +42,74 @@ namespace BTL___Nhóm_1
             username = txtTen.Text;
             password = txtMatKhau.Text;
             confirm = txtXacnhan.Text;
-            if (rdbtnSinhvien.Checked)
+
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                role = "Sinh viên";
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTen.Focus();
+                return; 
             }
-            else if (rdbtnGiangvien.Checked)
+
+            if (password != confirm)
             {
-                role = "Giảng viên";
+                MessageBox.Show("Mật khẩu xác nhận không khớp!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtXacnhan.Focus();
+                return;
             }
+
+            if (rdbtnSinhvien.Checked) role = "Sinh viên";
+            else if (rdbtnGiangvien.Checked) role = "Giảng viên";
             else
             {
-                role = null;
+                MessageBox.Show("Vui lòng chọn vai trò (Sinh viên/Giảng viên)!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
+
             try
-                {
-                    String query = "SELECT * FROM Users WHERE UserName = '" + username + "'";
-                    SqlDataAdapter sda = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    sda.Fill(dt);
+            {
+                connection.Open();
 
-                    if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+                    string checkSql = "SELECT COUNT(*) FROM Users WHERE UserName = @user";
+                    using (SqlCommand checkCmd = new SqlCommand(checkSql, connection))
                     {
-                        MessageBox.Show("Vui lòng nhập đầy đủ thông tin đăng ký", "Lỗi đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txtTen.Clear();
-                        txtMatKhau.Clear();
-                        txtXacnhan.Clear();
-                        txtTen.Focus();
+                        checkCmd.Parameters.AddWithValue("@user", username);
+                        int exist = (int)checkCmd.ExecuteScalar(); 
+
+                        if (exist > 0)
+                        {
+                            MessageBox.Show("Tài khoản này đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txtTen.Focus();
+                            return;
+                        }
                     }
 
-                    else if (dt.Rows.Count > 0)
+                   
+                    string insertSql = "INSERT INTO Users (UserName, UserPassword, UserRole) VALUES (@user, @pass, @role)";
+                    using (SqlCommand insertCmd = new SqlCommand(insertSql, connection))
                     {
-                        MessageBox.Show("Tài khoản đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txtTen.Clear();
-                        txtMatKhau.Clear();
-                        txtXacnhan.Clear();
-                        txtTen.Focus();
+                        
+                        insertCmd.Parameters.AddWithValue("@user", username);
+                        insertCmd.Parameters.AddWithValue("@pass", password); 
+                        insertCmd.Parameters.AddWithValue("@role", role);
+
+                        insertCmd.ExecuteNonQuery(); 
                     }
-                    else if (password != confirm)
-                    {
-                        MessageBox.Show("Mật khẩu xác nhận không khớp", "Lỗi đăng ký", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        txtMatKhau.Clear();
-                        txtXacnhan.Clear();
-                        txtMatKhau.Focus();
-                    }
-                    else
-                    {
-                    String insertQuery = "INSERT INTO Users (UserName, UserPassword,UserRole) VALUES ('" + username + "', '" + password + "', N'" + role + "')";
-                    SqlCommand cmd = new SqlCommand(insertQuery, conn);
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Chuyển form
                     fmLogin login = new fmLogin();
                     login.Show();
-                    this.Hide();
-                    }
-                }
-                catch
+                    this.Hide(); 
+                
+            }
+            catch (Exception ex) 
                 {
-                    MessageBox.Show("Lỗi");
+                    MessageBox.Show("Lỗi" + ex.Message);
                 }
                 finally
                 {
-                    conn.Close();
+                    connection.Close();
                 }
         }
         private void btnOpen_Click(object sender, EventArgs e)

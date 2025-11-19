@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using Microsoft.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,7 @@ namespace BTL___Nhóm_1
         {
             InitializeComponent();
             this.user = user;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void fmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -28,6 +29,16 @@ namespace BTL___Nhóm_1
         private void fmMain_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void pcbAvatar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc muốn đăng xuất","Thông báo",MessageBoxButtons.YesNo,MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                fmLogin login = new fmLogin();
+                login.Show();
+                this.Hide();
+            }
         }
     }
 }

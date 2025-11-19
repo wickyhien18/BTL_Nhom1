@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using Microsoft.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Globalization;
 using BTL___Nhóm_1.DAL;
 
@@ -15,7 +15,7 @@ namespace BTL___Nhóm_1
 {
     public partial class fmLogin : Form
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""D:\BTL - Nhóm 1\BTL - Nhóm 1\DeCuong.mdf"";Integrated Security=True");
+        
         public fmLogin()
         {
             InitializeComponent();
@@ -55,49 +55,54 @@ namespace BTL___Nhóm_1
             username = txtTen.Text;
             password = txtMatKhau.Text;
 
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtTen.Clear();
+                txtMatKhau.Clear();
+                txtTen.Focus();
+                return;
+            }
+
             try
             {
-                String query = "SELECT * FROM Users WHERE UserName = '"+username+"' and UserPassword = '"+password+"'";
-                SqlDataAdapter sda = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-                
-                if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
-                {
-                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin đăng nhập", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtTen.Clear();
-                    txtMatKhau.Clear();
-                    txtTen.Focus();
-                }
-
-                else if (dt.Rows.Count > 0)
-                {
-                    User user = new User
+                using (SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-WICKY\SQLEXPRESS01;Initial Catalog=DeCuong;Integrated Security=True;Encrypt=True;TrustServerCertificate=True")) {
+                    connection.Open();
+                    string select = "SELECT * FROM Users WHERE UserName = @username AND UserPassword = @password";
+                    using (SqlCommand cmd = new SqlCommand(select, connection))
                     {
-                        Id = Convert.ToInt32(dt.Rows[0]["UserID"]),
-                        TenDN = dt.Rows[0]["UserName"].ToString(),
-                        MatKhau = dt.Rows[0]["UserPassword"].ToString(),
-                        VaiTro = dt.Rows[0]["UserRole"].ToString()
-                    };
-                    fmMain main = new fmMain(user);
-                    main.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai","Lỗi đăng nhập",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    txtTen.Clear();
-                    txtMatKhau.Clear();
-                    txtTen.Focus();
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@password", password);
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                User user = new User
+                                {
+                                    Id = Convert.ToInt32(reader["UserId"]),
+                                    TenDN = reader["UserName"].ToString(),
+                                    MatKhau = reader["UserPassword"].ToString(),
+                                    VaiTro = reader["UserRole"].ToString()
+                                };
+                                fmMain main = new fmMain(user);
+                                main.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Tên đăng nhập hoặc mật khẩu sai", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                txtTen.Clear();
+                                txtMatKhau.Clear();
+                                txtTen.Focus();
+                            }
+                        }
+                    }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Lỗi");
-            }
-            finally
-            {
-                conn.Close();
+                MessageBox.Show("Lỗi " + ex.Message);
             }
         }
 
@@ -125,6 +130,14 @@ namespace BTL___Nhóm_1
             if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && (e.KeyChar != '_'))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void fmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnDangNhap.PerformClick();
             }
         }
     }

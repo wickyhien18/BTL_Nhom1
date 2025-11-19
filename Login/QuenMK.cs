@@ -1,8 +1,9 @@
-﻿using System;
+﻿using BTL___Nhóm_1.DAL;
+using Microsoft.Data;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace BTL___Nhóm_1
 {
     public partial class fmQuen : Form
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""D:\BTL - Nhóm 1\BTL - Nhóm 1\DeCuong.mdf"";Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-WICKY\SQLEXPRESS01;Initial Catalog=DeCuong;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
         public fmQuen()
         {
             InitializeComponent();
@@ -25,31 +26,36 @@ namespace BTL___Nhóm_1
         {
             String username;
             username = txtTen.Text;
+            if (String.IsNullOrEmpty(username))
+            {
+                MessageBox.Show("Tên đăng nhập không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtTen.Clear();
+                txtTen.Focus();
+                return;
+            }
+
             try
             {
-                String query = "SELECT * FROM Users WHERE UserName = '" + username + "'";
-                SqlDataAdapter sda = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                sda.Fill(dt);
-
-                if (String.IsNullOrEmpty(username))
+                connection.Open();
+                string select = "SELECT COUNT(*) FROM Users WHERE UserName = @username";
+                using (SqlCommand cmd = new SqlCommand(select, connection))
                 {
-                    MessageBox.Show("Vui lòng nhập tên đăng nhập", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtTen.Clear();
-                    txtTen.Focus();
-                }
-
-                else if (dt.Rows.Count > 0)
-                {
-                    fmMatKhau matkhau = new fmMatKhau(username);
-                    matkhau.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Tài khoản đăng nhập không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtTen.Clear();
-                    txtTen.Focus();
+                    cmd.Parameters.AddWithValue("@username", username);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            fmMatKhau matkhau = new fmMatKhau(username);
+                            matkhau.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tài khoản đăng nhập không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            txtTen.Clear();
+                            txtTen.Focus();
+                        }
+                    }
                 }
             }
             catch
@@ -58,7 +64,7 @@ namespace BTL___Nhóm_1
             }
             finally
             {
-                conn.Close();
+                connection.Close();
             }
         }
 
