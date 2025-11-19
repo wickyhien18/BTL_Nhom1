@@ -26,7 +26,7 @@ namespace BTL___Nhóm_1
         private void btnDoi_Click(object sender, EventArgs e)
         {
             String username;
-            username = txtTen.Text;
+            username = txtTen.Text.Trim();
             if (String.IsNullOrEmpty(username))
             {
                 MessageBox.Show("Tên đăng nhập không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -86,6 +86,14 @@ namespace BTL___Nhóm_1
             if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
             {
                 e.Handled = true;
+            }
+        }
+
+        private void fmQuen_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnDoi.PerformClick();
             }
         }
     }

@@ -203,6 +203,7 @@
             this.Name = "fmMatKhau";
             this.Text = "Đổi mật khẩu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmMatKhau_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmMatKhau_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

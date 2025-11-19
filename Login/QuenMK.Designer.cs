@@ -144,6 +144,7 @@
             this.Name = "fmQuen";
             this.Text = "Quên mật khẩu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmQuen_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmQuen_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

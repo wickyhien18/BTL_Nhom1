@@ -40,7 +40,7 @@ namespace BTL___Nhóm_1
         private void btnDangKy_Click(object sender, EventArgs e)
         {
             String username, password, role, confirm;
-            username = txtTen.Text;
+            username = txtTen.Text.Trim();
             password = txtMatKhau.Text;
             confirm = txtXacnhan.Text;
 
@@ -145,6 +145,14 @@ namespace BTL___Nhóm_1
             if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
             {
                 e.Handled = true;
+            }
+        }
+
+        private void fmDangKy_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnDangKy.PerformClick();
             }
         }
     }

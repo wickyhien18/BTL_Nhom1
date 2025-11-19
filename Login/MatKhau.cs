@@ -95,5 +95,13 @@ namespace BTL___Nhóm_1
                 e.Handled = true;
             }
         }
+
+        private void fmMatKhau_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnDoi.PerformClick();
+            }
+        }
     }
 }
