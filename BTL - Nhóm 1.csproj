@@ -263,13 +263,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DeCuong.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DeCuong_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>DeCuong.mdf</DependentUpon>
-    </Content>
     <None Include="Resources\UTC.png" />
   </ItemGroup>
   <ItemGroup>
