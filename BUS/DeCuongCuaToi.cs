@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BTL___Nhóm_1.BUS
 {
-    public partial class CaNhan : UserControl
+    public partial class DeCuongCuaToi : UserControl
     {
-        public CaNhan()
+        public DeCuongCuaToi()
         {
             InitializeComponent();
         }

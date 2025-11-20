@@ -1,6 +1,6 @@
 ﻿namespace BTL___Nhóm_1.BUS
 {
-    partial class CaNhan
+    partial class DeCuongCuaToi
     {
         /// <summary> 
         /// Required designer variable.
@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CaNhan";
-            this.Size = new System.Drawing.Size(1080, 776);
+            this.Size = new System.Drawing.Size(1080, 662);
             this.ResumeLayout(false);
 
         }

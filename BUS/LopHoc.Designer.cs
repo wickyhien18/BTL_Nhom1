@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "LopHoc";
-            this.Size = new System.Drawing.Size(1080, 776);
+            this.Size = new System.Drawing.Size(1080, 662);
             this.ResumeLayout(false);
 
         }

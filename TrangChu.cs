@@ -13,7 +13,6 @@ namespace BTL___Nhóm_1
 {
     public partial class fmMain : Form
     {
-        User user = new User();
 
         // Collapse state
         private int panel1Width;
@@ -22,10 +21,9 @@ namespace BTL___Nhóm_1
         private string textLopHoc;
         private string textCaNhan;
 
-        public fmMain(User user)
+        public fmMain()
         {
             InitializeComponent();
-            this.user = user;
             this.StartPosition = FormStartPosition.CenterScreen;
 
             // Save original state
@@ -36,9 +34,9 @@ namespace BTL___Nhóm_1
             textCaNhan = btnCaNhan.Text;
 
             // Set username and role display on top-right
-            if (!string.IsNullOrEmpty(this.user?.TenDN))
+            if (!string.IsNullOrEmpty(BTL___Nhóm_1.DAL.User.TenDN))
             {
-                lblUsername.Text = $"{this.user.TenDN} - {this.user.VaiTro}";
+                lblUsername.Text = $"{BTL___Nhóm_1.DAL.User.TenDN} - {BTL___Nhóm_1.DAL.User.VaiTro}";
             }
             else
             {
@@ -101,7 +99,7 @@ namespace BTL___Nhóm_1
 
         private void btnCaNhan_Click(object sender, EventArgs e)
         {
-            caNhan1.BringToFront();
+            deCuongCuaToi1.BringToFront();
         }
 
         private void btnToggle_Click(object sender, EventArgs e)

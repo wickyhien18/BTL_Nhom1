@@ -80,14 +80,11 @@ namespace BTL___Nhóm_1
                         {
                             if (reader.Read())
                             {
-                                User user = new User
-                                {
-                                    Id = Convert.ToInt32(reader["UserId"]),
-                                    TenDN = reader["UserName"].ToString(),
-                                    MatKhau = reader["UserPassword"].ToString(),
-                                    VaiTro = reader["UserRole"].ToString()
-                                };
-                                fmMain main = new fmMain(user);
+                                BTL___Nhóm_1.DAL.User.Id = Convert.ToInt32(reader["UserId"]);
+                                BTL___Nhóm_1.DAL.User.TenDN = reader["UserName"].ToString();
+                                BTL___Nhóm_1.DAL.User.MatKhau = reader["UserPassword"].ToString();
+                                BTL___Nhóm_1.DAL.User.VaiTro = reader["UserRole"].ToString();
+                                fmMain main = new fmMain();
                                 main.Show();
                                 this.Hide();
                             }
