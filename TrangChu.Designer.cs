@@ -46,7 +46,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(140)))));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panel1.Controls.Add(this.btnCaNhan);
             this.panel1.Controls.Add(this.btnLopHoc);
@@ -60,44 +60,50 @@
             // 
             // btnCaNhan
             // 
+            this.btnCaNhan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(140)))));
             this.btnCaNhan.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCaNhan.FlatAppearance.BorderSize = 0;
             this.btnCaNhan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCaNhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.btnCaNhan.ForeColor = System.Drawing.Color.White;
             this.btnCaNhan.Location = new System.Drawing.Point(4, 389);
             this.btnCaNhan.Name = "btnCaNhan";
             this.btnCaNhan.Size = new System.Drawing.Size(286, 67);
             this.btnCaNhan.TabIndex = 3;
             this.btnCaNhan.Text = "Lưu trữ cá nhân";
-            this.btnCaNhan.UseVisualStyleBackColor = true;
+            this.btnCaNhan.UseVisualStyleBackColor = false;
             this.btnCaNhan.Click += new System.EventHandler(this.btnCaNhan_Click);
             // 
             // btnLopHoc
             // 
+            this.btnLopHoc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(140)))));
             this.btnLopHoc.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLopHoc.FlatAppearance.BorderSize = 0;
             this.btnLopHoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLopHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.btnLopHoc.ForeColor = System.Drawing.Color.White;
             this.btnLopHoc.Location = new System.Drawing.Point(3, 316);
             this.btnLopHoc.Name = "btnLopHoc";
             this.btnLopHoc.Size = new System.Drawing.Size(286, 67);
             this.btnLopHoc.TabIndex = 2;
             this.btnLopHoc.Text = "Lớp học ";
-            this.btnLopHoc.UseVisualStyleBackColor = true;
+            this.btnLopHoc.UseVisualStyleBackColor = false;
             this.btnLopHoc.Click += new System.EventHandler(this.btnLopHoc_Click);
             // 
             // btnTrangChu
             // 
+            this.btnTrangChu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(70)))), ((int)(((byte)(140)))));
             this.btnTrangChu.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTrangChu.FlatAppearance.BorderSize = 0;
             this.btnTrangChu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTrangChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.btnTrangChu.ForeColor = System.Drawing.Color.White;
             this.btnTrangChu.Location = new System.Drawing.Point(4, 243);
             this.btnTrangChu.Name = "btnTrangChu";
             this.btnTrangChu.Size = new System.Drawing.Size(286, 67);
             this.btnTrangChu.TabIndex = 1;
             this.btnTrangChu.Text = "Trang chủ";
-            this.btnTrangChu.UseVisualStyleBackColor = true;
+            this.btnTrangChu.UseVisualStyleBackColor = false;
             this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
             // 
             // pcbAvatar
@@ -151,6 +157,7 @@
             // 
             // btnToggle
             // 
+            this.btnToggle.BackColor = System.Drawing.Color.Transparent;
             this.btnToggle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnToggle.FlatAppearance.BorderSize = 0;
             this.btnToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -160,7 +167,7 @@
             this.btnToggle.Size = new System.Drawing.Size(36, 36);
             this.btnToggle.TabIndex = 4;
             this.btnToggle.Text = "☰";
-            this.btnToggle.UseVisualStyleBackColor = true;
+            this.btnToggle.UseVisualStyleBackColor = false;
             this.btnToggle.Click += new System.EventHandler(this.btnToggle_Click);
             // 
             // pcbUserAvatar
