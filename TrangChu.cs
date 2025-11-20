@@ -40,5 +40,20 @@ namespace BTL___Nhóm_1
                 this.Hide();
             }
         }
+
+        private void btnTrangChu_Click(object sender, EventArgs e)
+        {
+            trangChu1.BringToFront();
+        }
+
+        private void btnLopHoc_Click(object sender, EventArgs e)
+        {
+            lopHoc1.BringToFront();
+        }
+
+        private void btnCaNhan_Click(object sender, EventArgs e)
+        {
+            caNhan1.BringToFront();
+        }
     }
 }
