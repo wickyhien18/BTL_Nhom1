@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnTrangChu = new System.Windows.Forms.Button();
-            this.btnLopHoc = new System.Windows.Forms.Button();
             this.btnCaNhan = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnLopHoc = new System.Windows.Forms.Button();
+            this.btnTrangChu = new System.Windows.Forms.Button();
             this.pcbAvatar = new System.Windows.Forms.PictureBox();
-            this.lopHoc1 = new BTL___Nhóm_1.BUS.LopHoc();
-            this.caNhan1 = new BTL___Nhóm_1.BUS.CaNhan();
-            this.trangChu1 = new BTL___Nhóm_1.BUS.TrangChu();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnLogoutPopup = new System.Windows.Forms.Button();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.btnToggle = new System.Windows.Forms.Button();
+            this.pcbUserAvatar = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbAvatar)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbUserAvatar)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -56,40 +58,12 @@
             this.panel1.Size = new System.Drawing.Size(294, 776);
             this.panel1.TabIndex = 0;
             // 
-            // btnTrangChu
-            // 
-            this.btnTrangChu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTrangChu.FlatAppearance.BorderSize = 0;
-            this.btnTrangChu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTrangChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrangChu.Location = new System.Drawing.Point(4, 243);
-            this.btnTrangChu.Name = "btnTrangChu";
-            this.btnTrangChu.Size = new System.Drawing.Size(286, 67);
-            this.btnTrangChu.TabIndex = 1;
-            this.btnTrangChu.Text = "Trang chủ";
-            this.btnTrangChu.UseVisualStyleBackColor = true;
-            this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
-            // 
-            // btnLopHoc
-            // 
-            this.btnLopHoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLopHoc.FlatAppearance.BorderSize = 0;
-            this.btnLopHoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLopHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLopHoc.Location = new System.Drawing.Point(3, 316);
-            this.btnLopHoc.Name = "btnLopHoc";
-            this.btnLopHoc.Size = new System.Drawing.Size(286, 67);
-            this.btnLopHoc.TabIndex = 2;
-            this.btnLopHoc.Text = "Lớp học ";
-            this.btnLopHoc.UseVisualStyleBackColor = true;
-            this.btnLopHoc.Click += new System.EventHandler(this.btnLopHoc_Click);
-            // 
             // btnCaNhan
             // 
             this.btnCaNhan.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCaNhan.FlatAppearance.BorderSize = 0;
             this.btnCaNhan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCaNhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCaNhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
             this.btnCaNhan.Location = new System.Drawing.Point(4, 389);
             this.btnCaNhan.Name = "btnCaNhan";
             this.btnCaNhan.Size = new System.Drawing.Size(286, 67);
@@ -98,58 +72,117 @@
             this.btnCaNhan.UseVisualStyleBackColor = true;
             this.btnCaNhan.Click += new System.EventHandler(this.btnCaNhan_Click);
             // 
-            // panel2
+            // btnLopHoc
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.trangChu1);
-            this.panel2.Controls.Add(this.lopHoc1);
-            this.panel2.Controls.Add(this.caNhan1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(294, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1080, 776);
-            this.panel2.TabIndex = 1;
+            this.btnLopHoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLopHoc.FlatAppearance.BorderSize = 0;
+            this.btnLopHoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLopHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.btnLopHoc.Location = new System.Drawing.Point(3, 316);
+            this.btnLopHoc.Name = "btnLopHoc";
+            this.btnLopHoc.Size = new System.Drawing.Size(286, 67);
+            this.btnLopHoc.TabIndex = 2;
+            this.btnLopHoc.Text = "Lớp học ";
+            this.btnLopHoc.UseVisualStyleBackColor = true;
+            this.btnLopHoc.Click += new System.EventHandler(this.btnLopHoc_Click);
+            // 
+            // btnTrangChu
+            // 
+            this.btnTrangChu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTrangChu.FlatAppearance.BorderSize = 0;
+            this.btnTrangChu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrangChu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.btnTrangChu.Location = new System.Drawing.Point(4, 243);
+            this.btnTrangChu.Name = "btnTrangChu";
+            this.btnTrangChu.Size = new System.Drawing.Size(286, 67);
+            this.btnTrangChu.TabIndex = 1;
+            this.btnTrangChu.Text = "Trang chủ";
+            this.btnTrangChu.UseVisualStyleBackColor = true;
+            this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
             // 
             // pcbAvatar
             // 
             this.pcbAvatar.Image = global::BTL___Nhóm_1.Properties.Resources.UTC;
-            this.pcbAvatar.Location = new System.Drawing.Point(44, 25);
+            this.pcbAvatar.Location = new System.Drawing.Point(52, 41);
             this.pcbAvatar.Name = "pcbAvatar";
             this.pcbAvatar.Size = new System.Drawing.Size(180, 180);
             this.pcbAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pcbAvatar.TabIndex = 0;
             this.pcbAvatar.TabStop = false;
-            this.pcbAvatar.Click += new System.EventHandler(this.pcbAvatar_Click);
             // 
-            // lopHoc1
+            // panel2
             // 
-            this.lopHoc1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lopHoc1.Location = new System.Drawing.Point(0, 0);
-            this.lopHoc1.Name = "lopHoc1";
-            this.lopHoc1.Size = new System.Drawing.Size(1080, 776);
-            this.lopHoc1.TabIndex = 2;
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.btnLogoutPopup);
+            this.panel2.Controls.Add(this.lblUsername);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(294, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1080, 776);
+            this.panel2.TabIndex = 1;
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
-            // caNhan1
+            // btnLogoutPopup
             // 
-            this.caNhan1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.caNhan1.Location = new System.Drawing.Point(0, 0);
-            this.caNhan1.Name = "caNhan1";
-            this.caNhan1.Size = new System.Drawing.Size(1080, 776);
-            this.caNhan1.TabIndex = 1;
+            this.btnLogoutPopup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogoutPopup.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogoutPopup.FlatAppearance.BorderSize = 0;
+            this.btnLogoutPopup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogoutPopup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnLogoutPopup.Location = new System.Drawing.Point(950, 64);
+            this.btnLogoutPopup.Name = "btnLogoutPopup";
+            this.btnLogoutPopup.Size = new System.Drawing.Size(120, 48);
+            this.btnLogoutPopup.TabIndex = 5;
+            this.btnLogoutPopup.Text = "Đăng xuất";
+            this.btnLogoutPopup.UseVisualStyleBackColor = true;
+            this.btnLogoutPopup.Visible = false;
+            this.btnLogoutPopup.Click += new System.EventHandler(this.btnLogoutPopup_Click);
             // 
-            // trangChu1
+            // lblUsername
             // 
-            this.trangChu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trangChu1.Location = new System.Drawing.Point(0, 0);
-            this.trangChu1.Name = "trangChu1";
-            this.trangChu1.Size = new System.Drawing.Size(1080, 776);
-            this.trangChu1.TabIndex = 0;
+            this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblUsername.Location = new System.Drawing.Point(831, 17);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(151, 20);
+            this.lblUsername.TabIndex = 4;
+            this.lblUsername.Text = "Username - Vai trò";
+            // 
+            // btnToggle
+            // 
+            this.btnToggle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnToggle.FlatAppearance.BorderSize = 0;
+            this.btnToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnToggle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.btnToggle.Location = new System.Drawing.Point(6, 6);
+            this.btnToggle.Name = "btnToggle";
+            this.btnToggle.Size = new System.Drawing.Size(36, 36);
+            this.btnToggle.TabIndex = 4;
+            this.btnToggle.Text = "☰";
+            this.btnToggle.UseVisualStyleBackColor = true;
+            this.btnToggle.Click += new System.EventHandler(this.btnToggle_Click);
+            // 
+            // pcbUserAvatar
+            // 
+            this.pcbUserAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pcbUserAvatar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pcbUserAvatar.Image = global::BTL___Nhóm_1.Properties.Resources.UTC;
+            this.pcbUserAvatar.Location = new System.Drawing.Point(1328, 8);
+            this.pcbUserAvatar.Name = "pcbUserAvatar";
+            this.pcbUserAvatar.Size = new System.Drawing.Size(36, 36);
+            this.pcbUserAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pcbUserAvatar.TabIndex = 3;
+            this.pcbUserAvatar.TabStop = false;
+            this.pcbUserAvatar.Click += new System.EventHandler(this.pcbUserAvatar_Click);
             // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1374, 776);
+            this.Controls.Add(this.pcbUserAvatar);
+            this.Controls.Add(this.btnToggle);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "fmMain";
@@ -157,8 +190,10 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmMain_FormClosing);
             this.Load += new System.EventHandler(this.fmMain_Load);
             this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbAvatar)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbUserAvatar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,6 +206,10 @@
         private System.Windows.Forms.Button btnCaNhan;
         private System.Windows.Forms.Button btnLopHoc;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnToggle;
+        private System.Windows.Forms.PictureBox pcbUserAvatar;
+        private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.Button btnLogoutPopup;
         private BUS.TrangChu trangChu1;
         private BUS.CaNhan caNhan1;
         private BUS.LopHoc lopHoc1;
