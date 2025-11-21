@@ -16,8 +16,10 @@ namespace BTL___Nhóm_1.TrangChu
 {
     public partial class ThemVaoDS : Form
     {
-        byte[] fileData = null;
+        // Biến lưu trữ dữ liệu tệp
+        string fileData = null;
         string fileType = null;
+        string filePath = null;
         public ThemVaoDS()
         {
             InitializeComponent();
@@ -26,19 +28,36 @@ namespace BTL___Nhóm_1.TrangChu
 
         private void btnFile_Click(object sender, EventArgs e)
         {
+            // Mở hộp thoại chọn tệp
             ofdDeCuong.Filter = "De Cuong(WORD,PDF,EXCEL)|*.pdf;*.docx;*.xls;*.xlsx";
             if (ofdDeCuong.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    fileData = File.ReadAllBytes(ofdDeCuong.FileName);
+                    fileData = Path.GetFileName(ofdDeCuong.FileName);
                     fileType = Path.GetExtension(ofdDeCuong.FileName).ToLower();
                     txtFile.Text = ofdDeCuong.FileName;
+
+                    //Đường dẫn lưu tệp ./bin/Debug/KhoDeCuong
+                    string folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
+
+                    if (!Directory.Exists(folderDeCuong))
+                    {
+                        Directory.CreateDirectory(folderDeCuong);
+                    }
+
+                    string newFile = fileData + "_" + DateTime.Now.Ticks.ToString();
+                    filePath = Path.Combine(folderDeCuong, newFile + fileType);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi: " + ex.Message);
                 }
+            }
+            else
+            {
+                fileData = null;
+                fileType = null;
             }
         }
 
@@ -52,10 +71,12 @@ namespace BTL___Nhóm_1.TrangChu
                 return;
             }
             try
-            {
+            {         
+                File.Copy(ofdDeCuong.FileName, filePath);
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
                 {
                     connection.Open();
+                    // Lấy SubjectId từ tên môn học đã chọn
                     int subjectId = 0;
                     string selectSubjectId = "SELECT SubjectId FROM Subject WHERE SubjectName = @SubjectName";
                     using (SqlCommand command = new SqlCommand(selectSubjectId, connection))
@@ -72,18 +93,18 @@ namespace BTL___Nhóm_1.TrangChu
                             return;
                         }
                     }
-                    string insert = "INSERT INTO Syllabus (SyllabusName, Author, PostedDate, SubjectId, UserId, SyllabusContext, SyllabusType) " +
-                                    "VALUES (@SyllabusName, @Author, @PostedDate, @SubjectId, @UserId, @SyllabusContext, @SyllabusType)";
+                    //Thêm đề cương vào cơ sở dữ liệu
+                    string insert = "INSERT INTO Syllabus (SyllabusName, Author, PostedDate, SubjectId, SyllabusContext, SyllabusType, SyllabusStatus) " +
+                                    "VALUES (@SyllabusName, @Author, @PostedDate, @SubjectId, @SyllabusContext, @SyllabusType, @SyllabusStatus)";
                     using (SqlCommand command = new SqlCommand(insert, connection))
                     {
                         command.Parameters.AddWithValue("@SyllabusName",txtTenDeCuong.Text.Trim());
                         command.Parameters.AddWithValue("@Author", txtTacGia.Text.Trim());
                         command.Parameters.AddWithValue("@PostedDate",dtpXuatBan.Text);
                         command.Parameters.AddWithValue("@SubjectId", subjectId);
-                        command.Parameters.AddWithValue("@UserId", BTL___Nhóm_1.DAL.User.Id);
-                        command.Parameters.AddWithValue("@SyllabusContext", SqlDbType.VarBinary).Value = fileData;
+                        command.Parameters.AddWithValue("@SyllabusContext", filePath);
                         command.Parameters.AddWithValue("@SyllabusType", fileType);
-
+                        command.Parameters.AddWithValue("@SyllabusStatus", "Công khai");
                         command.ExecuteNonQuery();
                     }
                 }
@@ -95,7 +116,7 @@ namespace BTL___Nhóm_1.TrangChu
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
-
+        // Chỉ cho phép nhập chữ cái, chữ số và dấu gạch dưới
         private void txtTenDeCuong_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
@@ -103,7 +124,7 @@ namespace BTL___Nhóm_1.TrangChu
                 e.Handled = true;
             }
         }
-
+        // Chỉ cho phép nhập chữ cái, chữ số và dấu cách
         private void txtTacGia_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != ' ')
@@ -111,7 +132,7 @@ namespace BTL___Nhóm_1.TrangChu
                 e.Handled = true;
             }
         }
-
+        // Load danh sách môn học vào combobox
         private void ThemVaoDS_Load(object sender, EventArgs e)
         {
             try
@@ -122,6 +143,38 @@ namespace BTL___Nhóm_1.TrangChu
                     string selectSubjectId = "SELECT SubjectName FROM Subject";
                     using (SqlCommand command = new SqlCommand(selectSubjectId, connection))
                     {
+                        cmbMonHoc.Items.Clear();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                cmbMonHoc.Items.Add(reader["SubjectName"].ToString());
+                            }
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+        // Mở form thêm môn học
+        private void btnThemMon_Click(object sender, EventArgs e)
+        {
+            ThemMon themMonForm = new ThemMon();
+            themMonForm.ShowDialog();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
+                {
+                    connection.Open();
+                    string selectSubjectId = "SELECT SubjectName FROM Subject";
+                    using (SqlCommand command = new SqlCommand(selectSubjectId, connection))
+                    {
+                        cmbMonHoc.Items.Clear();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())

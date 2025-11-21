@@ -33,14 +33,18 @@
             this.btnThemVaoLopHoc = new System.Windows.Forms.Button();
             this.btnThemVaoDeCuongCuaToi = new System.Windows.Forms.Button();
             this.txtTenDeCuong = new System.Windows.Forms.TextBox();
-            this.btnTimTen = new System.Windows.Forms.Button();
             this.lblMonHoc = new System.Windows.Forms.Label();
             this.cmbMonHoc = new System.Windows.Forms.ComboBox();
+            this.btnTimTen = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrangChu)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTrangChu
             // 
+            this.dgvTrangChu.AllowUserToAddRows = false;
+            this.dgvTrangChu.AllowUserToDeleteRows = false;
+            this.dgvTrangChu.AllowUserToResizeColumns = false;
+            this.dgvTrangChu.AllowUserToResizeRows = false;
             this.dgvTrangChu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrangChu.Location = new System.Drawing.Point(17, 106);
             this.dgvTrangChu.Name = "dgvTrangChu";
@@ -49,6 +53,7 @@
             this.dgvTrangChu.RowTemplate.Height = 24;
             this.dgvTrangChu.Size = new System.Drawing.Size(739, 287);
             this.dgvTrangChu.TabIndex = 0;
+            this.dgvTrangChu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTrangChu_CellClick);
             // 
             // btnThemVaoDS
             // 
@@ -94,17 +99,6 @@
             this.txtTenDeCuong.Enter += new System.EventHandler(this.txtTenDeCuong_Enter);
             this.txtTenDeCuong.Leave += new System.EventHandler(this.txtTenDeCuong_Leave);
             // 
-            // btnTimTen
-            // 
-            this.btnTimTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimTen.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
-            this.btnTimTen.Location = new System.Drawing.Point(375, 59);
-            this.btnTimTen.Name = "btnTimTen";
-            this.btnTimTen.Size = new System.Drawing.Size(63, 47);
-            this.btnTimTen.TabIndex = 5;
-            this.btnTimTen.UseVisualStyleBackColor = true;
-            this.btnTimTen.Click += new System.EventHandler(this.btnTimTen_Click);
-            // 
             // lblMonHoc
             // 
             this.lblMonHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -123,6 +117,17 @@
             this.cmbMonHoc.Name = "cmbMonHoc";
             this.cmbMonHoc.Size = new System.Drawing.Size(200, 33);
             this.cmbMonHoc.TabIndex = 7;
+            // 
+            // btnTimTen
+            // 
+            this.btnTimTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimTen.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
+            this.btnTimTen.Location = new System.Drawing.Point(375, 59);
+            this.btnTimTen.Name = "btnTimTen";
+            this.btnTimTen.Size = new System.Drawing.Size(63, 47);
+            this.btnTimTen.TabIndex = 5;
+            this.btnTimTen.UseVisualStyleBackColor = true;
+            this.btnTimTen.Click += new System.EventHandler(this.btnTimTen_Click);
             // 
             // TrangChu
             // 

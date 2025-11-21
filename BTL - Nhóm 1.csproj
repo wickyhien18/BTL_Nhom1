@@ -208,6 +208,7 @@
     <Compile Include="BUS\TrangChu.Designer.cs">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Syllabus.cs" />
     <Compile Include="DAL\User.cs" />
     <Compile Include="Login\DangKy.cs">
       <SubType>Form</SubType>
@@ -241,11 +242,23 @@
     <Compile Include="Login\QuenMK.Designer.cs">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
+    <Compile Include="TrangChu\ThemMon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangChu\ThemMon.Designer.cs">
+      <DependentUpon>ThemMon.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrangChu\ThemVaoDS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TrangChu\ThemVaoDS.Designer.cs">
       <DependentUpon>ThemVaoDS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrangChu\ThongTinDeCuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangChu\ThongTinDeCuong.Designer.cs">
+      <DependentUpon>ThongTinDeCuong.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="BUS\DeCuongCuaToi.resx">
       <DependentUpon>DeCuongCuaToi.cs</DependentUpon>
@@ -281,8 +294,14 @@
     <EmbeddedResource Include="Login\QuenMK.resx">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TrangChu\ThemMon.resx">
+      <DependentUpon>ThemMon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrangChu\ThemVaoDS.resx">
       <DependentUpon>ThemVaoDS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrangChu\ThongTinDeCuong.resx">
+      <DependentUpon>ThongTinDeCuong.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

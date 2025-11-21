@@ -42,6 +42,7 @@
             this.btnFile = new System.Windows.Forms.Button();
             this.ofdDeCuong = new System.Windows.Forms.OpenFileDialog();
             this.btnThem = new System.Windows.Forms.Button();
+            this.btnThemMon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -162,11 +163,23 @@
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
+            // btnThemMon
+            // 
+            this.btnThemMon.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemMon.Location = new System.Drawing.Point(501, 266);
+            this.btnThemMon.Name = "btnThemMon";
+            this.btnThemMon.Size = new System.Drawing.Size(42, 38);
+            this.btnThemMon.TabIndex = 12;
+            this.btnThemMon.Text = "+";
+            this.btnThemMon.UseVisualStyleBackColor = true;
+            this.btnThemMon.Click += new System.EventHandler(this.btnThemMon_Click);
+            // 
             // ThemVaoDS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(641, 536);
+            this.Controls.Add(this.btnThemMon);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.btnFile);
             this.Controls.Add(this.txtFile);
@@ -203,5 +216,6 @@
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.OpenFileDialog ofdDeCuong;
         private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.Button btnThemMon;
     }
 }
