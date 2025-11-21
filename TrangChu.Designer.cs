@@ -40,9 +40,9 @@
             this.btnToggle = new System.Windows.Forms.Button();
             this.pcbUserAvatar = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.trangChu1 = new BTL___Nhóm_1.BUS.TrangChu();
             this.lopHoc1 = new BTL___Nhóm_1.BUS.LopHoc();
             this.deCuongCuaToi1 = new BTL___Nhóm_1.BUS.DeCuongCuaToi();
-            this.trangChu1 = new BTL___Nhóm_1.BUS.TrangChu();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbAvatar)).BeginInit();
             this.panel2.SuspendLayout();
@@ -137,6 +137,7 @@
             // btnLogoutPopup
             // 
             this.btnLogoutPopup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogoutPopup.BackColor = System.Drawing.Color.White;
             this.btnLogoutPopup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogoutPopup.FlatAppearance.BorderSize = 0;
             this.btnLogoutPopup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -146,7 +147,7 @@
             this.btnLogoutPopup.Size = new System.Drawing.Size(120, 48);
             this.btnLogoutPopup.TabIndex = 5;
             this.btnLogoutPopup.Text = "Đăng xuất";
-            this.btnLogoutPopup.UseVisualStyleBackColor = true;
+            this.btnLogoutPopup.UseVisualStyleBackColor = false;
             this.btnLogoutPopup.Visible = false;
             this.btnLogoutPopup.Click += new System.EventHandler(this.btnLogoutPopup_Click);
             // 
@@ -201,6 +202,15 @@
             this.panel3.Size = new System.Drawing.Size(1080, 662);
             this.panel3.TabIndex = 5;
             // 
+            // trangChu1
+            // 
+            this.trangChu1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trangChu1.Location = new System.Drawing.Point(0, 0);
+            this.trangChu1.Name = "trangChu1";
+            this.trangChu1.Size = new System.Drawing.Size(1080, 662);
+            this.trangChu1.TabIndex = 2;
+            this.trangChu1.Load += new System.EventHandler(this.trangChu1_Load);
+            // 
             // lopHoc1
             // 
             this.lopHoc1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -216,14 +226,6 @@
             this.deCuongCuaToi1.Name = "deCuongCuaToi1";
             this.deCuongCuaToi1.Size = new System.Drawing.Size(1080, 662);
             this.deCuongCuaToi1.TabIndex = 0;
-            // 
-            // trangChu1
-            // 
-            this.trangChu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trangChu1.Location = new System.Drawing.Point(0, 0);
-            this.trangChu1.Name = "trangChu1";
-            this.trangChu1.Size = new System.Drawing.Size(1080, 662);
-            this.trangChu1.TabIndex = 2;
             // 
             // fmMain
             // 

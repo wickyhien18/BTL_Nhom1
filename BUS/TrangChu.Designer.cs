@@ -34,6 +34,8 @@
             this.btnThemVaoDeCuongCuaToi = new System.Windows.Forms.Button();
             this.txtTenDeCuong = new System.Windows.Forms.TextBox();
             this.btnTimTen = new System.Windows.Forms.Button();
+            this.lblMonHoc = new System.Windows.Forms.Label();
+            this.cmbMonHoc = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTrangChu)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,6 +44,7 @@
             this.dgvTrangChu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTrangChu.Location = new System.Drawing.Point(17, 106);
             this.dgvTrangChu.Name = "dgvTrangChu";
+            this.dgvTrangChu.RowHeadersVisible = false;
             this.dgvTrangChu.RowHeadersWidth = 51;
             this.dgvTrangChu.RowTemplate.Height = 24;
             this.dgvTrangChu.Size = new System.Drawing.Size(739, 287);
@@ -102,10 +105,31 @@
             this.btnTimTen.UseVisualStyleBackColor = true;
             this.btnTimTen.Click += new System.EventHandler(this.btnTimTen_Click);
             // 
+            // lblMonHoc
+            // 
+            this.lblMonHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblMonHoc.Location = new System.Drawing.Point(444, 69);
+            this.lblMonHoc.Name = "lblMonHoc";
+            this.lblMonHoc.Size = new System.Drawing.Size(123, 28);
+            this.lblMonHoc.TabIndex = 6;
+            this.lblMonHoc.Text = "Môn học:";
+            this.lblMonHoc.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbMonHoc
+            // 
+            this.cmbMonHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cmbMonHoc.FormattingEnabled = true;
+            this.cmbMonHoc.Location = new System.Drawing.Point(538, 67);
+            this.cmbMonHoc.Name = "cmbMonHoc";
+            this.cmbMonHoc.Size = new System.Drawing.Size(200, 33);
+            this.cmbMonHoc.TabIndex = 7;
+            // 
             // TrangChu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbMonHoc);
+            this.Controls.Add(this.lblMonHoc);
             this.Controls.Add(this.btnTimTen);
             this.Controls.Add(this.txtTenDeCuong);
             this.Controls.Add(this.btnThemVaoDeCuongCuaToi);
@@ -129,5 +153,7 @@
         private System.Windows.Forms.Button btnThemVaoDeCuongCuaToi;
         private System.Windows.Forms.TextBox txtTenDeCuong;
         private System.Windows.Forms.Button btnTimTen;
+        private System.Windows.Forms.Label lblMonHoc;
+        private System.Windows.Forms.ComboBox cmbMonHoc;
     }
 }
