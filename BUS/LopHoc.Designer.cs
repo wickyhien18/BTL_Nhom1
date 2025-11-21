@@ -1,45 +1,91 @@
-﻿namespace BTL___Nhóm_1.BUS
+﻿using BTL___Nhóm_1.DAL;
+using Microsoft.Data.SqlClient;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace BTL___Nhóm_1.BUS
 {
-    partial class LopHoc
+    public partial class LopHoc : UserControl
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        string connectionString = ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString;
+        private int _userId;
+        private string _role;
+        public LopHoc(int userId, string role) 
         {
-            if (disposing && (components != null))
+            InitializeComponent();
+            _userId = userId;
+            _role = role;
+            this.Load += new System.EventHandler(this.Form1_Load);
+
+        }
+        private void LoadLop(int userId, string role)
+        {
+            string query = "";
+
+            if (role == "GiangVien")
             {
-                components.Dispose();
+                // Giảng viên xem lớp mà họ quản lý
+                query = @"SELECT ClassId, ClassName, TeacherName 
+                  FROM Class 
+                  WHERE UserId = @UserId";
             }
-            base.Dispose(disposing);
+            else
+            {
+                // Sinh viên xem lớp mà họ tham gia
+                query = @"SELECT c.ClassId, c.ClassName, c.TeacherName
+                  FROM Class c
+                  INNER JOIN Users_Class uc ON c.ClassId = uc.ClassId
+                  WHERE uc.UserId = @UserId";
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@UserId", userId);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvLop.DataSource = dt;
+
+                if (dgvLop.Columns.Contains("ClassId"))
+                {
+                    dgvLop.Columns["ClassId"].Visible = false;
+                }
+
+            }
         }
 
-        #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+        private void Form1_Load(object sender, EventArgs e)
         {
-            this.SuspendLayout();
-            // 
-            // LopHoc
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "LopHoc";
-            this.Size = new System.Drawing.Size(1080, 776);
-            this.ResumeLayout(false);
+            LoadLop(_userId, _role);
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
 
-        #endregion
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
