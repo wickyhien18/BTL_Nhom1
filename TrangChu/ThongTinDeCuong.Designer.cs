@@ -54,7 +54,9 @@
             // txtFile
             // 
             this.txtFile.BackColor = System.Drawing.Color.White;
+            this.txtFile.Enabled = false;
             this.txtFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFile.ForeColor = System.Drawing.Color.Black;
             this.txtFile.Location = new System.Drawing.Point(244, 347);
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
@@ -94,7 +96,9 @@
             // txtTacGia
             // 
             this.txtTacGia.BackColor = System.Drawing.Color.White;
+            this.txtTacGia.Enabled = false;
             this.txtTacGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTacGia.ForeColor = System.Drawing.Color.Black;
             this.txtTacGia.Location = new System.Drawing.Point(244, 105);
             this.txtTacGia.Name = "txtTacGia";
             this.txtTacGia.ReadOnly = true;
@@ -114,7 +118,9 @@
             // txtTenDeCuong
             // 
             this.txtTenDeCuong.BackColor = System.Drawing.Color.White;
+            this.txtTenDeCuong.Enabled = false;
             this.txtTenDeCuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenDeCuong.ForeColor = System.Drawing.Color.Black;
             this.txtTenDeCuong.Location = new System.Drawing.Point(244, 34);
             this.txtTenDeCuong.Name = "txtTenDeCuong";
             this.txtTenDeCuong.ReadOnly = true;
@@ -134,7 +140,9 @@
             // txtNgayXuatBan
             // 
             this.txtNgayXuatBan.BackColor = System.Drawing.Color.White;
+            this.txtNgayXuatBan.Enabled = false;
             this.txtNgayXuatBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNgayXuatBan.ForeColor = System.Drawing.Color.Black;
             this.txtNgayXuatBan.Location = new System.Drawing.Point(244, 182);
             this.txtNgayXuatBan.Name = "txtNgayXuatBan";
             this.txtNgayXuatBan.ReadOnly = true;
@@ -144,7 +152,9 @@
             // txtMonHoc
             // 
             this.txtMonHoc.BackColor = System.Drawing.Color.White;
+            this.txtMonHoc.Enabled = false;
             this.txtMonHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMonHoc.ForeColor = System.Drawing.Color.Black;
             this.txtMonHoc.Location = new System.Drawing.Point(244, 262);
             this.txtMonHoc.Name = "txtMonHoc";
             this.txtMonHoc.ReadOnly = true;
@@ -164,7 +174,9 @@
             // txtLoaiDeCuong
             // 
             this.txtLoaiDeCuong.BackColor = System.Drawing.Color.White;
+            this.txtLoaiDeCuong.Enabled = false;
             this.txtLoaiDeCuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoaiDeCuong.ForeColor = System.Drawing.Color.Black;
             this.txtLoaiDeCuong.Location = new System.Drawing.Point(244, 439);
             this.txtLoaiDeCuong.Name = "txtLoaiDeCuong";
             this.txtLoaiDeCuong.ReadOnly = true;
@@ -184,7 +196,9 @@
             // txtTrangThai
             // 
             this.txtTrangThai.BackColor = System.Drawing.Color.White;
+            this.txtTrangThai.Enabled = false;
             this.txtTrangThai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTrangThai.ForeColor = System.Drawing.Color.Black;
             this.txtTrangThai.Location = new System.Drawing.Point(244, 523);
             this.txtTrangThai.Name = "txtTrangThai";
             this.txtTrangThai.ReadOnly = true;
@@ -200,6 +214,7 @@
             this.btnSua.TabIndex = 32;
             this.btnSua.Text = "Sửa";
             this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -210,6 +225,7 @@
             this.btnXoa.TabIndex = 33;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnTaiXuong
             // 

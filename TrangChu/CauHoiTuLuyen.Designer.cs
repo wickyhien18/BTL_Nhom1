@@ -101,6 +101,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CauHoiTuLuyen";
             this.Text = "Câu hỏi tự luyện";
+            this.Load += new System.EventHandler(this.CauHoiTuLuyen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

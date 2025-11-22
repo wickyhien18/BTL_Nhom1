@@ -25,6 +25,7 @@ namespace BTL___Nhóm_1.BUS
             this.Resize += TrangChu_Resize;
             this.Layout += TrangChu_Layout;
             this.dgvTrangChu.SizeChanged += (s, e) => UpdateButtonsByRole();
+            dgvTrangChu.AutoGenerateColumns = false;
 
             // tự động lọc khi người dùng thay đổi môn học (nếu combobox tồn tại)
             if (this.cmbMonHoc != null)
@@ -49,7 +50,7 @@ namespace BTL___Nhóm_1.BUS
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
                 {
                     connection.Open();
-                    string select = "SELECT SyllabusId ,SyllabusName as 'Tên đề cương', Author as 'Tác giả', PostedDate as 'Ngày xuất bản', SubjectName as 'Tên môn học' , SyllabusContext, SyllabusType as 'Loại file đề cương' , SyllabusStatus as 'Trạng thái' FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
                     using (SqlCommand command = new SqlCommand(select, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -58,14 +59,6 @@ namespace BTL___Nhóm_1.BUS
                             dataTable.Load(reader);
                             dgvTrangChu.DataSource = dataTable;
                         }
-                    }
-                    if (dgvTrangChu.Columns["SyllabusId"] != null)
-                    {
-                        dgvTrangChu.Columns["SyllabusId"].Visible = false; // Ẩn cột SyllabusId                   
-                    }
-                    if (dgvTrangChu.Columns["SyllabusContext"] != null)
-                    {
-                        dgvTrangChu.Columns["SyllabusContext"].Visible = false; // Ẩn cột SyllabusContext
                     }
                     // Nếu có combobox môn học trong Designer, load danh sách ở đây
                     if (this.cmbMonHoc != null)
@@ -189,7 +182,7 @@ namespace BTL___Nhóm_1.BUS
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
                 {
                     connection.Open();
-                    string select = "SELECT SyllabusId ,SyllabusName as 'Tên đề cương', Author as 'Tác giả', PostedDate as 'Ngày xuất bản', SubjectName as 'Tên môn học' , SyllabusContext, SyllabusType as 'Loại file đề cương' , SyllabusStatus as 'Trạng thái' FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType , SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
                     using (SqlCommand command = new SqlCommand(select, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -254,7 +247,7 @@ namespace BTL___Nhóm_1.BUS
         {
             try
             {
-                string selectBase = "SELECT SyllabusId ,SyllabusName as 'Tên đề cương', Author as 'Tác giả', PostedDate as 'Ngày xuất bản', SubjectName as 'Tên môn học' , SyllabusContext, SyllabusType as 'Loại file đề cương' , SyllabusStatus as 'Trạng thái' " +
+                string selectBase = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus" +
                                     "FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
                 var conditions = new List<string>();
 
@@ -296,14 +289,7 @@ namespace BTL___Nhóm_1.BUS
                             dataTable.Load(reader);
                             dgvTrangChu.DataSource = dataTable;
                         }
-                        if (dgvTrangChu.Columns["SyllabusId"] != null)
-                        {
-                            dgvTrangChu.Columns["SyllabusId"].Visible = false; // Ẩn cột SyllabusId
-                        }
-                        if (dgvTrangChu.Columns["SyllabusContext"] != null)
-                        {
-                            dgvTrangChu.Columns["SyllabusContext"].Visible = false; // Ẩn cột SyllabusContext
-                        }
+                       
                     }
                 }
 
@@ -326,16 +312,17 @@ namespace BTL___Nhóm_1.BUS
 
             DataGridViewRow row = dgvTrangChu.Rows[e.RowIndex];
             BTL___Nhóm_1.DAL.Syllabus.Id = Convert.ToInt32(row.Cells["SyllabusId"].Value);
-            BTL___Nhóm_1.DAL.Syllabus.Name = row.Cells["Tên đề cương"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Author = row.Cells["Tác giả"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Date = Convert.ToDateTime(row.Cells["Ngày xuất bản"].Value);
-            BTL___Nhóm_1.DAL.Syllabus.SubjectName = row.Cells["Tên môn học"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Name = row.Cells["SyllabusName"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Author = row.Cells["Author"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Date = Convert.ToDateTime(row.Cells["PostedDate"].Value);
+            BTL___Nhóm_1.DAL.Syllabus.SubjectName = row.Cells["SubjectName"].Value.ToString();
             BTL___Nhóm_1.DAL.Syllabus.Context = row.Cells["SyllabusContext"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Type = row.Cells["Loại file đề cương"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Status = row.Cells["Trạng thái"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Type = row.Cells["SyllabusType"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Status = row.Cells["SyllabusStatus"].Value.ToString();
 
             ThongTinDeCuong thongTinForm = new ThongTinDeCuong();
             thongTinForm.ShowDialog();
+            TrangChu_Load(sender, e);
         }
     }
 }

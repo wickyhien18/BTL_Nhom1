@@ -65,7 +65,7 @@ namespace BTL___Nhóm_1.TrangChu
         {
             if (string.IsNullOrWhiteSpace(txtTenDeCuong.Text) ||
                 string.IsNullOrWhiteSpace(txtTacGia.Text) ||
-                fileData == null)
+                fileData == null || cmbMonHoc.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin và chọn tệp đính kèm.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

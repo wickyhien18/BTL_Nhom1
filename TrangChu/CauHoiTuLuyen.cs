@@ -30,5 +30,15 @@ namespace BTL___Nhóm_1.TrangChu
             cauHoi.ShowDialog();
             this.Show();
         }
+
+        private void CauHoiTuLuyen_Load(object sender, EventArgs e)
+        {
+            // Ẩn nút chỉnh sửa nếu vai trò là Sinh viên
+            if (BTL___Nhóm_1.DAL.User.VaiTro == "Sinh viên")
+            {
+                btnChinhSua.Visible = false;
+                btnChinhSua.Enabled = false;
+            }
+        }
     }
 }
