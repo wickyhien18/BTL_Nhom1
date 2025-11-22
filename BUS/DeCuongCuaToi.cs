@@ -15,6 +15,24 @@ namespace BTL___Nhóm_1.BUS
         public DeCuongCuaToi()
         {
             InitializeComponent();
+
+            try
+            {
+                if (System.ComponentModel.LicenseManager.UsageMode != System.ComponentModel.LicenseUsageMode.Designtime)
+                {
+                    if (!this.Controls.OfType<LuuTruCaNhan>().Any())
+                    {
+                        var luu = new LuuTruCaNhan();
+                        luu.Dock = DockStyle.Fill;
+                        this.Controls.Add(luu);
+                        luu.BringToFront();
+                    }
+                }
+            }
+            catch
+            {
+             
+            }
         }
     }
 }
