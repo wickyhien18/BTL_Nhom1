@@ -202,6 +202,12 @@
     <Compile Include="BUS\LopHoc.Designer.cs">
       <DependentUpon>LopHoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="BUS\LuuTruCaNhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BUS\LuuTruCaNhan.Designer.cs">
+      <DependentUpon>LuuTruCaNhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="BUS\TrangChu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BUS\LopHoc.resx">
       <DependentUpon>LopHoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BUS\LuuTruCaNhan.resx">
+      <DependentUpon>LuuTruCaNhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BUS\TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>

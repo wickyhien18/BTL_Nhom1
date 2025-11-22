@@ -31,6 +31,20 @@ namespace BTL___Nhóm_1.BUS
             {
                 this.cmbMonHoc.SelectedIndexChanged += cmbMonHoc_SelectedIndexChanged;
             }
+
+            // đảm bảo nút "Thêm vào Đề cương của tôi" có handler
+            try
+            {
+                if (this.btnThemVaoDeCuongCuaToi != null)
+                {
+                    this.btnThemVaoDeCuongCuaToi.Click -= btnThemVaoDeCuongCuaToi_Click;
+                    this.btnThemVaoDeCuongCuaToi.Click += btnThemVaoDeCuongCuaToi_Click;
+                }
+            }
+            catch
+            {
+                // ignore wiring errors
+            }
         }
         private void TrangChu_Layout(object sender, LayoutEventArgs e)
         {
@@ -222,6 +236,142 @@ namespace BTL___Nhóm_1.BUS
         {
 
         }
+
+        // Thêm vào "Đề cương của tôi" (Lưu trữ cá nhân)
+        private void btnThemVaoDeCuongCuaToi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvTrangChu == null) return;
+
+                // get selected row
+                DataGridViewRow selectedRow = null;
+                if (dgvTrangChu.SelectedRows != null && dgvTrangChu.SelectedRows.Count > 0)
+                {
+                    selectedRow = dgvTrangChu.SelectedRows[0];
+                }
+                else if (dgvTrangChu.CurrentRow != null)
+                {
+                    selectedRow = dgvTrangChu.CurrentRow;
+                }
+
+                if (selectedRow == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một đề cương trước khi thêm.");
+                    return;
+                }
+
+                if (selectedRow.Cells["SyllabusId"].Value == null)
+                {
+                    MessageBox.Show("Không xác định được đề cương đã chọn.");
+                    return;
+                }
+
+                int syllabusId = Convert.ToInt32(selectedRow.Cells["SyllabusId"].Value);
+
+                // confirm
+                var dr = MessageBox.Show("Bạn có muốn thêm đề cương này vào 'Đề cương của tôi' không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr != DialogResult.Yes) return;
+
+                int userId = BTL___Nhóm_1.DAL.User.Id;
+
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
+                {
+                    connection.Open();
+
+                    // create table if not exists
+                    string createTable = @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'PersonalStorage')
+BEGIN
+    CREATE TABLE PersonalStorage (
+        Id INT IDENTITY(1,1) PRIMARY KEY,
+        UserId INT NOT NULL,
+        SyllabusId INT NOT NULL,
+        SavedDate DATETIME NOT NULL DEFAULT(GETDATE())
+    );
+END";
+                    using (SqlCommand cmdCreate = new SqlCommand(createTable, connection))
+                    {
+                        cmdCreate.ExecuteNonQuery();
+                    }
+
+                    // check duplicate
+                    string checkDup = "SELECT COUNT(1) FROM PersonalStorage WHERE UserId = @userId AND SyllabusId = @syllabusId";
+                    using (SqlCommand cmdCheck = new SqlCommand(checkDup, connection))
+                    {
+                        cmdCheck.Parameters.AddWithValue("@userId", userId);
+                        cmdCheck.Parameters.AddWithValue("@syllabusId", syllabusId);
+                        int exists = Convert.ToInt32(cmdCheck.ExecuteScalar());
+                        if (exists > 0)
+                        {
+                            MessageBox.Show("Đề cương này đã có trong 'Đề cương của tôi'.");
+                            return;
+                        }
+                    }
+
+                    string insert = "INSERT INTO PersonalStorage (UserId, SyllabusId, SavedDate) VALUES (@userId, @syllabusId, GETDATE())";
+                    using (SqlCommand cmdInsert = new SqlCommand(insert, connection))
+                    {
+                        cmdInsert.Parameters.AddWithValue("@userId", userId);
+                        cmdInsert.Parameters.AddWithValue("@syllabusId", syllabusId);
+                        cmdInsert.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("Đã thêm vào 'Đề cương của tôi'.");
+
+                try
+                {
+                    var mainForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f.GetType().Name == "fmMain");
+                    if (mainForm != null)
+                    {
+                        
+                        var deCuongCtrls = mainForm.Controls.Find("deCuongCuaToi1", true);
+                        bool refreshed = false;
+                        if (deCuongCtrls != null && deCuongCtrls.Length > 0)
+                        {
+                            foreach (var c in deCuongCtrls)
+                            {
+                                var container = c as DeCuongCuaToi;
+                                if (container != null)
+                                {
+                                    var luu = container.Controls.OfType<LuuTruCaNhan>().FirstOrDefault();
+                                    if (luu != null)
+                                    {
+                                        luu.RefreshData();
+                                        refreshed = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (!refreshed)
+                        {
+                            // fallback: search by type anywhere under mainForm
+                            var containers = mainForm.Controls.OfType<DeCuongCuaToi>().ToList();
+                            foreach (var container in containers)
+                            {
+                                var luu = container.Controls.OfType<LuuTruCaNhan>().FirstOrDefault();
+                                if (luu != null)
+                                {
+                                    luu.RefreshData();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // ignore refresh errors
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm vào 'Đề cương của tôi': " + ex.Message);
+            }
+        }
+
         //Placeholder text box tìm kiếm tên đề cương
         private void txtTenDeCuong_Enter(object sender, EventArgs e)
         {
@@ -243,7 +393,7 @@ namespace BTL___Nhóm_1.BUS
 
         private void cmbMonHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // tự động áp filter khi người dùng chọn môn (chỉ khi combobox đã populated)
+            // tự động áp filter khi người dùng chọn môn 
             if (cmbMonHoc == null || cmbMonHoc.SelectedItem == null) return;
 
             // tránh gọi khi giá trị "Tất cả" và không có tên tìm kiếm => vẫn cần hiển thị toàn bộ
