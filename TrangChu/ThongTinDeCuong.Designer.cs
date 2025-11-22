@@ -48,10 +48,12 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTaiXuong = new System.Windows.Forms.Button();
             this.btnTuLuyen = new System.Windows.Forms.Button();
+            this.sfdDeCuong = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // txtFile
             // 
+            this.txtFile.BackColor = System.Drawing.Color.White;
             this.txtFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFile.Location = new System.Drawing.Point(244, 347);
             this.txtFile.Name = "txtFile";
@@ -91,6 +93,7 @@
             // 
             // txtTacGia
             // 
+            this.txtTacGia.BackColor = System.Drawing.Color.White;
             this.txtTacGia.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTacGia.Location = new System.Drawing.Point(244, 105);
             this.txtTacGia.Name = "txtTacGia";
@@ -110,6 +113,7 @@
             // 
             // txtTenDeCuong
             // 
+            this.txtTenDeCuong.BackColor = System.Drawing.Color.White;
             this.txtTenDeCuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenDeCuong.Location = new System.Drawing.Point(244, 34);
             this.txtTenDeCuong.Name = "txtTenDeCuong";
@@ -129,6 +133,7 @@
             // 
             // txtNgayXuatBan
             // 
+            this.txtNgayXuatBan.BackColor = System.Drawing.Color.White;
             this.txtNgayXuatBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNgayXuatBan.Location = new System.Drawing.Point(244, 182);
             this.txtNgayXuatBan.Name = "txtNgayXuatBan";
@@ -138,6 +143,7 @@
             // 
             // txtMonHoc
             // 
+            this.txtMonHoc.BackColor = System.Drawing.Color.White;
             this.txtMonHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMonHoc.Location = new System.Drawing.Point(244, 262);
             this.txtMonHoc.Name = "txtMonHoc";
@@ -157,6 +163,7 @@
             // 
             // txtLoaiDeCuong
             // 
+            this.txtLoaiDeCuong.BackColor = System.Drawing.Color.White;
             this.txtLoaiDeCuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLoaiDeCuong.Location = new System.Drawing.Point(244, 439);
             this.txtLoaiDeCuong.Name = "txtLoaiDeCuong";
@@ -176,6 +183,7 @@
             // 
             // txtTrangThai
             // 
+            this.txtTrangThai.BackColor = System.Drawing.Color.White;
             this.txtTrangThai.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTrangThai.Location = new System.Drawing.Point(244, 523);
             this.txtTrangThai.Name = "txtTrangThai";
@@ -212,6 +220,7 @@
             this.btnTaiXuong.TabIndex = 34;
             this.btnTaiXuong.Text = "Tải xuống";
             this.btnTaiXuong.UseVisualStyleBackColor = true;
+            this.btnTaiXuong.Click += new System.EventHandler(this.btnTaiXuong_Click);
             // 
             // btnTuLuyen
             // 
@@ -222,6 +231,7 @@
             this.btnTuLuyen.TabIndex = 35;
             this.btnTuLuyen.Text = "Tự luyện";
             this.btnTuLuyen.UseVisualStyleBackColor = true;
+            this.btnTuLuyen.Click += new System.EventHandler(this.btnTuLuyen_Click);
             // 
             // ThongTinDeCuong
             // 
@@ -275,5 +285,6 @@
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnTaiXuong;
         private System.Windows.Forms.Button btnTuLuyen;
+        private System.Windows.Forms.SaveFileDialog sfdDeCuong;
     }
 }

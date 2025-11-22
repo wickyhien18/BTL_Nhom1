@@ -208,6 +208,7 @@
     <Compile Include="BUS\TrangChu.Designer.cs">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Question.cs" />
     <Compile Include="DAL\Syllabus.cs" />
     <Compile Include="DAL\User.cs" />
     <Compile Include="Login\DangKy.cs">
@@ -241,6 +242,18 @@
     </Compile>
     <Compile Include="Login\QuenMK.Designer.cs">
       <DependentUpon>QuenMK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrangChu\CauHoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangChu\CauHoi.Designer.cs">
+      <DependentUpon>CauHoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrangChu\CauHoiTuLuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangChu\CauHoiTuLuyen.Designer.cs">
+      <DependentUpon>CauHoiTuLuyen.cs</DependentUpon>
     </Compile>
     <Compile Include="TrangChu\ThemMon.cs">
       <SubType>Form</SubType>
@@ -293,6 +306,12 @@
     </Compile>
     <EmbeddedResource Include="Login\QuenMK.resx">
       <DependentUpon>QuenMK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrangChu\CauHoi.resx">
+      <DependentUpon>CauHoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrangChu\CauHoiTuLuyen.resx">
+      <DependentUpon>CauHoiTuLuyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrangChu\ThemMon.resx">
       <DependentUpon>ThemMon.cs</DependentUpon>
