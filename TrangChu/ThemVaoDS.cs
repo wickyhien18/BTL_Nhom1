@@ -38,8 +38,22 @@ namespace BTL___Nhóm_1.TrangChu
                     fileType = Path.GetExtension(ofdDeCuong.FileName).ToLower();
                     txtFile.Text = ofdDeCuong.FileName;
 
-                    //Đường dẫn lưu tệp ./bin/Debug/KhoDeCuong
-                    string folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
+                    string folderDeCuong;
+                    #if DEBUG
+                        try
+                        {
+                            DirectoryInfo directoryInfo = Directory.GetParent(Application.StartupPath).Parent;
+
+                            folderDeCuong = Path.Combine(directoryInfo.FullName, "KhoDeCuong");
+                        }
+                        catch (Exception)
+                        {
+                            folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
+                        }
+                    #else
+                        folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
+                    #endif
+
 
                     if (!Directory.Exists(folderDeCuong))
                     {

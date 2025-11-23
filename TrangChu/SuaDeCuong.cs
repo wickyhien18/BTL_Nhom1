@@ -71,12 +71,21 @@ namespace BTL___Nhóm_1.TrangChu
                     txtFile.Text = ofdDeCuong.FileName;
 
                     //Đường dẫn lưu tệp ./bin/Debug/KhoDeCuong
-                    string folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
-
-                    if (!Directory.Exists(folderDeCuong))
+                    string folderDeCuong;
+#if DEBUG
+                    try
                     {
-                        Directory.CreateDirectory(folderDeCuong);
+                        DirectoryInfo directoryInfo = Directory.GetParent(Application.StartupPath).Parent;
+
+                        folderDeCuong = Path.Combine(directoryInfo.FullName, "KhoDeCuong");
                     }
+                    catch (Exception)
+                    {
+                        folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
+                    }
+#else
+                        folderDeCuong = Path.Combine(Application.StartupPath, "KhoDeCuong");
+#endif
 
                     string newFile = fileData + "_" + DateTime.Now.Ticks.ToString();
                     filePath = Path.Combine(folderDeCuong, newFile + fileType);
@@ -180,7 +189,7 @@ namespace BTL___Nhóm_1.TrangChu
                     BTL___Nhóm_1.DAL.Syllabus.Author = txtTacGia.Text;
                     BTL___Nhóm_1.DAL.Syllabus.Date = dtpXuatBan.Value;
                     BTL___Nhóm_1.DAL.Syllabus.SubjectName = cmbMonHoc.SelectedItem.ToString();
-                    BTL___Nhóm_1.DAL.Syllabus.Context = txtFile.Text;
+                    BTL___Nhóm_1.DAL.Syllabus.Context = filePath;
                     this.Close();
                 }
                 catch (Exception ex)
