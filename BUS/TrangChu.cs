@@ -120,7 +120,6 @@ namespace BTL___Nhóm_1.BUS
         {
             try
             {
-
                 if (dgvTrangChu == null || btnThemVaoDeCuongCuaToi == null || btnThemVaoDS == null || btnThemVaoLopHoc == null)
                     return;
 
@@ -144,38 +143,58 @@ namespace BTL___Nhóm_1.BUS
                 int dgvWidth = dgvTrangChu.Width;
                 int dgvHeight = dgvTrangChu.Height;
 
-                // compute column X that is always adjacent to dgv (try dgv.Right + margin, but clamp to client area)
                 int columnX = dgvRight + margin;
-                int maxX = clientW - margin - btnThemVaoDS.Width; // use btnThemVaoDS width as representative for clamp
+                int maxX = clientW - margin - btnThemVaoDS.Width; 
                 if (columnX > maxX) columnX = maxX;
                 if (columnX < margin) columnX = margin;
 
-                // vertical placement
+                // vertical placement gap
                 int gap = 20;
+
+                bool canPlaceRight = (dgvRight + margin + btnThemVaoDS.Width) <= (clientW - margin);
 
                 if (isGiangVien)
                 {
-                    // three buttons in a column, aligned to same X (adjacent to grid)
-                    int top = dgvTop;
-                    btnThemVaoDS.Location = new Point(columnX, top);
-                    btnThemVaoLopHoc.Location = new Point(columnX, top + btnThemVaoDS.Height + gap);
-                    btnThemVaoDeCuongCuaToi.Location = new Point(columnX, top + (btnThemVaoDS.Height + gap) * 2);
+                    if (canPlaceRight)
+                    {
+                        int top = dgvTop;
+                        btnThemVaoDS.Location = new Point(columnX, top);
+                        btnThemVaoLopHoc.Location = new Point(columnX, top + btnThemVaoDS.Height + gap);
+                        btnThemVaoDeCuongCuaToi.Location = new Point(columnX, top + (btnThemVaoDS.Height + gap) * 2);
+                    }
+                    else
+                    {
+                        // Not enough space on the right -> place the three buttons centered in a row below the DataGridView
+                        int totalWidth = btnThemVaoDS.Width + btnThemVaoLopHoc.Width + btnThemVaoDeCuongCuaToi.Width + gap * 2;
+                        int startX = dgvLeft + Math.Max(0, (dgvWidth - totalWidth) / 2);
+                        startX = Math.Max(margin, Math.Min(startX, clientW - margin - totalWidth));
+
+                        int y = dgvTop + dgvHeight + gap;
+                        if (y + btnThemVaoDS.Height > clientH - margin)
+                        {
+                            y = clientH - margin - btnThemVaoDS.Height;
+                        }
+
+                        btnThemVaoDS.Location = new Point(startX, y);
+                        btnThemVaoLopHoc.Location = new Point(startX + btnThemVaoDS.Width + gap, y);
+                        btnThemVaoDeCuongCuaToi.Location = new Point(startX + btnThemVaoDS.Width + gap + btnThemVaoLopHoc.Width + gap, y);
+                    }
                 }
                 else
                 {
-                    // student: single button should sit at the same column (adjacent to grid)
+                    // student: single button should sit adjacent or below depending on space
                     int x = columnX;
-
-                    // center vertically relative to DataGridView but clamp inside client area
                     int y = dgvTop + (dgvHeight - btnThemVaoDeCuongCuaToi.Height) / 2;
                     y = Math.Max(margin, Math.Min(y, clientH - margin - btnThemVaoDeCuongCuaToi.Height));
 
-                    // if columnX would place button overlapping the DataGridView (rare), shift it slightly to the right but keep adjacent
-                    if (x <= dgvRight && x + btnThemVaoDeCuongCuaToi.Width > dgvRight)
+                    if (!canPlaceRight)
                     {
-                        x = dgvRight + margin;
-                        int maxX2 = clientW - margin - btnThemVaoDeCuongCuaToi.Width;
-                        if (x > maxX2) x = maxX2;
+                        x = dgvLeft + Math.Max(0, (dgvWidth - btnThemVaoDeCuongCuaToi.Width) / 2);
+                        if (x + btnThemVaoDeCuongCuaToi.Width > clientW - margin)
+                            x = clientW - margin - btnThemVaoDeCuongCuaToi.Width;
+                        y = dgvTop + dgvHeight + gap;
+                        if (y + btnThemVaoDeCuongCuaToi.Height > clientH - margin)
+                            y = clientH - margin - btnThemVaoDeCuongCuaToi.Height;
                     }
 
                     btnThemVaoDeCuongCuaToi.Location = new Point(x, y);
@@ -183,7 +202,6 @@ namespace BTL___Nhóm_1.BUS
             }
             catch
             {
-                // ignore layout errors to avoid breaking UI
             }
         }
         //Thêm vào danh sách đề cương tại trang chủ
@@ -356,7 +374,6 @@ END";
                 }
                 catch
                 {
-                    // ignore refresh errors
                 }
             }
             catch (Exception ex)
@@ -397,8 +414,7 @@ END";
         {
             try
             {
-                string selectBase = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus" +
-                                    "FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                string selectBase = "SELECT SyllabusId, SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
                 var conditions = new List<string>();
 
                 if (!string.IsNullOrEmpty(txtTenDeCuong.Text.Trim()) && txtTenDeCuong.Text != "Tìm kiếm tên đề cương...")
@@ -422,12 +438,10 @@ END";
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(finalSelect, connection))
                     {
-                        //Tìm kiếm đề cương theo tên đề cương
                         if (conditions.Contains("SyllabusName LIKE @search"))
                         {
                             command.Parameters.AddWithValue("@search", "%" + txtTenDeCuong.Text.Trim() + "%");
                         }
-                        //Lọc đề cương theo môn học
                         if (conditions.Contains("Subject.SubjectName = @subject"))
                         {
                             command.Parameters.AddWithValue("@subject", cmbMonHoc.SelectedItem.ToString());
@@ -439,7 +453,6 @@ END";
                             dataTable.Load(reader);
                             dgvTrangChu.DataSource = dataTable;
                         }
-                       
                     }
                 }
 
@@ -473,6 +486,11 @@ END";
             ThongTinDeCuong thongTinForm = new ThongTinDeCuong();
             thongTinForm.ShowDialog();
             TrangChu_Load(sender, e);
+        }
+
+        private void btnThemVaoDeCuongCuaToi_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
