@@ -18,7 +18,7 @@ namespace BTL___Nhóm_1.TrangChu
     {
         string fileData = BTL___Nhóm_1.DAL.Syllabus.Context;
         string fileType = BTL___Nhóm_1.DAL.Syllabus.Type;
-        string filePath = null;
+        string filePath = BTL___Nhóm_1.DAL.Syllabus.Context;
         public SuaDeCuong()
         {
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace BTL___Nhóm_1.TrangChu
             txtTacGia.Text = BTL___Nhóm_1.DAL.Syllabus.Author;
             dtpXuatBan.Value = BTL___Nhóm_1.DAL.Syllabus.Date;
             cmbMonHoc.SelectedItem = BTL___Nhóm_1.DAL.Syllabus.SubjectName;
-            txtFile.Text = BTL___Nhóm_1.DAL.Syllabus.Context;
+            txtFile.Text = Path.GetFileName(BTL___Nhóm_1.DAL.Syllabus.Context);
         }
         // Chọn tệp đề cương
         private void btnFile_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace BTL___Nhóm_1.TrangChu
                 {
                     fileData = Path.GetFileName(ofdDeCuong.FileName);
                     fileType = Path.GetExtension(ofdDeCuong.FileName).ToLower();
-                    txtFile.Text = ofdDeCuong.FileName;
+                    txtFile.Text = Path.GetFileName(ofdDeCuong.FileName);
 
                     //Đường dẫn lưu tệp ./bin/Debug/KhoDeCuong
                     string folderDeCuong;
@@ -95,11 +95,6 @@ namespace BTL___Nhóm_1.TrangChu
                     MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
-            else
-            {
-                fileData = null;
-                fileType = null;
-            }
         }
         // Sửa đề cương
         private void btnSua_Click(object sender, EventArgs e)
@@ -115,7 +110,7 @@ namespace BTL___Nhóm_1.TrangChu
                 try
                 {
                     //Nếu người dùng chọn tệp mới thì xóa tệp cũ và lưu tệp mới
-                    if (txtFile.Text != BTL___Nhóm_1.DAL.Syllabus.Context)
+                    if (txtFile.Text != Path.GetFileName(BTL___Nhóm_1.DAL.Syllabus.Context))
                     {
                         if (File.Exists(BTL___Nhóm_1.DAL.Syllabus.Context))
                         {
