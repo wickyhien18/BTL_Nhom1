@@ -36,7 +36,7 @@ namespace BTL___Nhóm_1.TrangChu
                 {
                     fileData = Path.GetFileName(ofdDeCuong.FileName);
                     fileType = Path.GetExtension(ofdDeCuong.FileName).ToLower();
-                    txtFile.Text = ofdDeCuong.FileName;
+                    txtFile.Text = Path.GetFileName(ofdDeCuong.FileName);
 
                     string folderDeCuong;
                     #if DEBUG
@@ -133,7 +133,7 @@ namespace BTL___Nhóm_1.TrangChu
         // Chỉ cho phép nhập chữ cái, chữ số và dấu gạch dưới
         private void txtTenDeCuong_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_')
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_' && e.KeyChar != ' ')
             {
                 e.Handled = true;
             }
@@ -141,7 +141,7 @@ namespace BTL___Nhóm_1.TrangChu
         // Chỉ cho phép nhập chữ cái, chữ số và dấu cách
         private void txtTacGia_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != ' ')
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '_')
             {
                 e.Handled = true;
             }
