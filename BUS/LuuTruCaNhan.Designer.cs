@@ -44,6 +44,7 @@
             this.dgvLuuTru.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLuuTru.Location = new System.Drawing.Point(20, 100);
             this.dgvLuuTru.Name = "dgvLuuTru";
+            this.dgvLuuTru.ReadOnly = true;
             this.dgvLuuTru.RowHeadersVisible = false;
             this.dgvLuuTru.RowHeadersWidth = 51;
             this.dgvLuuTru.RowTemplate.Height = 24;

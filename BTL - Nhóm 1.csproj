@@ -261,6 +261,12 @@
     <Compile Include="TrangChu\CauHoiTuLuyen.Designer.cs">
       <DependentUpon>CauHoiTuLuyen.cs</DependentUpon>
     </Compile>
+    <Compile Include="TrangChu\SelectSyllabiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangChu\SelectSyllabiForm.Designer.cs">
+      <DependentUpon>SelectSyllabiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrangChu\SuaDeCuong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TrangChu\CauHoiTuLuyen.resx">
       <DependentUpon>CauHoiTuLuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrangChu\SelectSyllabiForm.resx">
+      <DependentUpon>SelectSyllabiForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrangChu\SuaDeCuong.resx">
       <DependentUpon>SuaDeCuong.cs</DependentUpon>

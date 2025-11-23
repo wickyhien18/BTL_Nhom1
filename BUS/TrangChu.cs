@@ -253,132 +253,145 @@ namespace BTL___Nhóm_1.BUS
         {
             try
             {
-                if (dgvTrangChu == null) return;
-
-                // get selected row
-                DataGridViewRow selectedRow = null;
-                if (dgvTrangChu.SelectedRows != null && dgvTrangChu.SelectedRows.Count > 0)
+                // loop to allow re-selection when duplicates are found
+                while (true)
                 {
-                    selectedRow = dgvTrangChu.SelectedRows[0];
-                }
-                else if (dgvTrangChu.CurrentRow != null)
-                {
-                    selectedRow = dgvTrangChu.CurrentRow;
-                }
-
-                if (selectedRow == null)
-                {
-                    MessageBox.Show("Vui lòng chọn một đề cương trước khi thêm.");
-                    return;
-                }
-
-                if (selectedRow.Cells["SyllabusId"].Value == null)
-                {
-                    MessageBox.Show("Không xác định được đề cương đã chọn.");
-                    return;
-                }
-
-                int syllabusId = Convert.ToInt32(selectedRow.Cells["SyllabusId"].Value);
-
-                // confirm
-                var dr = MessageBox.Show("Bạn có muốn thêm đề cương này vào 'Đề cương của tôi' không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr != DialogResult.Yes) return;
-
-                int userId = BTL___Nhóm_1.DAL.User.Id;
-
-                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
-                {
-                    connection.Open();
-
-                    // create table if not exists
-                    string createTable = @"IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'PersonalStorage')
-BEGIN
-    CREATE TABLE PersonalStorage (
-        Id INT IDENTITY(1,1) PRIMARY KEY,
-        UserId INT NOT NULL,
-        SyllabusId INT NOT NULL,
-        SavedDate DATETIME NOT NULL DEFAULT(GETDATE())
-    );
-END";
-                    using (SqlCommand cmdCreate = new SqlCommand(createTable, connection))
+                    using (var dlg = new BTL___Nhóm_1.TrangChu.SelectSyllabiForm())
                     {
-                        cmdCreate.ExecuteNonQuery();
-                    }
-
-                    // check duplicate
-                    string checkDup = "SELECT COUNT(1) FROM PersonalStorage WHERE UserId = @userId AND SyllabusId = @syllabusId";
-                    using (SqlCommand cmdCheck = new SqlCommand(checkDup, connection))
-                    {
-                        cmdCheck.Parameters.AddWithValue("@userId", userId);
-                        cmdCheck.Parameters.AddWithValue("@syllabusId", syllabusId);
-                        int exists = Convert.ToInt32(cmdCheck.ExecuteScalar());
-                        if (exists > 0)
-                        {
-                            MessageBox.Show("Đề cương này đã có trong 'Đề cương của tôi'.");
+                        if (dlg.ShowDialog(this) != DialogResult.OK)
                             return;
-                        }
-                    }
 
-                    string insert = "INSERT INTO PersonalStorage (UserId, SyllabusId, SavedDate) VALUES (@userId, @syllabusId, GETDATE())";
-                    using (SqlCommand cmdInsert = new SqlCommand(insert, connection))
-                    {
-                        cmdInsert.Parameters.AddWithValue("@userId", userId);
-                        cmdInsert.Parameters.AddWithValue("@syllabusId", syllabusId);
-                        cmdInsert.ExecuteNonQuery();
-                    }
-                }
-
-                MessageBox.Show("Đã thêm vào 'Đề cương của tôi'.");
-
-                try
-                {
-                    var mainForm = Application.OpenForms.Cast<Form>().FirstOrDefault(f => f.GetType().Name == "fmMain");
-                    if (mainForm != null)
-                    {
-                        
-                        var deCuongCtrls = mainForm.Controls.Find("deCuongCuaToi1", true);
-                        bool refreshed = false;
-                        if (deCuongCtrls != null && deCuongCtrls.Length > 0)
+                        var idsToAdd = dlg.SelectedSyllabusIds.ToList();
+                        if (idsToAdd.Count == 0)
                         {
-                            foreach (var c in deCuongCtrls)
+                            MessageBox.Show("Vui lòng chọn ít nhất một đề cương.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            continue;
+                        }
+
+                        int userId = BTL___Nhóm_1.DAL.User.Id;
+
+                        // build parameterized IN clause
+                        var paramNames = new List<string>();
+                        for (int i = 0; i < idsToAdd.Count; i++)
+                            paramNames.Add($"@p{i}");
+
+                        var existing = new List<int>();
+                        string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString;
+                        using (var connection = new System.Data.SqlClient.SqlConnection(connStr))
+                        {
+                            connection.Open();
+                            string sqlCheck = $"SELECT SyllabusId FROM PersonalStorage WHERE UserId = @userId AND SyllabusId IN ({string.Join(",", paramNames)})";
+                            using (var cmd = new System.Data.SqlClient.SqlCommand(sqlCheck, connection))
                             {
-                                var container = c as DeCuongCuaToi;
-                                if (container != null)
+                                cmd.Parameters.AddWithValue("@userId", userId);
+                                for (int i = 0; i < idsToAdd.Count; i++)
+                                    cmd.Parameters.AddWithValue(paramNames[i], idsToAdd[i]);
+
+                                using (var reader = cmd.ExecuteReader())
                                 {
-                                    var luu = container.Controls.OfType<LuuTruCaNhan>().FirstOrDefault();
-                                    if (luu != null)
+                                    while (reader.Read())
                                     {
-                                        luu.RefreshData();
-                                        refreshed = true;
-                                        break;
+                                        existing.Add(Convert.ToInt32(reader["SyllabusId"]));
                                     }
                                 }
                             }
                         }
 
-                        if (!refreshed)
+                        if (existing.Count > 0)
                         {
-                            // fallback: search by type anywhere under mainForm
-                            var containers = mainForm.Controls.OfType<DeCuongCuaToi>().ToList();
-                            foreach (var container in containers)
+                            MessageBox.Show($"Phát hiện {existing.Count} đề cương đã có trong 'Đề cương của tôi'.\nVui lòng chọn lại đề cương khác (không chọn các đề cương đã tồn tại).", "Đã tồn tại", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            continue; // reopen selection dialog so user can choose non-duplicate items
+                        }
+
+                        var confirm = MessageBox.Show($"Bạn có muốn thêm {idsToAdd.Count} đề cương vào 'Đề cương của tôi'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (confirm != DialogResult.Yes)
+                            return;
+
+                        int added = 0;
+                        int skipped = 0;
+
+                        using (var connection = new System.Data.SqlClient.SqlConnection(connStr))
+                        {
+                            connection.Open();
+                            using (var transaction = connection.BeginTransaction())
                             {
-                                var luu = container.Controls.OfType<LuuTruCaNhan>().FirstOrDefault();
-                                if (luu != null)
+                                try
                                 {
-                                    luu.RefreshData();
-                                    break;
+                                    foreach (var syllabusId in idsToAdd)
+                                    {
+                                        // double-check duplicate inside transaction
+                                        using (var checkCmd = new System.Data.SqlClient.SqlCommand("SELECT COUNT(1) FROM PersonalStorage WHERE UserId = @userId AND SyllabusId = @syllabusId", connection, transaction))
+                                        {
+                                            checkCmd.Parameters.AddWithValue("@userId", userId);
+                                            checkCmd.Parameters.AddWithValue("@syllabusId", syllabusId);
+                                            int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                                            if (exists > 0)
+                                            {
+                                                skipped++;
+                                                continue;
+                                            }
+                                        }
+
+                                        using (var insertCmd = new System.Data.SqlClient.SqlCommand("INSERT INTO PersonalStorage (UserId, SyllabusId, SavedDate) VALUES (@userId, @syllabusId, GETDATE())", connection, transaction))
+                                        {
+                                            insertCmd.Parameters.AddWithValue("@userId", userId);
+                                            insertCmd.Parameters.AddWithValue("@syllabusId", syllabusId);
+                                            insertCmd.ExecuteNonQuery();
+                                            added++;
+                                        }
+                                    }
+
+                                    transaction.Commit();
+                                }
+                                catch
+                                {
+                                    try { transaction.Rollback(); } catch { }
+                                    throw;
                                 }
                             }
                         }
+
+                        MessageBox.Show($"Hoàn thành. Đã thêm: {added}.", "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Refresh LuuTruCaNhan if present
+                        try
+                        {
+                            // Duyệt tất cả các Form đang mở, tìm mọi instance của LuuTruCaNhan và gọi RefreshData()
+                            foreach (Form f in Application.OpenForms)
+                            {
+                                try
+                                {
+                                    foreach (var luu in FindControlsRecursive<LuuTruCaNhan>(f).ToList())
+                                    {
+                                        try
+                                        {
+                                            luu.RefreshData();
+                                        }
+                                        catch
+                                        {
+                                            // ignore individual refresh errors
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    // ignore errors per form
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            // ignore global refresh errors
+                        }
+
+                        // finished successfully
+                        return;
                     }
-                }
-                catch
-                {
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi thêm vào 'Đề cương của tôi': " + ex.Message);
+                MessageBox.Show("Lỗi khi thêm vào 'Đề cương của tôi': " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -491,6 +504,17 @@ END";
         private void btnThemVaoDeCuongCuaToi_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private IEnumerable<T> FindControlsRecursive<T>(Control parent) where T : Control
+        {
+            if (parent == null) yield break;
+            foreach (Control c in parent.Controls)
+            {
+                if (c is T t) yield return t;
+                foreach (var child in FindControlsRecursive<T>(c))
+                    yield return child;
+            }
         }
     }
 }
