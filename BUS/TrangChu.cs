@@ -25,14 +25,28 @@ namespace BTL___Nhóm_1.BUS
             this.Resize += TrangChu_Resize;
             this.Layout += TrangChu_Layout;
             this.dgvTrangChu.SizeChanged += (s, e) => UpdateButtonsByRole();
+            dgvTrangChu.AutoGenerateColumns = false;
 
             // tự động lọc khi người dùng thay đổi môn học (nếu combobox tồn tại)
             if (this.cmbMonHoc != null)
             {
                 this.cmbMonHoc.SelectedIndexChanged += cmbMonHoc_SelectedIndexChanged;
             }
-        }
 
+            // đảm bảo nút "Thêm vào Đề cương của tôi" có handler
+            try
+            {
+                if (this.btnThemVaoDeCuongCuaToi != null)
+                {
+                    this.btnThemVaoDeCuongCuaToi.Click -= btnThemVaoDeCuongCuaToi_Click;
+                    this.btnThemVaoDeCuongCuaToi.Click += btnThemVaoDeCuongCuaToi_Click;
+                }
+            }
+            catch
+            {
+                // ignore wiring errors
+            }
+        }
         private void TrangChu_Layout(object sender, LayoutEventArgs e)
         {
             UpdateButtonsByRole();
@@ -42,7 +56,7 @@ namespace BTL___Nhóm_1.BUS
         {
             UpdateButtonsByRole();
         }
-
+        //Hiển thị danh sách đề cương gồm tên đề cương, tác giả, ngày xuất bản, tên môn học, loại file đề cương, trạng thái
         private void TrangChu_Load(object sender, EventArgs e)
         {
             try
@@ -50,7 +64,7 @@ namespace BTL___Nhóm_1.BUS
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
                 {
                     connection.Open();
-                    string select = "SELECT SyllabusName as 'Tên đề cương', Author as 'Tác giả', PostedDate as 'Ngày xuất bản', SubjectName as 'Tên môn học' , SyllabusType as 'Loại file đề cương'FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId WHERE SyllabusStatus = 'Công khai'"; // chỉ tải đề cương công khai
                     using (SqlCommand command = new SqlCommand(select, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -60,7 +74,6 @@ namespace BTL___Nhóm_1.BUS
                             dgvTrangChu.DataSource = dataTable;
                         }
                     }
-
                     // Nếu có combobox môn học trong Designer, load danh sách ở đây
                     if (this.cmbMonHoc != null)
                     {
@@ -102,12 +115,11 @@ namespace BTL___Nhóm_1.BUS
 
             this.BeginInvoke(new Action(() => UpdateButtonsByRole()));
         }
-
+        //Phân quyền hiển thị 
         private void UpdateButtonsByRole()
         {
             try
             {
-
                 if (dgvTrangChu == null || btnThemVaoDeCuongCuaToi == null || btnThemVaoDS == null || btnThemVaoLopHoc == null)
                     return;
 
@@ -131,38 +143,58 @@ namespace BTL___Nhóm_1.BUS
                 int dgvWidth = dgvTrangChu.Width;
                 int dgvHeight = dgvTrangChu.Height;
 
-                // compute column X that is always adjacent to dgv (try dgv.Right + margin, but clamp to client area)
                 int columnX = dgvRight + margin;
-                int maxX = clientW - margin - btnThemVaoDS.Width; // use btnThemVaoDS width as representative for clamp
+                int maxX = clientW - margin - btnThemVaoDS.Width; 
                 if (columnX > maxX) columnX = maxX;
                 if (columnX < margin) columnX = margin;
 
-                // vertical placement
+                // vertical placement gap
                 int gap = 20;
+
+                bool canPlaceRight = (dgvRight + margin + btnThemVaoDS.Width) <= (clientW - margin);
 
                 if (isGiangVien)
                 {
-                    // three buttons in a column, aligned to same X (adjacent to grid)
-                    int top = dgvTop;
-                    btnThemVaoDS.Location = new Point(columnX, top);
-                    btnThemVaoLopHoc.Location = new Point(columnX, top + btnThemVaoDS.Height + gap);
-                    btnThemVaoDeCuongCuaToi.Location = new Point(columnX, top + (btnThemVaoDS.Height + gap) * 2);
+                    if (canPlaceRight)
+                    {
+                        int top = dgvTop;
+                        btnThemVaoDS.Location = new Point(columnX, top);
+                        btnThemVaoLopHoc.Location = new Point(columnX, top + btnThemVaoDS.Height + gap);
+                        btnThemVaoDeCuongCuaToi.Location = new Point(columnX, top + (btnThemVaoDS.Height + gap) * 2);
+                    }
+                    else
+                    {
+                        // Not enough space on the right -> place the three buttons centered in a row below the DataGridView
+                        int totalWidth = btnThemVaoDS.Width + btnThemVaoLopHoc.Width + btnThemVaoDeCuongCuaToi.Width + gap * 2;
+                        int startX = dgvLeft + Math.Max(0, (dgvWidth - totalWidth) / 2);
+                        startX = Math.Max(margin, Math.Min(startX, clientW - margin - totalWidth));
+
+                        int y = dgvTop + dgvHeight + gap;
+                        if (y + btnThemVaoDS.Height > clientH - margin)
+                        {
+                            y = clientH - margin - btnThemVaoDS.Height;
+                        }
+
+                        btnThemVaoDS.Location = new Point(startX, y);
+                        btnThemVaoLopHoc.Location = new Point(startX + btnThemVaoDS.Width + gap, y);
+                        btnThemVaoDeCuongCuaToi.Location = new Point(startX + btnThemVaoDS.Width + gap + btnThemVaoLopHoc.Width + gap, y);
+                    }
                 }
                 else
                 {
-                    // student: single button should sit at the same column (adjacent to grid)
+                    // student: single button should sit adjacent or below depending on space
                     int x = columnX;
-
-                    // center vertically relative to DataGridView but clamp inside client area
                     int y = dgvTop + (dgvHeight - btnThemVaoDeCuongCuaToi.Height) / 2;
                     y = Math.Max(margin, Math.Min(y, clientH - margin - btnThemVaoDeCuongCuaToi.Height));
 
-                    // if columnX would place button overlapping the DataGridView (rare), shift it slightly to the right but keep adjacent
-                    if (x <= dgvRight && x + btnThemVaoDeCuongCuaToi.Width > dgvRight)
+                    if (!canPlaceRight)
                     {
-                        x = dgvRight + margin;
-                        int maxX2 = clientW - margin - btnThemVaoDeCuongCuaToi.Width;
-                        if (x > maxX2) x = maxX2;
+                        x = dgvLeft + Math.Max(0, (dgvWidth - btnThemVaoDeCuongCuaToi.Width) / 2);
+                        if (x + btnThemVaoDeCuongCuaToi.Width > clientW - margin)
+                            x = clientW - margin - btnThemVaoDeCuongCuaToi.Width;
+                        y = dgvTop + dgvHeight + gap;
+                        if (y + btnThemVaoDeCuongCuaToi.Height > clientH - margin)
+                            y = clientH - margin - btnThemVaoDeCuongCuaToi.Height;
                     }
 
                     btnThemVaoDeCuongCuaToi.Location = new Point(x, y);
@@ -170,20 +202,19 @@ namespace BTL___Nhóm_1.BUS
             }
             catch
             {
-                // ignore layout errors to avoid breaking UI
             }
         }
-
+        //Thêm vào danh sách đề cương tại trang chủ
         private void btnThemVaoDS_Click(object sender, EventArgs e)
         {
-            ThemVaoDS themVaoDSForm = new ThemVaoDS();
+            ThemVaoDS themVaoDSForm = new ThemVaoDS(); //Mở form thêm vào danh sách đề cương
             themVaoDSForm.ShowDialog();
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
                 {
                     connection.Open();
-                    string select = "SELECT SyllabusName as 'Tên đề cương', Author as 'Tác giả', PostedDate as 'Ngày xuất bản', SubjectName as 'Tên môn học' , SyllabusType as 'Loại file đề cương'FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType , SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId WHERE SyllabusStatus = 'Công khai'"; // chỉ tải đề cương công khai
                     using (SqlCommand command = new SqlCommand(select, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -192,6 +223,14 @@ namespace BTL___Nhóm_1.BUS
                             dataTable.Load(reader);
                             dgvTrangChu.DataSource = dataTable;
                         }
+                    }
+                    if (dgvTrangChu.Columns["SyllabusId"] != null)
+                    {
+                        dgvTrangChu.Columns["SyllabusId"].Visible = false; // Ẩn cột SyllabusId
+                    }
+                    if (dgvTrangChu.Columns["SyllabusContext"] != null)
+                    {
+                        dgvTrangChu.Columns["SyllabusContext"].Visible = false; // Ẩn cột SyllabusContext
                     }
                 }
 
@@ -209,6 +248,154 @@ namespace BTL___Nhóm_1.BUS
 
         }
 
+        // Thêm vào "Đề cương của tôi" (Lưu trữ cá nhân)
+        private void btnThemVaoDeCuongCuaToi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // loop to allow re-selection when duplicates are found
+                while (true)
+                {
+                    using (var dlg = new BTL___Nhóm_1.TrangChu.SelectSyllabiForm())
+                    {
+                        if (dlg.ShowDialog(this) != DialogResult.OK)
+                            return;
+
+                        var idsToAdd = dlg.SelectedSyllabusIds.ToList();
+                        if (idsToAdd.Count == 0)
+                        {
+                            MessageBox.Show("Vui lòng chọn ít nhất một đề cương.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            continue;
+                        }
+
+                        int userId = BTL___Nhóm_1.DAL.User.Id;
+
+                        // build parameterized IN clause
+                        var paramNames = new List<string>();
+                        for (int i = 0; i < idsToAdd.Count; i++)
+                            paramNames.Add($"@p{i}");
+
+                        var existing = new List<int>();
+                        string connStr = System.Configuration.ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString;
+                        using (var connection = new System.Data.SqlClient.SqlConnection(connStr))
+                        {
+                            connection.Open();
+                            string sqlCheck = $"SELECT SyllabusId FROM PersonalStorage WHERE UserId = @userId AND SyllabusId IN ({string.Join(",", paramNames)})";
+                            using (var cmd = new System.Data.SqlClient.SqlCommand(sqlCheck, connection))
+                            {
+                                cmd.Parameters.AddWithValue("@userId", userId);
+                                for (int i = 0; i < idsToAdd.Count; i++)
+                                    cmd.Parameters.AddWithValue(paramNames[i], idsToAdd[i]);
+
+                                using (var reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        existing.Add(Convert.ToInt32(reader["SyllabusId"]));
+                                    }
+                                }
+                            }
+                        }
+
+                        if (existing.Count > 0)
+                        {
+                            MessageBox.Show($"Phát hiện {existing.Count} đề cương đã có trong 'Đề cương của tôi'.\nVui lòng chọn lại đề cương khác (không chọn các đề cương đã tồn tại).", "Đã tồn tại", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            continue; // reopen selection dialog so user can choose non-duplicate items
+                        }
+
+                        var confirm = MessageBox.Show($"Bạn có muốn thêm {idsToAdd.Count} đề cương vào 'Đề cương của tôi'?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (confirm != DialogResult.Yes)
+                            return;
+
+                        int added = 0;
+                        int skipped = 0;
+
+                        using (var connection = new System.Data.SqlClient.SqlConnection(connStr))
+                        {
+                            connection.Open();
+                            using (var transaction = connection.BeginTransaction())
+                            {
+                                try
+                                {
+                                    foreach (var syllabusId in idsToAdd)
+                                    {
+                                        // double-check duplicate inside transaction
+                                        using (var checkCmd = new System.Data.SqlClient.SqlCommand("SELECT COUNT(1) FROM PersonalStorage WHERE UserId = @userId AND SyllabusId = @syllabusId", connection, transaction))
+                                        {
+                                            checkCmd.Parameters.AddWithValue("@userId", userId);
+                                            checkCmd.Parameters.AddWithValue("@syllabusId", syllabusId);
+                                            int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                                            if (exists > 0)
+                                            {
+                                                skipped++;
+                                                continue;
+                                            }
+                                        }
+
+                                        using (var insertCmd = new System.Data.SqlClient.SqlCommand("INSERT INTO PersonalStorage (UserId, SyllabusId, SavedDate) VALUES (@userId, @syllabusId, GETDATE())", connection, transaction))
+                                        {
+                                            insertCmd.Parameters.AddWithValue("@userId", userId);
+                                            insertCmd.Parameters.AddWithValue("@syllabusId", syllabusId);
+                                            insertCmd.ExecuteNonQuery();
+                                            added++;
+                                        }
+                                    }
+
+                                    transaction.Commit();
+                                }
+                                catch
+                                {
+                                    try { transaction.Rollback(); } catch { }
+                                    throw;
+                                }
+                            }
+                        }
+
+                        MessageBox.Show($"Hoàn thành. Đã thêm: {added}.", "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Refresh LuuTruCaNhan if present
+                        try
+                        {
+                            // Duyệt tất cả các Form đang mở, tìm mọi instance của LuuTruCaNhan và gọi RefreshData()
+                            foreach (Form f in Application.OpenForms)
+                            {
+                                try
+                                {
+                                    foreach (var luu in FindControlsRecursive<LuuTruCaNhan>(f).ToList())
+                                    {
+                                        try
+                                        {
+                                            luu.RefreshData();
+                                        }
+                                        catch
+                                        {
+                                            // ignore individual refresh errors
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    // ignore errors per form
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            // ignore global refresh errors
+                        }
+
+                        // finished successfully
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm vào 'Đề cương của tôi': " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //Placeholder text box tìm kiếm tên đề cương
         private void txtTenDeCuong_Enter(object sender, EventArgs e)
         {
             if (txtTenDeCuong.Text == "Tìm kiếm tên đề cương...")
@@ -217,7 +404,7 @@ namespace BTL___Nhóm_1.BUS
                 txtTenDeCuong.ForeColor = Color.Black;
             }
         }
-
+        //Placeholder text box tìm kiếm tên đề cương
         private void txtTenDeCuong_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTenDeCuong.Text))
@@ -229,7 +416,7 @@ namespace BTL___Nhóm_1.BUS
 
         private void cmbMonHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // tự động áp filter khi người dùng chọn môn (chỉ khi combobox đã populated)
+            // tự động áp filter khi người dùng chọn môn 
             if (cmbMonHoc == null || cmbMonHoc.SelectedItem == null) return;
 
             // tránh gọi khi giá trị "Tất cả" và không có tên tìm kiếm => vẫn cần hiển thị toàn bộ
@@ -240,9 +427,11 @@ namespace BTL___Nhóm_1.BUS
         {
             try
             {
-                string selectBase = "SELECT SyllabusName as 'Tên đề cương', Author as 'Tác giả', PostedDate as 'Ngày xuất bản', SubjectName as 'Tên môn học', SyllabusType as 'Loại file đề cương' " +
-                                    "FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                string selectBase = "SELECT SyllabusId, SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
                 var conditions = new List<string>();
+
+                // always filter to public
+                conditions.Add("SyllabusStatus = @status");
 
                 if (!string.IsNullOrEmpty(txtTenDeCuong.Text.Trim()) && txtTenDeCuong.Text != "Tìm kiếm tên đề cương...")
                 {
@@ -265,6 +454,7 @@ namespace BTL___Nhóm_1.BUS
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(finalSelect, connection))
                     {
+                        command.Parameters.AddWithValue("@status", "Công khai");
                         if (conditions.Contains("SyllabusName LIKE @search"))
                         {
                             command.Parameters.AddWithValue("@search", "%" + txtTenDeCuong.Text.Trim() + "%");
@@ -294,6 +484,41 @@ namespace BTL___Nhóm_1.BUS
         private void btnTimTen_Click(object sender, EventArgs e)
         {
             ApplyFilters();
+        }
+
+        private void dgvTrangChu_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+
+            DataGridViewRow row = dgvTrangChu.Rows[e.RowIndex];
+            BTL___Nhóm_1.DAL.Syllabus.Id = Convert.ToInt32(row.Cells["SyllabusId"].Value);
+            BTL___Nhóm_1.DAL.Syllabus.Name = row.Cells["SyllabusName"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Author = row.Cells["Author"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Date = Convert.ToDateTime(row.Cells["PostedDate"].Value);
+            BTL___Nhóm_1.DAL.Syllabus.SubjectName = row.Cells["SubjectName"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Context = row.Cells["SyllabusContext"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Type = row.Cells["SyllabusType"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Status = row.Cells["SyllabusStatus"].Value.ToString();
+
+            ThongTinDeCuong thongTinForm = new ThongTinDeCuong();
+            thongTinForm.ShowDialog();
+            TrangChu_Load(sender, e);
+        }
+
+        private void btnThemVaoDeCuongCuaToi_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private IEnumerable<T> FindControlsRecursive<T>(Control parent) where T : Control
+        {
+            if (parent == null) yield break;
+            foreach (Control c in parent.Controls)
+            {
+                if (c is T t) yield return t;
+                foreach (var child in FindControlsRecursive<T>(c))
+                    yield return child;
+            }
         }
     }
 }
