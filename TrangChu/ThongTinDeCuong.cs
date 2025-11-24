@@ -93,6 +93,35 @@ namespace BTL___Nhóm_1.TrangChu
         //Mở form câu hỏi tự luyện
         private void btnTuLuyen_Click(object sender, EventArgs e)
         {
+            int questionCount = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM QUESTION WHERE SyllabusId = @SyllabusId", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            questionCount = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kiểm tra câu hỏi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (questionCount <= 0)
+            {
+                MessageBox.Show("Đề cương chưa có câu hỏi để tự luyện.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
             this.Hide();
             CauHoiTuLuyen cauHoiTuLuyen = new CauHoiTuLuyen();
             cauHoiTuLuyen.ShowDialog();
@@ -117,19 +146,45 @@ namespace BTL___Nhóm_1.TrangChu
                     using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
                     {
                         connection.Open();
-                        if (File.Exists(BTL___Nhóm_1.DAL.Syllabus.Context))
+                        using (SqlTransaction tran = connection.BeginTransaction())
                         {
-                            File.Delete(BTL___Nhóm_1.DAL.Syllabus.Context);
-                        }
-                        string delete = "DELETE FROM Syllabus WHERE SyllabusId = @SyllabusId";
-                        using (SqlCommand command = new SqlCommand(delete, connection))
-                        {
-                            command.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
-                            int rowsAffected = command.ExecuteNonQuery();
-                            if (rowsAffected > 0)
+                            try
                             {
-                                MessageBox.Show("Xoá đề cương thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.Close();
+                                // Xóa toàn bộ câu hỏi thuộc syllabus
+                                string deleteQuestions = "DELETE FROM QUESTION WHERE SyllabusId = @SyllabusId";
+                                using (SqlCommand delQ = new SqlCommand(deleteQuestions, connection, tran))
+                                {
+                                    delQ.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                                    delQ.ExecuteNonQuery();
+                                }
+
+                                // Xóa syllabus
+                                string deleteSyllabus = "DELETE FROM Syllabus WHERE SyllabusId = @SyllabusId";
+                                int rowsAffected;
+                                using (SqlCommand delS = new SqlCommand(deleteSyllabus, connection, tran))
+                                {
+                                    delS.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                                    rowsAffected = delS.ExecuteNonQuery();
+                                }
+
+                                tran.Commit();
+
+                                // Xóa tệp sau khi DB đã commit
+                                if (File.Exists(BTL___Nhóm_1.DAL.Syllabus.Context))
+                                {
+                                    try { File.Delete(BTL___Nhóm_1.DAL.Syllabus.Context); } catch { /* ignore IO errors */ }
+                                }
+
+                                if (rowsAffected > 0)
+                                {
+                                    MessageBox.Show("Xoá đề cương thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    this.Close();
+                                }
+                            }
+                            catch
+                            {
+                                tran.Rollback();
+                                throw;
                             }
                         }
                     }

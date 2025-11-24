@@ -1,5 +1,7 @@
-﻿using BTL___Nhóm_1.DAL;
+﻿        using BTL___Nhóm_1.DAL;
 using Microsoft.Data.SqlClient;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,7 +118,6 @@ namespace BTL___Nhóm_1.TrangChu
                         {
                             File.Delete(BTL___Nhóm_1.DAL.Syllabus.Context);
                         }
-
                         File.Copy(ofdDeCuong.FileName, filePath);
                     }
 
@@ -140,51 +141,94 @@ namespace BTL___Nhóm_1.TrangChu
                                 return;
                             }
                         }
+
                         string update = "";
-                        //Thêm đề cương vào cơ sở dữ liệu
                         if (txtFile.Text != BTL___Nhóm_1.DAL.Syllabus.Context)
                         {
                             update = "UPDATE Syllabus SET " +
-                                        "SyllabusName = @SyllabusName, " +
-                                        "Author = @Author, " +
-                                        "PostedDate = @PostedDate, " +
-                                        "SubjectId = @SubjectId, " +
-                                        "SyllabusContext = @SyllabusContext, " +
-                                        "SyllabusType = @SyllabusType, " +
-                                        "SyllabusStatus = @SyllabusStatus " +
-                                        "WHERE SyllabusId = @SyllabusId";
+                                     "SyllabusName = @SyllabusName, " +
+                                     "Author = @Author, " +
+                                     "PostedDate = @PostedDate, " +
+                                     "SubjectId = @SubjectId, " +
+                                     "SyllabusContext = @SyllabusContext, " +
+                                     "SyllabusType = @SyllabusType, " +
+                                     "SyllabusStatus = @SyllabusStatus " +
+                                     "WHERE SyllabusId = @SyllabusId";
                         }
                         else
                         {
                             update = "UPDATE Syllabus SET " +
-                                        "SyllabusName = @SyllabusName, " +
-                                        "Author = @Author, " +
-                                        "PostedDate = @PostedDate, " +
-                                        "SubjectId = @SubjectId, " +
-                                        "SyllabusStatus = @SyllabusStatus " +
-                                        "WHERE SyllabusId = @SyllabusId";
+                                     "SyllabusName = @SyllabusName, " +
+                                     "Author = @Author, " +
+                                     "PostedDate = @PostedDate, " +
+                                     "SubjectId = @SubjectId, " +
+                                     "SyllabusStatus = @SyllabusStatus " +
+                                     "WHERE SyllabusId = @SyllabusId";
                         }
                         using (SqlCommand command = new SqlCommand(update, connection))
                         {
                             command.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
                             command.Parameters.AddWithValue("@SyllabusName", txtTenDeCuong.Text.Trim());
                             command.Parameters.AddWithValue("@Author", txtTacGia.Text.Trim());
-                            command.Parameters.AddWithValue("@PostedDate", dtpXuatBan.Text);
+                            command.Parameters.AddWithValue("@PostedDate", dtpXuatBan.Value);
                             command.Parameters.AddWithValue("@SubjectId", subjectId);
-                            if (txtFile.Text != BTL___Nhóm_1.DAL.Syllabus.Context) {
+                            if (txtFile.Text != BTL___Nhóm_1.DAL.Syllabus.Context)
+                            {
                                 command.Parameters.AddWithValue("@SyllabusContext", filePath);
                                 command.Parameters.AddWithValue("@SyllabusType", fileType);
                             }
-                                command.Parameters.AddWithValue("@SyllabusStatus", "Công khai");
-                                command.ExecuteNonQuery();
+                            command.Parameters.AddWithValue("@SyllabusStatus", "Công khai");
+                            command.ExecuteNonQuery();
+                        }
+
+                        // Nếu người dùng chọn file câu hỏi mới thì xóa hết câu hỏi cũ và thay bằng câu hỏi mới
+                        if (!string.IsNullOrWhiteSpace(txtFileCauHoi.Text) && File.Exists(ofdCauHoi.FileName))
+                        {
+                            // Đọc file excel câu hỏi
+                            List<Question> excelQuestions = DocFileExcel(ofdCauHoi.FileName);
+
+                            // Xóa câu hỏi cũ của syllabus
+                            string deleteQuestions = "DELETE FROM QUESTION WHERE SyllabusId = @SyllabusId";
+                            using (SqlCommand delCmd = new SqlCommand(deleteQuestions, connection))
+                            {
+                                delCmd.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                                delCmd.ExecuteNonQuery();
                             }
+
+                            // Thêm câu hỏi mới
+                            if (excelQuestions != null && excelQuestions.Count > 0)
+                            {
+                                string insertQuestion = "INSERT INTO QUESTION (Contentt, Answer, AnswerExplanation, SyllabusId) " +
+                                                        "VALUES (@Contentt, @Answer, @AnswerExplanation, @SyllabusId)";
+                                using (SqlCommand qCmd = new SqlCommand(insertQuestion, connection))
+                                {
+                                    qCmd.Parameters.Add("@Contentt", SqlDbType.NVarChar);
+                                    qCmd.Parameters.Add("@Answer", SqlDbType.NVarChar);
+                                    qCmd.Parameters.Add("@AnswerExplanation", SqlDbType.NVarChar);
+                                    qCmd.Parameters.Add("@SyllabusId", SqlDbType.Int);
+
+                                    foreach (Question q in excelQuestions)
+                                    {
+                                        qCmd.Parameters["@Contentt"].Value = (object)q.Context ?? DBNull.Value;
+                                        qCmd.Parameters["@Answer"].Value = (object)q.Answer ?? DBNull.Value;
+                                        qCmd.Parameters["@AnswerExplanation"].Value = (object)q.Explain ?? DBNull.Value;
+                                        qCmd.Parameters["@SyllabusId"].Value = BTL___Nhóm_1.DAL.Syllabus.Id;
+                                        qCmd.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
                     }
+
                     MessageBox.Show("Sửa đề cương thành công!");
                     BTL___Nhóm_1.DAL.Syllabus.Name = txtTenDeCuong.Text;
                     BTL___Nhóm_1.DAL.Syllabus.Author = txtTacGia.Text;
                     BTL___Nhóm_1.DAL.Syllabus.Date = dtpXuatBan.Value;
                     BTL___Nhóm_1.DAL.Syllabus.SubjectName = cmbMonHoc.SelectedItem.ToString();
-                    BTL___Nhóm_1.DAL.Syllabus.Context = filePath;
+                    if (txtFile.Text != Path.GetFileName(BTL___Nhóm_1.DAL.Syllabus.Context))
+                    {
+                        BTL___Nhóm_1.DAL.Syllabus.Context = filePath;
+                    }
                     this.Close();
                 }
                 catch (Exception ex)
@@ -197,6 +241,61 @@ namespace BTL___Nhóm_1.TrangChu
                 return;
             }
         }
+
+        private List<Question> DocFileExcel(string excelPath)
+        {
+            List<Question> danhSachCauHoi = new List<Question>();
+            FileInfo fileInfo = new FileInfo(excelPath);
+            if (!fileInfo.Exists) return danhSachCauHoi;
+
+            ExcelPackage.License.SetNonCommercialPersonal("Nhom 1");
+            using (ExcelPackage package = new ExcelPackage(fileInfo))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                int rowCount = worksheet.Dimension.Rows;
+
+                for (int row = 1; row < rowCount; row += 2)
+                {
+                    Question cauHoi = new Question();
+                    cauHoi.Context = worksheet.Cells[row, 1].Text;
+                    string checkCotB = worksheet.Cells[row + 1, 2].Text;
+
+                    if (string.IsNullOrEmpty(checkCotB))
+                    {
+                        // Tự luận: lưu đáp án vào Explain
+                        cauHoi.Explain = worksheet.Cells[row + 1, 1].Text;
+                    }
+                    else
+                    {
+                        List<string> tempDapAnDung = new List<string>();
+                        List<string> tempDapAn = new List<string>();
+                        for (int col = 1; col <= 10; col++)
+                        {
+                            var cell = worksheet.Cells[row + 1, col];
+                            string textDapAn = cell.Text;
+                            if (string.IsNullOrEmpty(textDapAn)) break;
+
+                            tempDapAn.Add(textDapAn);
+
+                            bool isBold = cell.Style.Font.Bold;
+                            string colorRgb = cell.Style.Font.Color.Rgb;
+                            bool isRed = !string.IsNullOrEmpty(colorRgb) && (colorRgb.Contains("FF0000") || colorRgb.Contains("Red"));
+
+                            if (isBold || isRed)
+                            {
+                                tempDapAnDung.Add(textDapAn);
+                            }
+                        }
+                        cauHoi.Answer = string.Join("!", tempDapAn);           // tất cả lựa chọn
+                        cauHoi.Explain = string.Join("!", tempDapAnDung);      // đáp án đúng
+                    }
+
+                    danhSachCauHoi.Add(cauHoi);
+                }
+            }
+            return danhSachCauHoi;
+        }
+
         // Chỉ cho phép nhập chữ cái, chữ số và dấu gạch dưới
         private void txtTenDeCuong_KeyPress(object sender, KeyPressEventArgs e)
         {

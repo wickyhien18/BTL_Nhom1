@@ -134,7 +134,7 @@ namespace BTL___Nhóm_1.TrangChu
                         command.Parameters.AddWithValue("@SubjectId", subjectId);
                         command.Parameters.AddWithValue("@SyllabusContext", filePath);
                         command.Parameters.AddWithValue("@SyllabusType", fileType);
-                        command.Parameters.AddWithValue("@SyllabusStatus", "Công khai");
+                        command.Parameters.AddWithValue("@SyllabusStatus", _defaultStatus);
                         newSyllabusId = Convert.ToInt32(command.ExecuteScalar());
                     }
 
