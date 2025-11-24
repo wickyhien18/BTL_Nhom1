@@ -105,7 +105,7 @@ namespace BTL___Nhóm_1.TrangChu
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (MessageBox.Show("Bạn có chắc với những thay đổi cho thông tin đề cương hiện tại?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có chắc muốn thay đổi thông tin đề cương?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 try
                 {

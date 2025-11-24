@@ -34,6 +34,8 @@
             this.cmbMonHoc = new System.Windows.Forms.ComboBox();
             this.lblMonHoc = new System.Windows.Forms.Label();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.btnThemMoi = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLuuTru)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,10 +100,34 @@
             this.btnXoa.TabIndex = 0;
             this.btnXoa.Text = "Xóa khỏi Đề cương của tôi";
             // 
+            // btnThemMoi
+            // 
+            this.btnThemMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnThemMoi.Location = new System.Drawing.Point(232, 428);
+            this.btnThemMoi.Name = "btnThemMoi";
+            this.btnThemMoi.Size = new System.Drawing.Size(200, 60);
+            this.btnThemMoi.TabIndex = 5;
+            this.btnThemMoi.Text = "Thêm đề cương";
+            this.btnThemMoi.UseVisualStyleBackColor = true;
+            this.btnThemMoi.Click += new System.EventHandler(this.btnThemMoi_Click);
+            // 
+            // btnSua
+            // 
+            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnSua.Location = new System.Drawing.Point(444, 428);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.Size = new System.Drawing.Size(200, 60);
+            this.btnSua.TabIndex = 6;
+            this.btnSua.Text = "Sửa đề cương";
+            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
             // LuuTruCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnSua);
+            this.Controls.Add(this.btnThemMoi);
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.lblMonHoc);
             this.Controls.Add(this.cmbMonHoc);
@@ -124,5 +150,7 @@
         private System.Windows.Forms.ComboBox cmbMonHoc;
         private System.Windows.Forms.Label lblMonHoc;
         private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnThemMoi;
+        private System.Windows.Forms.Button btnSua;
     }
 }

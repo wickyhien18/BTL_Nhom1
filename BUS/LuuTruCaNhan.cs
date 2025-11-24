@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
 using BTL___Nhóm_1.DAL;
+using BTL___Nhóm_1.TrangChu;
 
 namespace BTL___Nhóm_1.BUS
 {
@@ -302,6 +303,134 @@ WHERE ps.UserId = @userId";
         private void cmbMonHoc_SelectedIndexChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        public void AddNewPrivateSyllabus()
+        {
+            try
+            {
+                //request private status and save to PersonalStorage
+                using (var dlg = new ThemVaoDS(defaultStatus: "Riêng tư", saveToPersonal: true))
+                {
+                    dlg.ShowDialog(this);
+
+                    //refresh the LuuTru table
+                    if (dlg.CreatedSyllabusId.HasValue)
+                    {
+                        if (this.IsHandleCreated && this.InvokeRequired)
+                            this.BeginInvoke(new Action(RefreshData));
+                        else
+                            RefreshData();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm đề cương riêng tư: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnThemMoi_Click(object sender, EventArgs e)
+        {
+            AddNewPrivateSyllabus();
+        }
+
+        private string GetCellValue(DataGridViewRow row, string colName)
+        {
+            try
+            {
+                var cell = row.Cells[colName];
+                return cell?.Value?.ToString() ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvLuuTru == null) return;
+
+                DataGridViewRow row = null;
+                if (dgvLuuTru.SelectedRows != null && dgvLuuTru.SelectedRows.Count > 0)
+                    row = dgvLuuTru.SelectedRows[0];
+                else if (dgvLuuTru.CurrentRow != null)
+                    row = dgvLuuTru.CurrentRow;
+
+                if (row == null)
+                {
+                    MessageBox.Show("Vui lòng chọn một đề cương để sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                string status = GetCellValue(row, "SyllabusStatus");
+                if (string.IsNullOrWhiteSpace(status))
+                    status = GetCellValue(row, "Trạng thái");
+
+                string role = (BTL___Nhóm_1.DAL.User.VaiTro ?? string.Empty).Trim();
+
+                // If user is student and syllabus is public, disallow editing
+                if (role.Equals("Sinh viên", StringComparison.OrdinalIgnoreCase) &&
+                    status.Equals("Công khai", StringComparison.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Bạn không được phép sửa đề cương có trạng thái 'Công khai'.", "Không cho phép", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                object idObj = null;
+                try { idObj = row.Cells["SyllabusId"].Value; } catch { }
+                if (idObj == null)
+                {
+                    MessageBox.Show("Không xác định được mã đề cương.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                BTL___Nhóm_1.DAL.Syllabus.Id = Convert.ToInt32(idObj);
+                BTL___Nhóm_1.DAL.Syllabus.Name = GetCellValue(row, "SyllabusName");
+                if (string.IsNullOrEmpty(BTL___Nhóm_1.DAL.Syllabus.Name))
+                    BTL___Nhóm_1.DAL.Syllabus.Name = GetCellValue(row, "Tên đề cương");
+
+                BTL___Nhóm_1.DAL.Syllabus.Author = GetCellValue(row, "Author");
+                if (string.IsNullOrEmpty(BTL___Nhóm_1.DAL.Syllabus.Author))
+                    BTL___Nhóm_1.DAL.Syllabus.Author = GetCellValue(row, "Tác giả");
+
+                DateTime dt;
+                var posted = GetCellValue(row, "PostedDate");
+                if (string.IsNullOrEmpty(posted)) posted = GetCellValue(row, "Ngày xuất bản");
+                if (DateTime.TryParse(posted, out dt)) BTL___Nhóm_1.DAL.Syllabus.Date = dt;
+                else BTL___Nhóm_1.DAL.Syllabus.Date = DateTime.Now;
+
+                BTL___Nhóm_1.DAL.Syllabus.SubjectName = GetCellValue(row, "SubjectName");
+                if (string.IsNullOrEmpty(BTL___Nhóm_1.DAL.Syllabus.SubjectName))
+                    BTL___Nhóm_1.DAL.Syllabus.SubjectName = GetCellValue(row, "Tên môn học");
+
+                BTL___Nhóm_1.DAL.Syllabus.Context = GetCellValue(row, "SyllabusContext");
+                BTL___Nhóm_1.DAL.Syllabus.Type = GetCellValue(row, "SyllabusType");
+                if (string.IsNullOrEmpty(BTL___Nhóm_1.DAL.Syllabus.Type))
+                    BTL___Nhóm_1.DAL.Syllabus.Type = GetCellValue(row, "Loại file đề cương");
+
+                BTL___Nhóm_1.DAL.Syllabus.Status = status;
+
+                // Open the edit form (Sửa đề cương)
+                using (var editForm = new BTL___Nhóm_1.TrangChu.SuaDeCuong())
+                {
+                    var result = editForm.ShowDialog(this);
+                    if (result == DialogResult.OK)
+                    {
+                        MessageBox.Show("Sửa đề cương thành công.", "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
+                // refresh personal storage list
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi mở form sửa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

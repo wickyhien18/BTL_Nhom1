@@ -64,7 +64,7 @@ namespace BTL___Nhóm_1.BUS
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
                 {
                     connection.Open();
-                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId WHERE SyllabusStatus = 'Công khai'"; // chỉ tải đề cương công khai
                     using (SqlCommand command = new SqlCommand(select, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -214,7 +214,7 @@ namespace BTL___Nhóm_1.BUS
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
                 {
                     connection.Open();
-                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType , SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
+                    string select = "SELECT SyllabusId ,SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType , SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId WHERE SyllabusStatus = 'Công khai'"; // chỉ tải đề cương công khai
                     using (SqlCommand command = new SqlCommand(select, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -430,6 +430,9 @@ namespace BTL___Nhóm_1.BUS
                 string selectBase = "SELECT SyllabusId, SyllabusName, Author, PostedDate, SubjectName, SyllabusContext, SyllabusType, SyllabusStatus FROM Syllabus JOIN Subject ON Syllabus.SubjectId = Subject.SubjectId";
                 var conditions = new List<string>();
 
+                // always filter to public
+                conditions.Add("SyllabusStatus = @status");
+
                 if (!string.IsNullOrEmpty(txtTenDeCuong.Text.Trim()) && txtTenDeCuong.Text != "Tìm kiếm tên đề cương...")
                 {
                     conditions.Add("SyllabusName LIKE @search");
@@ -451,6 +454,7 @@ namespace BTL___Nhóm_1.BUS
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(finalSelect, connection))
                     {
+                        command.Parameters.AddWithValue("@status", "Công khai");
                         if (conditions.Contains("SyllabusName LIKE @search"))
                         {
                             command.Parameters.AddWithValue("@search", "%" + txtTenDeCuong.Text.Trim() + "%");
