@@ -70,7 +70,7 @@ namespace BTL___Nhóm_1.TrangChu
                     fileType = Path.GetExtension(ofdDeCuong.FileName).ToLower();
                     txtFile.Text = Path.GetFileName(ofdDeCuong.FileName);
 
-                    //Đường dẫn lưu tệp ./bin/Debug/KhoDeCuong
+                    //Đường dẫn lưu tệp ./Project_Name/KhoDeCuong
                     string folderDeCuong;
 #if DEBUG
                     try
@@ -100,7 +100,7 @@ namespace BTL___Nhóm_1.TrangChu
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTenDeCuong.Text) ||
-                string.IsNullOrWhiteSpace(txtTacGia.Text))
+                string.IsNullOrWhiteSpace(txtTacGia.Text) || cmbMonHoc.SelectedIndex == -1)
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

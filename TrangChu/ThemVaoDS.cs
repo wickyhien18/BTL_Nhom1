@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace BTL___Nhóm_1.TrangChu
         private void btnFile_Click(object sender, EventArgs e)
         {
             // Mở hộp thoại chọn tệp
-            ofdDeCuong.Filter = "De Cuong(WORD,PDF,EXCEL)|*.pdf;*.docx;*.xls;*.xlsx";
+            ofdDeCuong.Filter = "De Cuong(WORD,EXCEL)|*.doc;*.docx;*.xls;*.xlsx";
             if (ofdDeCuong.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -37,7 +37,7 @@ namespace BTL___Nhóm_1.TrangChu
                     fileData = Path.GetFileName(ofdDeCuong.FileName);
                     fileType = Path.GetExtension(ofdDeCuong.FileName).ToLower();
                     txtFile.Text = Path.GetFileName(ofdDeCuong.FileName);
-
+                    //Lưu file vào đường dẫn ./ Project_Name / KhoDeCuong
                     string folderDeCuong;
                     #if DEBUG
                         try
@@ -67,11 +67,6 @@ namespace BTL___Nhóm_1.TrangChu
                 {
                     MessageBox.Show("Lỗi: " + ex.Message);
                 }
-            }
-            else
-            {
-                fileData = null;
-                fileType = null;
             }
         }
 

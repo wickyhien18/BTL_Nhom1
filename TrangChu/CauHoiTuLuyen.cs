@@ -40,5 +40,15 @@ namespace BTL___Nhóm_1.TrangChu
                 btnChinhSua.Enabled = false;
             }
         }
+
+        private void btnChinhSua_Click(object sender, EventArgs e)
+        {
+            sfdCauHoi.Filter = "Câu hỏi (EXCEL)|*.xls;*.xlsx";
+            if (sfdCauHoi.ShowDialog() == DialogResult.OK)
+            {
+                //Đặt code ở đây Long nhé
+            }
+            
+        }
     }
 }

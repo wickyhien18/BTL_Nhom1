@@ -34,6 +34,7 @@
             this.btnSanSang = new System.Windows.Forms.Button();
             this.btnQuayLai = new System.Windows.Forms.Button();
             this.btnChinhSua = new System.Windows.Forms.Button();
+            this.sfdCauHoi = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -87,6 +88,7 @@
             this.btnChinhSua.TabIndex = 4;
             this.btnChinhSua.Text = "Chỉnh sửa";
             this.btnChinhSua.UseVisualStyleBackColor = true;
+            this.btnChinhSua.Click += new System.EventHandler(this.btnChinhSua_Click);
             // 
             // CauHoiTuLuyen
             // 
@@ -114,5 +116,6 @@
         private System.Windows.Forms.Button btnSanSang;
         private System.Windows.Forms.Button btnQuayLai;
         private System.Windows.Forms.Button btnChinhSua;
+        private System.Windows.Forms.SaveFileDialog sfdCauHoi;
     }
 }
