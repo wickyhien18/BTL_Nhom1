@@ -80,6 +80,15 @@ namespace BTL___Nhóm_1.BUS
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.SuspendLayout();
+            // 
+            // LopHoc
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "LopHoc";
+            this.Size = new System.Drawing.Size(1080, 776);
+            this.ResumeLayout(false);
 
         }
 
