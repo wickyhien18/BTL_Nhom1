@@ -28,7 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvLuuTru = new System.Windows.Forms.DataGridView();
+            this.SyllaBusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SyllabusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PostedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SyllabusContext = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SyllabusType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SyllabusStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SavedDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.btnTim = new System.Windows.Forms.Button();
             this.cmbMonHoc = new System.Windows.Forms.ComboBox();
@@ -43,7 +54,38 @@
             // 
             this.dgvLuuTru.AllowUserToAddRows = false;
             this.dgvLuuTru.AllowUserToDeleteRows = false;
+            this.dgvLuuTru.AllowUserToResizeColumns = false;
+            this.dgvLuuTru.AllowUserToResizeRows = false;
+            this.dgvLuuTru.BackgroundColor = System.Drawing.Color.White;
+                this.dgvLuuTru.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLuuTru.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLuuTru.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLuuTru.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SyllaBusId,
+            this.SyllabusName,
+            this.Author,
+            this.PostedDate,
+            this.SubjectName,
+            this.SyllabusContext,
+            this.SyllabusType,
+            this.SyllabusStatus,
+            this.SavedDate});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLuuTru.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvLuuTru.GridColor = System.Drawing.Color.White;
             this.dgvLuuTru.Location = new System.Drawing.Point(20, 100);
             this.dgvLuuTru.Name = "dgvLuuTru";
             this.dgvLuuTru.ReadOnly = true;
@@ -53,7 +95,91 @@
             this.dgvLuuTru.Size = new System.Drawing.Size(942, 300);
             this.dgvLuuTru.TabIndex = 0;
             // 
-            // txtTen
+            // SyllaBusId 
+            // 
+            this.SyllaBusId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SyllaBusId.DataPropertyName = "SyllabusId";
+            this.SyllaBusId.HeaderText = "SyllaBusId";
+            this.SyllaBusId.MinimumWidth = 6;
+            this.SyllaBusId.Name = "SyllaBusId";
+            this.SyllaBusId.ReadOnly = true;
+            this.SyllaBusId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.SyllaBusId.Visible = false;
+            // 
+            // SyllabusName 
+            // 
+            this.SyllabusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SyllabusName.DataPropertyName = "Tên đề cương";
+            this.SyllabusName.HeaderText = "Tên đề cương";
+            this.SyllabusName.MinimumWidth = 6;
+            this.SyllabusName.Name = "SyllabusName";
+            this.SyllabusName.ReadOnly = true;
+            // 
+            // Author
+            // 
+            this.Author.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Author.DataPropertyName = "Tác giả";
+            this.Author.HeaderText = "Tác giả";
+            this.Author.MinimumWidth = 6;
+            this.Author.Name = "Author";
+            this.Author.ReadOnly = true;
+            // 
+            // PostedDate
+            // 
+            this.PostedDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PostedDate.DataPropertyName = "Ngày xuất bản";
+            this.PostedDate.HeaderText = "Ngày xuất bản";
+            this.PostedDate.MinimumWidth = 6;
+            this.PostedDate.Name = "PostedDate";
+            this.PostedDate.ReadOnly = true;
+            // 
+            // SubjectName
+            // 
+            this.SubjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SubjectName.DataPropertyName = "Tên môn học";
+            this.SubjectName.HeaderText = "Tên môn học";
+            this.SubjectName.MinimumWidth = 6;
+            this.SubjectName.Name = "SubjectName";
+            this.SubjectName.ReadOnly = true;
+            // 
+            // SyllabusContext (hidden)
+            // 
+            this.SyllabusContext.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SyllabusContext.DataPropertyName = "SyllabusContext";
+            this.SyllabusContext.HeaderText = "SyllabusContext";
+            this.SyllabusContext.MinimumWidth = 6;
+            this.SyllabusContext.Name = "SyllabusContext";
+            this.SyllabusContext.ReadOnly = true;
+            this.SyllabusContext.Visible = false;
+            // 
+            // SyllabusType
+            // 
+            this.SyllabusType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SyllabusType.DataPropertyName = "Loại file đề cương";
+            this.SyllabusType.HeaderText = "Loại đề cương";
+            this.SyllabusType.MinimumWidth = 6;
+            this.SyllabusType.Name = "SyllabusType";
+            this.SyllabusType.ReadOnly = true;
+            // 
+            // SyllabusStatus
+            // 
+            this.SyllabusStatus.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SyllabusStatus.DataPropertyName = "Trạng thái";
+            this.SyllabusStatus.HeaderText = "Trạng thái";
+            this.SyllabusStatus.MinimumWidth = 6;
+            this.SyllabusStatus.Name = "SyllabusStatus";
+            this.SyllabusStatus.ReadOnly = true;
+            // 
+            // SavedDate (Vietnamese binding)
+            // 
+            this.SavedDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SavedDate.DataPropertyName = "Ngày lưu";
+            this.SavedDate.HeaderText = "Ngày lưu";
+            this.SavedDate.MinimumWidth = 6;
+            this.SavedDate.Name = "SavedDate";
+            this.SavedDate.ReadOnly = true;
+            // 
+            // 
             // 
             this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
             this.txtTen.ForeColor = System.Drawing.Color.Gray;
@@ -91,7 +217,7 @@
             this.lblMonHoc.TabIndex = 1;
             this.lblMonHoc.Text = "Môn học:";
             // 
-            // btnXoa
+            // buttons...
             // 
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.btnXoa.Location = new System.Drawing.Point(20, 428);
@@ -99,9 +225,6 @@
             this.btnXoa.Size = new System.Drawing.Size(200, 60);
             this.btnXoa.TabIndex = 0;
             this.btnXoa.Text = "Xóa khỏi Đề cương của tôi";
-            // 
-            // btnThemMoi
-            // 
             this.btnThemMoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.btnThemMoi.Location = new System.Drawing.Point(232, 428);
             this.btnThemMoi.Name = "btnThemMoi";
@@ -110,9 +233,6 @@
             this.btnThemMoi.Text = "Thêm đề cương";
             this.btnThemMoi.UseVisualStyleBackColor = true;
             this.btnThemMoi.Click += new System.EventHandler(this.btnThemMoi_Click);
-            // 
-            // btnSua
-            // 
             this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.btnSua.Location = new System.Drawing.Point(444, 428);
             this.btnSua.Name = "btnSua";
@@ -126,31 +246,38 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbMonHoc);
+            this.Controls.Add(this.lblMonHoc);
+            this.Controls.Add(this.btnTim);
+            this.Controls.Add(this.txtTen);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThemMoi);
             this.Controls.Add(this.btnXoa);
-            this.Controls.Add(this.lblMonHoc);
-            this.Controls.Add(this.cmbMonHoc);
-            this.Controls.Add(this.btnTim);
-            this.Controls.Add(this.txtTen);
             this.Controls.Add(this.dgvLuuTru);
             this.Name = "LuuTruCaNhan";
             this.Size = new System.Drawing.Size(1000, 650);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLuuTru)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        #endregion
-
         private System.Windows.Forms.DataGridView dgvLuuTru;
+        private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnThemMoi;
+        private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.TextBox txtTen;
         private System.Windows.Forms.Button btnTim;
         private System.Windows.Forms.ComboBox cmbMonHoc;
         private System.Windows.Forms.Label lblMonHoc;
-        private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.Button btnThemMoi;
-        private System.Windows.Forms.Button btnSua;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SyllaBusId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PostedDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SubjectName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusContext;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusStatus;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SavedDate;
     }
 }
+#endregion
