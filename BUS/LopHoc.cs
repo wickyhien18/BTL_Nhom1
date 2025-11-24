@@ -51,7 +51,7 @@ namespace BTL___Nhóm_1.BUS
             this.dgvLop.Name = "dgvLop";
             this.dgvLop.RowHeadersWidth = 51;
             this.dgvLop.RowTemplate.Height = 24;
-            this.dgvLop.Size = new System.Drawing.Size(776, 304);
+            this.dgvLop.Size = new System.Drawing.Size(665, 278);
             this.dgvLop.TabIndex = 0;
             this.dgvLop.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -67,18 +67,18 @@ namespace BTL___Nhóm_1.BUS
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 83);
+            this.button1.Location = new System.Drawing.Point(713, 134);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 35);
+            this.button1.Size = new System.Drawing.Size(309, 57);
             this.button1.TabIndex = 3;
             this.button1.Text = "Thêm lớp";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(132, 83);
+            this.button2.Location = new System.Drawing.Point(713, 226);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(116, 35);
+            this.button2.Size = new System.Drawing.Size(309, 66);
             this.button2.TabIndex = 4;
             this.button2.Text = "Sửa thông tin";
             this.button2.UseVisualStyleBackColor = true;
@@ -86,9 +86,9 @@ namespace BTL___Nhóm_1.BUS
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(278, 83);
+            this.button3.Location = new System.Drawing.Point(713, 331);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 35);
+            this.button3.Size = new System.Drawing.Size(309, 60);
             this.button3.TabIndex = 5;
             this.button3.Text = "Xoá lớp";
             this.button3.UseVisualStyleBackColor = true;
@@ -96,12 +96,13 @@ namespace BTL___Nhóm_1.BUS
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(713, 89);
+            this.button4.Location = new System.Drawing.Point(12, 16);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(104, 38);
             this.button4.TabIndex = 6;
             this.button4.Text = "Quay lại";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // LopHoc
             // 
@@ -114,7 +115,7 @@ namespace BTL___Nhóm_1.BUS
             this.Controls.Add(this.lbLop);
             this.Controls.Add(this.dgvLop);
             this.Name = "LopHoc";
-            this.Size = new System.Drawing.Size(800, 450);
+            this.Size = new System.Drawing.Size(1052, 544);
             this.Load += new System.EventHandler(this.LopHoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).EndInit();
             this.ResumeLayout(false);
@@ -123,6 +124,11 @@ namespace BTL___Nhóm_1.BUS
         }
 
         private void LopHoc_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
         {
 
         }

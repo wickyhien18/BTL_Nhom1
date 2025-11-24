@@ -94,11 +94,7 @@ namespace BTL___Nhóm_1
 
         private void btnLopHoc_Click(object sender, EventArgs e)
         {
-            panel2.Controls.Clear();
-
-            var ucLopHoc = new BTL___Nhóm_1.BUS.LopHoc(user.Id, user.VaiTro);
-            panel2.Controls.Add(ucLopHoc);
-            ucLopHoc.Dock = DockStyle.Fill;
+            lopHoc1.BringToFront();
         }
 
         private void btnCaNhan_Click(object sender, EventArgs e)

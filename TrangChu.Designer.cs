@@ -133,7 +133,6 @@
             this.panel2.Size = new System.Drawing.Size(1080, 114);
             this.panel2.TabIndex = 1;
             this.panel2.Click += new System.EventHandler(this.panel2_Click);
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // btnLogoutPopup
             // 
@@ -210,7 +209,7 @@
             this.trangChu1.Name = "trangChu1";
             this.trangChu1.Size = new System.Drawing.Size(1080, 662);
             this.trangChu1.TabIndex = 2;
-            this.trangChu1.Load += new System.EventHandler(this.trangChu1_Load);
+            //this.trangChu1.Load += new System.EventHandler(this.trangChu1_Load);
             // 
             // lopHoc1
             // 
