@@ -36,19 +36,18 @@ namespace BTL___Nhóm_1.TrangChu
             // Ẩn nút chỉnh sửa nếu vai trò là Sinh viên
             if (BTL___Nhóm_1.DAL.User.VaiTro == "Sinh viên")
             {
-                btnChinhSua.Visible = false;
-                btnChinhSua.Enabled = false;
+                btnUpload.Visible = false;
+                btnUpload.Enabled = false;
             }
         }
 
         private void btnChinhSua_Click(object sender, EventArgs e)
         {
-            sfdCauHoi.Filter = "Câu hỏi (EXCEL)|*.xls;*.xlsx";
-            if (sfdCauHoi.ShowDialog() == DialogResult.OK)
+            ofdCauHoi.Filter = "Cau Hoi (EXCEL)|*.xls;*.xlsx";
+            if (ofdCauHoi.ShowDialog() == DialogResult.OK)
             {
-                //Đặt code ở đây Long nhé
+                //Cho code vào đây LONG
             }
-            
         }
     }
 }

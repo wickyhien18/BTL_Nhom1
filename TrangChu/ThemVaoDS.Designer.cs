@@ -43,6 +43,10 @@
             this.ofdDeCuong = new System.Windows.Forms.OpenFileDialog();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnThemMon = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtFileCauHoi = new System.Windows.Forms.TextBox();
+            this.btnFileCauHoi = new System.Windows.Forms.Button();
+            this.ofdCauHoi = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -155,7 +159,7 @@
             // btnThem
             // 
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThem.Location = new System.Drawing.Point(147, 447);
+            this.btnThem.Location = new System.Drawing.Point(158, 528);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(319, 59);
             this.btnThem.TabIndex = 11;
@@ -174,11 +178,48 @@
             this.btnThemMon.UseVisualStyleBackColor = true;
             this.btnThemMon.Click += new System.EventHandler(this.btnThemMon_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(25, 444);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(137, 29);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "File câu hỏi";
+            // 
+            // txtFileCauHoi
+            // 
+            this.txtFileCauHoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFileCauHoi.Location = new System.Drawing.Point(226, 444);
+            this.txtFileCauHoi.Name = "txtFileCauHoi";
+            this.txtFileCauHoi.ReadOnly = true;
+            this.txtFileCauHoi.Size = new System.Drawing.Size(223, 38);
+            this.txtFileCauHoi.TabIndex = 14;
+            // 
+            // btnFileCauHoi
+            // 
+            this.btnFileCauHoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFileCauHoi.Location = new System.Drawing.Point(455, 444);
+            this.btnFileCauHoi.Name = "btnFileCauHoi";
+            this.btnFileCauHoi.Size = new System.Drawing.Size(124, 38);
+            this.btnFileCauHoi.TabIndex = 15;
+            this.btnFileCauHoi.Text = "Upload";
+            this.btnFileCauHoi.UseVisualStyleBackColor = true;
+            this.btnFileCauHoi.Click += new System.EventHandler(this.btnFileCauHoi_Click);
+            // 
+            // ofdCauHoi
+            // 
+            this.ofdCauHoi.FileName = "openFileDialog1";
+            // 
             // ThemVaoDS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 536);
+            this.ClientSize = new System.Drawing.Size(641, 621);
+            this.Controls.Add(this.btnFileCauHoi);
+            this.Controls.Add(this.txtFileCauHoi);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnThemMon);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.btnFile);
@@ -217,5 +258,9 @@
         private System.Windows.Forms.OpenFileDialog ofdDeCuong;
         private System.Windows.Forms.Button btnThem;
         private System.Windows.Forms.Button btnThemMon;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtFileCauHoi;
+        private System.Windows.Forms.Button btnFileCauHoi;
+        private System.Windows.Forms.OpenFileDialog ofdCauHoi;
     }
 }

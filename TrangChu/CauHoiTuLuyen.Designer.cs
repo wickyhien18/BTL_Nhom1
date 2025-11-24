@@ -33,8 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSanSang = new System.Windows.Forms.Button();
             this.btnQuayLai = new System.Windows.Forms.Button();
-            this.btnChinhSua = new System.Windows.Forms.Button();
-            this.sfdCauHoi = new System.Windows.Forms.SaveFileDialog();
+            this.btnUpload = new System.Windows.Forms.Button();
+            this.ofdCauHoi = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -60,7 +60,7 @@
             // btnSanSang
             // 
             this.btnSanSang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSanSang.Location = new System.Drawing.Point(31, 172);
+            this.btnSanSang.Location = new System.Drawing.Point(12, 172);
             this.btnSanSang.Name = "btnSanSang";
             this.btnSanSang.Size = new System.Drawing.Size(138, 48);
             this.btnSanSang.TabIndex = 2;
@@ -71,7 +71,7 @@
             // btnQuayLai
             // 
             this.btnQuayLai.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuayLai.Location = new System.Drawing.Point(363, 172);
+            this.btnQuayLai.Location = new System.Drawing.Point(371, 172);
             this.btnQuayLai.Name = "btnQuayLai";
             this.btnQuayLai.Size = new System.Drawing.Size(136, 48);
             this.btnQuayLai.TabIndex = 3;
@@ -79,23 +79,27 @@
             this.btnQuayLai.UseVisualStyleBackColor = true;
             this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
             // 
-            // btnChinhSua
+            // btnUpload
             // 
-            this.btnChinhSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChinhSua.Location = new System.Drawing.Point(199, 172);
-            this.btnChinhSua.Name = "btnChinhSua";
-            this.btnChinhSua.Size = new System.Drawing.Size(142, 48);
-            this.btnChinhSua.TabIndex = 4;
-            this.btnChinhSua.Text = "Chỉnh sửa";
-            this.btnChinhSua.UseVisualStyleBackColor = true;
-            this.btnChinhSua.Click += new System.EventHandler(this.btnChinhSua_Click);
+            this.btnUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpload.Location = new System.Drawing.Point(180, 172);
+            this.btnUpload.Name = "btnUpload";
+            this.btnUpload.Size = new System.Drawing.Size(165, 48);
+            this.btnUpload.TabIndex = 4;
+            this.btnUpload.Text = "Tải file câu hỏi";
+            this.btnUpload.UseVisualStyleBackColor = true;
+            this.btnUpload.Click += new System.EventHandler(this.btnChinhSua_Click);
+            // 
+            // ofdCauHoi
+            // 
+            this.ofdCauHoi.FileName = "openFileDialog1";
             // 
             // CauHoiTuLuyen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(528, 277);
-            this.Controls.Add(this.btnChinhSua);
+            this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.btnQuayLai);
             this.Controls.Add(this.btnSanSang);
             this.Controls.Add(this.label2);
@@ -115,7 +119,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSanSang;
         private System.Windows.Forms.Button btnQuayLai;
-        private System.Windows.Forms.Button btnChinhSua;
-        private System.Windows.Forms.SaveFileDialog sfdCauHoi;
+        private System.Windows.Forms.Button btnUpload;
+        private System.Windows.Forms.OpenFileDialog ofdCauHoi;
     }
 }
