@@ -37,7 +37,7 @@ namespace BTL___Nhóm_1.TrangChu
             txtTacGia.Text = BTL___Nhóm_1.DAL.Syllabus.Author;
             txtNgayXuatBan.Text = BTL___Nhóm_1.DAL.Syllabus.Date.ToString("dd/MM/yyyy");
             txtMonHoc.Text = BTL___Nhóm_1.DAL.Syllabus.SubjectName;
-            txtFile.Text = Path.GetFileName(BTL___Nhóm_1.DAL.Syllabus.Context);
+            txtFile.Text = BTL___Nhóm_1.DAL.Syllabus.Context;
             txtLoaiDeCuong.Text = BTL___Nhóm_1.DAL.Syllabus.Type;
             txtTrangThai.Text = BTL___Nhóm_1.DAL.Syllabus.Status;
         }

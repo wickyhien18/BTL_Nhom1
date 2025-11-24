@@ -44,10 +44,9 @@
             // 
             this.lblCauHoi.AutoSize = true;
             this.lblCauHoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCauHoi.Location = new System.Drawing.Point(24, 25);
-            this.lblCauHoi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblCauHoi.Location = new System.Drawing.Point(32, 31);
             this.lblCauHoi.Name = "lblCauHoi";
-            this.lblCauHoi.Size = new System.Drawing.Size(75, 24);
+            this.lblCauHoi.Size = new System.Drawing.Size(95, 29);
             this.lblCauHoi.TabIndex = 0;
             this.lblCauHoi.Text = "Câu hỏi";
             // 
@@ -58,18 +57,20 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(114, 29);
+            this.textBox1.Location = new System.Drawing.Point(152, 36);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(372, 20);
+            this.textBox1.Size = new System.Drawing.Size(495, 22);
             this.textBox1.TabIndex = 2;
             // 
             // rdoA
             // 
             this.rdoA.AutoSize = true;
             this.rdoA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.rdoA.Location = new System.Drawing.Point(28, 140);
+            this.rdoA.Location = new System.Drawing.Point(37, 172);
+            this.rdoA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoA.Name = "rdoA";
-            this.rdoA.Size = new System.Drawing.Size(94, 24);
+            this.rdoA.Size = new System.Drawing.Size(115, 29);
             this.rdoA.TabIndex = 3;
             this.rdoA.TabStop = true;
             this.rdoA.Text = "Đáp án A";
@@ -79,9 +80,10 @@
             // 
             this.rdoB.AutoSize = true;
             this.rdoB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.rdoB.Location = new System.Drawing.Point(28, 183);
+            this.rdoB.Location = new System.Drawing.Point(37, 225);
+            this.rdoB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoB.Name = "rdoB";
-            this.rdoB.Size = new System.Drawing.Size(94, 24);
+            this.rdoB.Size = new System.Drawing.Size(114, 29);
             this.rdoB.TabIndex = 3;
             this.rdoB.TabStop = true;
             this.rdoB.Text = "Đáp án B";
@@ -91,9 +93,10 @@
             // 
             this.rdoC.AutoSize = true;
             this.rdoC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.rdoC.Location = new System.Drawing.Point(28, 221);
+            this.rdoC.Location = new System.Drawing.Point(37, 272);
+            this.rdoC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoC.Name = "rdoC";
-            this.rdoC.Size = new System.Drawing.Size(94, 24);
+            this.rdoC.Size = new System.Drawing.Size(116, 29);
             this.rdoC.TabIndex = 3;
             this.rdoC.TabStop = true;
             this.rdoC.Text = "Đáp án C";
@@ -103,9 +106,10 @@
             // 
             this.rdoD.AutoSize = true;
             this.rdoD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.rdoD.Location = new System.Drawing.Point(28, 259);
+            this.rdoD.Location = new System.Drawing.Point(37, 319);
+            this.rdoD.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoD.Name = "rdoD";
-            this.rdoD.Size = new System.Drawing.Size(95, 24);
+            this.rdoD.Size = new System.Drawing.Size(115, 29);
             this.rdoD.TabIndex = 3;
             this.rdoD.TabStop = true;
             this.rdoD.Text = "Đáp án D";
@@ -114,9 +118,10 @@
             // btnCheck
             // 
             this.btnCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnCheck.Location = new System.Drawing.Point(179, 335);
+            this.btnCheck.Location = new System.Drawing.Point(239, 412);
+            this.btnCheck.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(156, 48);
+            this.btnCheck.Size = new System.Drawing.Size(208, 59);
             this.btnCheck.TabIndex = 4;
             this.btnCheck.Text = "Kiểm tra đáp án";
             this.btnCheck.UseVisualStyleBackColor = true;
@@ -124,17 +129,18 @@
             // txtDapAn
             // 
             this.txtDapAn.Enabled = false;
-            this.txtDapAn.Location = new System.Drawing.Point(28, 302);
+            this.txtDapAn.Location = new System.Drawing.Point(37, 372);
+            this.txtDapAn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDapAn.Name = "txtDapAn";
-            this.txtDapAn.Size = new System.Drawing.Size(458, 20);
+            this.txtDapAn.Size = new System.Drawing.Size(609, 22);
             this.txtDapAn.TabIndex = 5;
             this.txtDapAn.Visible = false;
             // 
             // CauHoi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 395);
+            this.ClientSize = new System.Drawing.Size(699, 486);
             this.Controls.Add(this.txtDapAn);
             this.Controls.Add(this.btnCheck);
             this.Controls.Add(this.rdoB);
@@ -144,7 +150,7 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblCauHoi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CauHoi";
             this.Text = "Câu hỏi";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CauHoi_FormClosing);
