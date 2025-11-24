@@ -20,7 +20,6 @@ namespace BTL___Nhóm_1.TrangChu
         public CauHoi()
         {
             InitializeComponent();
-            btnNop.BringToFront();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -78,40 +77,11 @@ namespace BTL___Nhóm_1.TrangChu
                 return;
             }
             lblCauHoi.Text = "Câu hỏi: " + ds[index].Context;
-            lblDapAn.Visible = false;
-            lblDapAn.Enabled = false;
-            txtGiaiThichDapAn.Visible = false;
-            txtGiaiThichDapAn.Enabled = false;
         }
 
-        private void btnNop_Click(object sender, EventArgs e)
+        private void txtDienDapAn_TextChanged(object sender, EventArgs e)
         {
-            txtDienDapAn.Enabled = false;
-            txtDienDapAn.ReadOnly = true;
-            lblDapAn.Visible = true;
-            lblDapAn.Enabled = true;
-            txtGiaiThichDapAn.Visible = true;
-            txtGiaiThichDapAn.Enabled = true;
-            lblDapAn.Text = "Đáp án đúng: ";
-            if (txtDienDapAn.Text.Trim().Equals(ds[index].Answer.Trim(), StringComparison.OrdinalIgnoreCase))
-            {
-                lblDapAn.ForeColor = Color.Green;
-                lblDapAn.Text += ds[index].Answer;
-            }
-            else
-            {
-                lblDapAn.ForeColor = Color.Red;
-                lblDapAn.Text += ds[index].Answer;
-            }
-            txtGiaiThichDapAn.Text = ds[index].Explain;
-            btnTiep.BringToFront();
-        }
 
-        private void btnTiep_Click(object sender, EventArgs e)
-        {
-            index++;
-            HienThiCauHoi();
-            btnNop.BringToFront();
         }
     }
 }

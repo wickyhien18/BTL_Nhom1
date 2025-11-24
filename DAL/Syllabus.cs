@@ -16,5 +16,6 @@ namespace BTL___Nhóm_1.DAL
         public static string Context { get; set; }
         public static string Type { get; set; }
         public static string Status { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

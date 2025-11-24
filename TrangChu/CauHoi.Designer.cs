@@ -30,95 +30,121 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CauHoi));
             this.lblCauHoi = new System.Windows.Forms.Label();
-            this.txtDienDapAn = new System.Windows.Forms.TextBox();
-            this.lblDapAn = new System.Windows.Forms.Label();
-            this.btnNop = new System.Windows.Forms.Button();
-            this.btnTiep = new System.Windows.Forms.Button();
             this.sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
-            this.txtGiaiThichDapAn = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rdoA = new System.Windows.Forms.RadioButton();
+            this.rdoB = new System.Windows.Forms.RadioButton();
+            this.rdoC = new System.Windows.Forms.RadioButton();
+            this.rdoD = new System.Windows.Forms.RadioButton();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.txtDapAn = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblCauHoi
             // 
             this.lblCauHoi.AutoSize = true;
             this.lblCauHoi.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCauHoi.Location = new System.Drawing.Point(32, 33);
+            this.lblCauHoi.Location = new System.Drawing.Point(24, 25);
+            this.lblCauHoi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCauHoi.Name = "lblCauHoi";
-            this.lblCauHoi.Size = new System.Drawing.Size(95, 29);
+            this.lblCauHoi.Size = new System.Drawing.Size(75, 24);
             this.lblCauHoi.TabIndex = 0;
             this.lblCauHoi.Text = "Câu hỏi";
-            // 
-            // txtDienDapAn
-            // 
-            this.txtDienDapAn.BackColor = System.Drawing.Color.White;
-            this.txtDienDapAn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDienDapAn.Location = new System.Drawing.Point(37, 83);
-            this.txtDienDapAn.Multiline = true;
-            this.txtDienDapAn.Name = "txtDienDapAn";
-            this.txtDienDapAn.Size = new System.Drawing.Size(610, 45);
-            this.txtDienDapAn.TabIndex = 1;
-            this.txtDienDapAn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lblDapAn
-            // 
-            this.lblDapAn.AutoSize = true;
-            this.lblDapAn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDapAn.Location = new System.Drawing.Point(32, 186);
-            this.lblDapAn.Name = "lblDapAn";
-            this.lblDapAn.Size = new System.Drawing.Size(89, 29);
-            this.lblDapAn.TabIndex = 2;
-            this.lblDapAn.Text = "Đáp án";
-            // 
-            // btnNop
-            // 
-            this.btnNop.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNop.Location = new System.Drawing.Point(552, 146);
-            this.btnNop.Name = "btnNop";
-            this.btnNop.Size = new System.Drawing.Size(95, 45);
-            this.btnNop.TabIndex = 3;
-            this.btnNop.Text = "Nộp";
-            this.btnNop.UseVisualStyleBackColor = true;
-            this.btnNop.Click += new System.EventHandler(this.btnNop_Click);
-            // 
-            // btnTiep
-            // 
-            this.btnTiep.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTiep.Location = new System.Drawing.Point(552, 146);
-            this.btnTiep.Name = "btnTiep";
-            this.btnTiep.Size = new System.Drawing.Size(95, 45);
-            this.btnTiep.TabIndex = 4;
-            this.btnTiep.Text = "Tiếp";
-            this.btnTiep.UseVisualStyleBackColor = true;
-            this.btnTiep.Click += new System.EventHandler(this.btnTiep_Click);
             // 
             // sqlCommand1
             // 
             this.sqlCommand1.CommandTimeout = 30;
             this.sqlCommand1.EnableOptimizedParameterBinding = false;
             // 
-            // txtGiaiThichDapAn
+            // textBox1
             // 
-            this.txtGiaiThichDapAn.BackColor = System.Drawing.Color.White;
-            this.txtGiaiThichDapAn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGiaiThichDapAn.Location = new System.Drawing.Point(37, 230);
-            this.txtGiaiThichDapAn.Multiline = true;
-            this.txtGiaiThichDapAn.Name = "txtGiaiThichDapAn";
-            this.txtGiaiThichDapAn.ReadOnly = true;
-            this.txtGiaiThichDapAn.Size = new System.Drawing.Size(610, 229);
-            this.txtGiaiThichDapAn.TabIndex = 5;
+            this.textBox1.Location = new System.Drawing.Point(114, 29);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(372, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // rdoA
+            // 
+            this.rdoA.AutoSize = true;
+            this.rdoA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.rdoA.Location = new System.Drawing.Point(28, 140);
+            this.rdoA.Name = "rdoA";
+            this.rdoA.Size = new System.Drawing.Size(94, 24);
+            this.rdoA.TabIndex = 3;
+            this.rdoA.TabStop = true;
+            this.rdoA.Text = "Đáp án A";
+            this.rdoA.UseVisualStyleBackColor = true;
+            // 
+            // rdoB
+            // 
+            this.rdoB.AutoSize = true;
+            this.rdoB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.rdoB.Location = new System.Drawing.Point(28, 183);
+            this.rdoB.Name = "rdoB";
+            this.rdoB.Size = new System.Drawing.Size(94, 24);
+            this.rdoB.TabIndex = 3;
+            this.rdoB.TabStop = true;
+            this.rdoB.Text = "Đáp án B";
+            this.rdoB.UseVisualStyleBackColor = true;
+            // 
+            // rdoC
+            // 
+            this.rdoC.AutoSize = true;
+            this.rdoC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.rdoC.Location = new System.Drawing.Point(28, 221);
+            this.rdoC.Name = "rdoC";
+            this.rdoC.Size = new System.Drawing.Size(94, 24);
+            this.rdoC.TabIndex = 3;
+            this.rdoC.TabStop = true;
+            this.rdoC.Text = "Đáp án C";
+            this.rdoC.UseVisualStyleBackColor = true;
+            // 
+            // rdoD
+            // 
+            this.rdoD.AutoSize = true;
+            this.rdoD.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.rdoD.Location = new System.Drawing.Point(28, 259);
+            this.rdoD.Name = "rdoD";
+            this.rdoD.Size = new System.Drawing.Size(95, 24);
+            this.rdoD.TabIndex = 3;
+            this.rdoD.TabStop = true;
+            this.rdoD.Text = "Đáp án D";
+            this.rdoD.UseVisualStyleBackColor = true;
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnCheck.Location = new System.Drawing.Point(179, 335);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(156, 48);
+            this.btnCheck.TabIndex = 4;
+            this.btnCheck.Text = "Kiểm tra đáp án";
+            this.btnCheck.UseVisualStyleBackColor = true;
+            // 
+            // txtDapAn
+            // 
+            this.txtDapAn.Enabled = false;
+            this.txtDapAn.Location = new System.Drawing.Point(28, 302);
+            this.txtDapAn.Name = "txtDapAn";
+            this.txtDapAn.Size = new System.Drawing.Size(458, 20);
+            this.txtDapAn.TabIndex = 5;
+            this.txtDapAn.Visible = false;
             // 
             // CauHoi
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(742, 515);
-            this.Controls.Add(this.txtGiaiThichDapAn);
-            this.Controls.Add(this.btnTiep);
-            this.Controls.Add(this.btnNop);
-            this.Controls.Add(this.lblDapAn);
-            this.Controls.Add(this.txtDienDapAn);
+            this.ClientSize = new System.Drawing.Size(524, 395);
+            this.Controls.Add(this.txtDapAn);
+            this.Controls.Add(this.btnCheck);
+            this.Controls.Add(this.rdoB);
+            this.Controls.Add(this.rdoD);
+            this.Controls.Add(this.rdoC);
+            this.Controls.Add(this.rdoA);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblCauHoi);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CauHoi";
             this.Text = "Câu hỏi";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CauHoi_FormClosing);
@@ -131,11 +157,13 @@
         #endregion
 
         private System.Windows.Forms.Label lblCauHoi;
-        private System.Windows.Forms.TextBox txtDienDapAn;
-        private System.Windows.Forms.Label lblDapAn;
-        private System.Windows.Forms.Button btnNop;
-        private System.Windows.Forms.Button btnTiep;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
-        private System.Windows.Forms.TextBox txtGiaiThichDapAn;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RadioButton rdoA;
+        private System.Windows.Forms.RadioButton rdoB;
+        private System.Windows.Forms.RadioButton rdoC;
+        private System.Windows.Forms.RadioButton rdoD;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.TextBox txtDapAn;
     }
 }
