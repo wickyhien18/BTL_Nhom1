@@ -244,5 +244,22 @@ namespace BTL___Nhóm_1.TrangChu
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+        // Chọn tệp câu hỏi
+        private void btnFileCauHoi_Click(object sender, EventArgs e)
+        {
+            // Mở hộp thoại chọn tệp
+            ofdCauHoi.Filter = "Cau Hoi (EXCEL)|*.xls;*.xlsx";
+            if (ofdCauHoi.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    txtFileCauHoi.Text = Path.GetFileName(ofdCauHoi.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
+            }
+        }
     }
 }
