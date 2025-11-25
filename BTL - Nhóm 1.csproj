@@ -253,10 +253,10 @@
     <Compile Include="Login\DangNhap.Designer.cs">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu.cs">
+    <Compile Include="GUI\TrangChu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu.Designer.cs">
+    <Compile Include="GUI\TrangChu.Designer.cs">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\MatKhau.cs">
@@ -273,46 +273,46 @@
     <Compile Include="Login\QuenMK.Designer.cs">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\CauHoi.cs">
+    <Compile Include="GUI\TrangChu\CauHoi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\CauHoi.Designer.cs">
+    <Compile Include="GUI\TrangChu\CauHoi.Designer.cs">
       <DependentUpon>CauHoi.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\CauHoiTuLuyen.cs">
+    <Compile Include="GUI\TrangChu\CauHoiTuLuyen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\CauHoiTuLuyen.Designer.cs">
+    <Compile Include="GUI\TrangChu\CauHoiTuLuyen.Designer.cs">
       <DependentUpon>CauHoiTuLuyen.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\SelectSyllabiForm.cs">
+    <Compile Include="GUI\TrangChu\SelectSyllabiForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\SelectSyllabiForm.Designer.cs">
+    <Compile Include="GUI\TrangChu\SelectSyllabiForm.Designer.cs">
       <DependentUpon>SelectSyllabiForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\SuaDeCuong.cs">
+    <Compile Include="GUI\TrangChu\SuaDeCuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\SuaDeCuong.Designer.cs">
+    <Compile Include="GUI\TrangChu\SuaDeCuong.Designer.cs">
       <DependentUpon>SuaDeCuong.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\ThemMon.cs">
+    <Compile Include="GUI\TrangChu\ThemMon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\ThemMon.Designer.cs">
+    <Compile Include="GUI\TrangChu\ThemMon.Designer.cs">
       <DependentUpon>ThemMon.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\ThemVaoDS.cs">
+    <Compile Include="GUI\TrangChu\ThemVaoDS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\ThemVaoDS.Designer.cs">
+    <Compile Include="GUI\TrangChu\ThemVaoDS.Designer.cs">
       <DependentUpon>ThemVaoDS.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrangChu\ThongTinDeCuong.cs">
+    <Compile Include="GUI\TrangChu\ThongTinDeCuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TrangChu\ThongTinDeCuong.Designer.cs">
+    <Compile Include="GUI\TrangChu\ThongTinDeCuong.Designer.cs">
       <DependentUpon>ThongTinDeCuong.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="BUS\DeCuongCuaToi.resx">
@@ -333,7 +333,7 @@
     <EmbeddedResource Include="Login\DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu.resx">
+    <EmbeddedResource Include="GUI\TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\MatKhau.resx">
@@ -352,25 +352,25 @@
     <EmbeddedResource Include="Login\QuenMK.resx">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\CauHoi.resx">
+    <EmbeddedResource Include="GUI\TrangChu\CauHoi.resx">
       <DependentUpon>CauHoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\CauHoiTuLuyen.resx">
+    <EmbeddedResource Include="GUI\TrangChu\CauHoiTuLuyen.resx">
       <DependentUpon>CauHoiTuLuyen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\SelectSyllabiForm.resx">
+    <EmbeddedResource Include="GUI\TrangChu\SelectSyllabiForm.resx">
       <DependentUpon>SelectSyllabiForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\SuaDeCuong.resx">
+    <EmbeddedResource Include="GUI\TrangChu\SuaDeCuong.resx">
       <DependentUpon>SuaDeCuong.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\ThemMon.resx">
+    <EmbeddedResource Include="GUI\TrangChu\ThemMon.resx">
       <DependentUpon>ThemMon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\ThemVaoDS.resx">
+    <EmbeddedResource Include="GUI\TrangChu\ThemVaoDS.resx">
       <DependentUpon>ThemVaoDS.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrangChu\ThongTinDeCuong.resx">
+    <EmbeddedResource Include="GUI\TrangChu\ThongTinDeCuong.resx">
       <DependentUpon>ThongTinDeCuong.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
