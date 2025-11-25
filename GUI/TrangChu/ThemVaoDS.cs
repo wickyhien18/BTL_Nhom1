@@ -318,34 +318,37 @@ namespace BTL___Nhóm_1.TrangChu
                     {
                         // --- TRẮC NGHIỆM ---
 
-                        // Danh sách tạm để chứa các đáp án đúng tìm được
                         List<string> tempDapAnDung = new List<string>();
                         List<string> tempDapAn = new List<string>();
 
-                        for (int col = 1; col <= 10; col++)
+                        for (int col = 1; col <= 6; col++)
                         {
                             var cell = worksheet.Cells[row + 1, col];
-                            string textDapAn = cell.Text;
+                            string textDapAn = cell.Text.Trim();
                             if (string.IsNullOrEmpty(textDapAn)) break;
 
-                            // 1. Luôn thêm vào danh sách lựa chọn để hiển thị UI
                             tempDapAn.Add(textDapAn);
 
-                            // 2. Kiểm tra in đậm hoặc đỏ
+                            // Kiểm tra in đậm hoặc đỏ
                             bool isBold = cell.Style.Font.Bold;
                             var colorRgb = cell.Style.Font.Color.Rgb;
                             bool isRed = !string.IsNullOrEmpty(colorRgb) && (colorRgb.Contains("FF0000") || colorRgb.Contains("Red"));
 
                             if (isBold || isRed)
                             {
-                                // Nếu đúng, thêm nội dung vào list tạm
-                                tempDapAnDung.Add(textDapAn);
+                                if (textDapAn.StartsWith("A") ||
+                                    textDapAn.StartsWith("B") ||
+                                    textDapAn.StartsWith("C") ||
+                                    textDapAn.StartsWith("D") ||
+                                    textDapAn.StartsWith("E") ||
+                                    textDapAn.StartsWith("F"))
+                                {
+                                    tempDapAnDung.Add(textDapAn[0].ToString());
+                                }
                             }
                         }
 
-                        // --- XỬ LÝ YÊU CẦU CỦA BẠN ---
-
-                        // A. Nối các đáp án đúng bằng dấu chấm than "!"
+                        //Nối các đáp án đúng bằng dấu chấm than "!"
                         cauHoi.Answer = string.Join("!", tempDapAn);
                         cauHoi.Explain = string.Join("!", tempDapAnDung);
                     }

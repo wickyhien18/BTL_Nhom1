@@ -88,7 +88,6 @@
             this.btnUpload.TabIndex = 4;
             this.btnUpload.Text = "Tải file câu hỏi";
             this.btnUpload.UseVisualStyleBackColor = true;
-            this.btnUpload.Click += new System.EventHandler(this.btnChinhSua_Click);
             // 
             // ofdCauHoi
             // 
