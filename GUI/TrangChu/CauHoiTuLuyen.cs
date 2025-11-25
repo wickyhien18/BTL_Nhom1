@@ -1,4 +1,5 @@
 ﻿using BTL___Nhóm_1.DAL;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +17,11 @@ namespace BTL___Nhóm_1.TrangChu
 {
     public partial class CauHoiTuLuyen : Form
     {
+        List<Question> questions = new List<Question>();
         public CauHoiTuLuyen()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-        }
-
-        private void btnQuayLai_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void btnSanSang_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var list = new List<Question>();
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
@@ -43,7 +35,7 @@ namespace BTL___Nhóm_1.TrangChu
                         {
                             while (r.Read())
                             {
-                                list.Add(new Question
+                                questions.Add(new Question
                                 {
                                     Context = r["Contentt"].ToString(),
                                     Answer = r["Answer"].ToString(),
@@ -58,7 +50,17 @@ namespace BTL___Nhóm_1.TrangChu
             {
                 MessageBox.Show("Lỗi tải câu hỏi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            CauHoi cauHoi = new CauHoi(list);
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void btnSanSang_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CauHoi cauHoi = new CauHoi(questions);
             cauHoi.ShowDialog();
             this.Show();
         }
@@ -73,5 +75,55 @@ namespace BTL___Nhóm_1.TrangChu
             }
         }
 
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Excel Workbook|*.xlsx",
+                Title = "Xuất danh sách câu hỏi ra Excel"
+            };
+            if (sfd.ShowDialog() != DialogResult.OK) return;
+
+            ExcelPackage.License.SetNonCommercialPersonal("Nhom 1");
+            using (var package = new ExcelPackage())
+            {
+                var ws = package.Workbook.Worksheets.Add("CauHoi");
+
+                int row = 1;
+                foreach (var q in questions)
+                {
+                    // Dòng 1: Nội dung câu hỏi
+                    ws.Cells[row, 1].Value = q.Context;
+
+                    // Dòng 2: Đáp án
+                    var answers = !string.IsNullOrEmpty(q.Answer) ? q.Answer.Split('!') : new string[0];
+                    var corrects = !string.IsNullOrEmpty(q.Explain) ? q.Explain.Split('!') : new string[0];
+
+                    if (answers.Length == 0)
+                    {
+                        // Tự luận: đáp án ở cột A dòng 2
+                        ws.Cells[row + 1, 1].Value = q.Explain;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < answers.Length && i < 6; i++)
+                        {
+                            ws.Cells[row + 1, i + 1].Value = answers[i];
+                            // Nếu là đáp án đúng, in đậm và tô đỏ
+                            if (corrects.Contains(((char)('A' + i)).ToString()))
+                            {
+                                ws.Cells[row + 1, i + 1].Style.Font.Bold = true;
+                                ws.Cells[row + 1, i + 1].Style.Font.Color.SetColor(Color.Red);
+                            }
+                        }
+                    }
+                    row += 2;
+                }
+
+                ws.Cells.AutoFitColumns();
+                File.WriteAllBytes(sfd.FileName, package.GetAsByteArray());
+                MessageBox.Show("Tải file câu hỏi thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
