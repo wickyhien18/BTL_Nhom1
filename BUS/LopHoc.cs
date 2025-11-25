@@ -39,7 +39,7 @@ namespace BTL___Nhóm_1.BUS
             try
             {
                 int userId = BTL___Nhóm_1.DAL.User.Id;
-                string query = @"SELECT c.ClassId, c.ClassName AS 'Tên lớp', c.TeacherName AS 'Giảng viên phụ trách', sub.SubjectName AS 'Môn học'
+                string query = @"SELECT c.ClassId, c.ClassName, c.TeacherName, sub.SubjectName
                                  FROM Class c
                                  JOIN Class_User cu ON c.ClassId = cu.ClassId
                                  JOIN Class_Syllabus cs ON c.ClassId = cs.ClassId
