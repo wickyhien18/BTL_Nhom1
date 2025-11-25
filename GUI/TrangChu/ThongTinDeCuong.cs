@@ -20,10 +20,6 @@ namespace BTL___Nhóm_1.TrangChu
             InitializeComponent();
             //Ban đầu form ở giữa màn hình
             this.StartPosition = FormStartPosition.CenterScreen;
-        }
-        //Load thông tin đề cương lên form
-        private void ThongTinDeCuong_Load(object sender, EventArgs e)
-        {
             // Ẩn nút sửa, xoá nếu vai trò là Sinh viên
             if (BTL___Nhóm_1.DAL.User.VaiTro == "Sinh viên")
             {
@@ -33,6 +29,27 @@ namespace BTL___Nhóm_1.TrangChu
                 btnXoa.Enabled = false;
             }
 
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
+            {
+                connection.Open();
+                //Kiểm tra xem đề cương có câu hỏi hay không để ẩn/hiện nút tự luyện
+                using (SqlCommand cmd = new SqlCommand("SELECT Syllabus_User.UserId FROM Syllabus JOIN Syllabus_User ON Syllabus.SyllabusId = Syllabus_User.SyllabusId", connection))
+                {
+                    cmd.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                    int result = Convert.ToInt32(cmd.ExecuteScalar());
+                    if (result != BTL___Nhóm_1.DAL.User.Id)
+                    {
+                        btnSua.Visible = false;
+                        btnXoa.Visible = false;
+                        btnSua.Enabled = false;
+                        btnXoa.Enabled = false;
+                    }
+                }
+            }
+        }
+        //Load thông tin đề cương lên form
+        private void ThongTinDeCuong_Load(object sender, EventArgs e)
+        {
             txtTenDeCuong.Text = BTL___Nhóm_1.DAL.Syllabus.Name;
             txtTacGia.Text = BTL___Nhóm_1.DAL.Syllabus.Author;
             txtNgayXuatBan.Text = BTL___Nhóm_1.DAL.Syllabus.Date.ToString("dd/MM/yyyy");
@@ -141,6 +158,10 @@ namespace BTL___Nhóm_1.TrangChu
         {
             if (MessageBox.Show("Bạn có chắc muôn xoá thông tin đề cương này", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                if (File.Exists(BTL___Nhóm_1.DAL.Syllabus.Context))
+                {
+                    File.Delete(BTL___Nhóm_1.DAL.Syllabus.Context);
+                }
                 try
                 {
                     using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
@@ -156,6 +177,20 @@ namespace BTL___Nhóm_1.TrangChu
                                 {
                                     delQ.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
                                     delQ.ExecuteNonQuery();
+                                }
+                                //Xoá bảng liên kết lớp học - đề cương
+                                string deleteClass = "DELETE FROM Class_Syllabus WHERE SyllabusId = @SyllabusId";
+                                using (SqlCommand delS = new SqlCommand(deleteClass, connection, tran))
+                                {
+                                    delS.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                                    delS.ExecuteNonQuery();
+                                }
+                                // Xóa bảng liên kết người dùng - đề cương
+                                string deleteUser = "DELETE FROM Syllabus_User WHERE SyllabusId = @SyllabusId";
+                                using (SqlCommand delS = new SqlCommand(deleteUser, connection, tran))
+                                {
+                                    delS.Parameters.AddWithValue("@SyllabusId", BTL___Nhóm_1.DAL.Syllabus.Id);
+                                    delS.ExecuteNonQuery();
                                 }
 
                                 // Xóa syllabus

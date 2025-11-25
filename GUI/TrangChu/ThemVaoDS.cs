@@ -138,6 +138,14 @@ namespace BTL___Nhóm_1.TrangChu
                         newSyllabusId = Convert.ToInt32(command.ExecuteScalar());
                     }
 
+                    string insertUser = "INSERT INTO Syllabus_User (SyllabusId, UserId) VALUES (@syllabusId, @userId)";
+                    using (SqlCommand cmd = new SqlCommand(insertUser, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@syllabusId", newSyllabusId);
+                        cmd.Parameters.AddWithValue("@userId", BTL___Nhóm_1.DAL.User.Id);
+                        cmd.ExecuteNonQuery();
+                    }
+
                     if (_excelQuestions != null && _excelQuestions.Count > 0)
                     {
                         string insertQuestion = "INSERT INTO QUESTION (Contentt, Answer, AnswerExplanation, SyllabusId) " +
