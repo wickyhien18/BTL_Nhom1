@@ -74,6 +74,7 @@
             this.dgvLuuTru.RowTemplate.Height = 24;
             this.dgvLuuTru.Size = new System.Drawing.Size(942, 300);
             this.dgvLuuTru.TabIndex = 0;
+            this.dgvLuuTru.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLuuTru_CellContentClick);
             // 
             // txtTen
             // 

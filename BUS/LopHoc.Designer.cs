@@ -1,100 +1,133 @@
-﻿using BTL___Nhóm_1.DAL;
-using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace BTL___Nhóm_1.BUS
+﻿namespace BTL___Nhóm_1.BUS
 {
-    public partial class LopHoc : UserControl
+    partial class LopHoc
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString;
-        private int _userId;
-        private string _role;
-        public LopHoc(int userId, string role) 
-        {
-            InitializeComponent();
-            _userId = userId;
-            _role = role;
-            this.Load += new System.EventHandler(this.Form1_Load);
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-        }
-        private void LoadLop(int userId, string role)
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
         {
-            string query = "";
-
-            if (role == "GiangVien")
+            if (disposing && (components != null))
             {
-                // Giảng viên xem lớp mà họ quản lý
-                query = @"SELECT ClassId, ClassName, TeacherName 
-                  FROM Class 
-                  WHERE UserId = @UserId";
+                components.Dispose();
             }
-            else
-            {
-                // Sinh viên xem lớp mà họ tham gia
-                query = @"SELECT c.ClassId, c.ClassName, c.TeacherName
-                  FROM Class c
-                  INNER JOIN Users_Class uc ON c.ClassId = uc.ClassId
-                  WHERE uc.UserId = @UserId";
-            }
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@UserId", userId);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvLop.DataSource = dt;
-
-                if (dgvLop.Columns.Contains("ClassId"))
-                {
-                    dgvLop.Columns["ClassId"].Visible = false;
-                }
-
-            }
+            base.Dispose(disposing);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            LoadLop(_userId, _role);
-        }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        #region Component Designer generated code
 
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
+            this.txtTen = new System.Windows.Forms.TextBox();
+            this.btnXoa = new System.Windows.Forms.Button();
+            this.btnSua = new System.Windows.Forms.Button();
+            this.btnThem = new System.Windows.Forms.Button();
+            this.dgvLop = new System.Windows.Forms.DataGridView();
+            this.btnTim = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).BeginInit();
             this.SuspendLayout();
+            // 
+            // txtTen
+            // 
+            this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.txtTen.ForeColor = System.Drawing.Color.Gray;
+            this.txtTen.Location = new System.Drawing.Point(3, 2);
+            this.txtTen.Name = "txtTen";
+            this.txtTen.Size = new System.Drawing.Size(352, 38);
+            this.txtTen.TabIndex = 12;
+            this.txtTen.Text = "Tìm kiếm lớp...";
+            // 
+            // btnXoa
+            // 
+            this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoa.Location = new System.Drawing.Point(405, 377);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(175, 57);
+            this.btnXoa.TabIndex = 11;
+            this.btnXoa.Text = "Xoá lớp";
+            this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
+            // 
+            // btnSua
+            // 
+            this.btnSua.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSua.Location = new System.Drawing.Point(206, 377);
+            this.btnSua.Name = "btnSua";
+            this.btnSua.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnSua.Size = new System.Drawing.Size(175, 57);
+            this.btnSua.TabIndex = 10;
+            this.btnSua.Text = "Sửa thông tin";
+            this.btnSua.UseVisualStyleBackColor = true;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
+            // btnThem
+            // 
+            this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThem.Location = new System.Drawing.Point(3, 377);
+            this.btnThem.Name = "btnThem";
+            this.btnThem.Size = new System.Drawing.Size(186, 57);
+            this.btnThem.TabIndex = 9;
+            this.btnThem.Text = "Thêm lớp";
+            this.btnThem.UseVisualStyleBackColor = true;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            // dgvLop
+            // 
+            this.dgvLop.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvLop.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.dgvLop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLop.Location = new System.Drawing.Point(3, 54);
+            this.dgvLop.Name = "dgvLop";
+            this.dgvLop.RowHeadersVisible = false;
+            this.dgvLop.RowHeadersWidth = 100;
+            this.dgvLop.RowTemplate.Height = 24;
+            this.dgvLop.Size = new System.Drawing.Size(936, 306);
+            this.dgvLop.TabIndex = 8;
+            // 
+            // btnTim
+            // 
+            this.btnTim.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.btnTim.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
+            this.btnTim.Location = new System.Drawing.Point(361, 0);
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Size = new System.Drawing.Size(60, 40);
+            this.btnTim.TabIndex = 13;
             // 
             // LopHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnTim);
+            this.Controls.Add(this.txtTen);
+            this.Controls.Add(this.btnXoa);
+            this.Controls.Add(this.btnSua);
+            this.Controls.Add(this.btnThem);
+            this.Controls.Add(this.dgvLop);
             this.Name = "LopHoc";
-            this.Size = new System.Drawing.Size(1080, 776);
+            this.Size = new System.Drawing.Size(992, 610);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        #endregion
 
-        }
+        private System.Windows.Forms.Button btnTim;
+        private System.Windows.Forms.TextBox txtTen;
+        private System.Windows.Forms.Button btnXoa;
+        private System.Windows.Forms.Button btnSua;
+        private System.Windows.Forms.Button btnThem;
+        private System.Windows.Forms.DataGridView dgvLop;
     }
 }

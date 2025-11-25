@@ -520,5 +520,10 @@ namespace BTL___Nhóm_1.BUS
                     yield return child;
             }
         }
+
+        private void dgvTrangChu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
