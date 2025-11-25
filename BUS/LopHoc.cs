@@ -39,9 +39,12 @@ namespace BTL___Nhóm_1.BUS
             try
             {
                 int userId = BTL___Nhóm_1.DAL.User.Id;
-                string query = @"SELECT c.ClassId, c.ClassName AS 'Tên lớp', c.TeacherName AS 'Giảng viên phụ trách'
+                string query = @"SELECT c.ClassId, c.ClassName AS 'Tên lớp', c.TeacherName AS 'Giảng viên phụ trách', sub.SubjectName AS 'Môn học'
                                  FROM Class c
                                  JOIN Class_User cu ON c.ClassId = cu.ClassId
+                                 JOIN Class_Syllabus cs ON c.ClassId = cs.ClassId
+                                 JOIN Syllabus s ON cs.SyllabusId = s.SyllabusId
+                                 JOIN Subject sub ON s.SubjectId = sub.SubjectId
                                  WHERE cu.UserId = @UserId";
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString)){
                     conn.Open();
@@ -52,10 +55,7 @@ namespace BTL___Nhóm_1.BUS
                         {
                             DataTable dt = new DataTable();
                             dt.Load(reader);
-                            if(dt.Rows.Count == 0)
-                                dgvLop.DataSource = null;
-                            else
-                                dgvLop.DataSource = dt;
+                            dgvLop.DataSource = dt;
                         }
                     }
                     if (dgvLop.Columns["ClassId"] != null)
@@ -105,6 +105,11 @@ namespace BTL___Nhóm_1.BUS
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvLop_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
