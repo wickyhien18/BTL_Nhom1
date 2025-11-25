@@ -120,6 +120,7 @@ namespace BTL___Nhóm_1.BUS
                         {
                             DataTable dt = new DataTable();
                             dt.Load(reader);
+                            dgvLop.AutoGenerateColumns = false;
                             dgvLop.DataSource = dt;
                         }
                     }
