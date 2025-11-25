@@ -269,10 +269,10 @@ namespace BTL___Nhóm_1.TrangChu
                     {
                         List<string> tempDapAnDung = new List<string>();
                         List<string> tempDapAn = new List<string>();
-                        for (int col = 1; col <= 10; col++)
+                        for (int col = 1; col <= 5; col++)
                         {
                             var cell = worksheet.Cells[row + 1, col];
-                            string textDapAn = cell.Text;
+                            string textDapAn = cell.Text.Trim();
                             if (string.IsNullOrEmpty(textDapAn)) break;
 
                             tempDapAn.Add(textDapAn);
@@ -283,11 +283,19 @@ namespace BTL___Nhóm_1.TrangChu
 
                             if (isBold || isRed)
                             {
-                                tempDapAnDung.Add(textDapAn);
+                                if (textDapAn.StartsWith("A") ||
+                                    textDapAn.StartsWith("B") ||
+                                    textDapAn.StartsWith("C") ||
+                                    textDapAn.StartsWith("D") ||
+                                    textDapAn.StartsWith("E") ||
+                                    textDapAn.StartsWith("F"))
+                                {
+                                    tempDapAnDung.Add(textDapAn[0].ToString());
+                                }
                             }
                         }
-                        cauHoi.Answer = string.Join("!", tempDapAn);           // tất cả lựa chọn
-                        cauHoi.Explain = string.Join("!", tempDapAnDung);      // đáp án đúng
+                        cauHoi.Answer = string.Join("!", tempDapAn);           
+                        cauHoi.Explain = string.Join("!", tempDapAnDung);      
                     }
 
                     danhSachCauHoi.Add(cauHoi);
