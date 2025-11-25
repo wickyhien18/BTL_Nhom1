@@ -140,7 +140,9 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblQuanLy);
             this.Controls.Add(this.lblUngDung);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "fmQuen";
             this.Text = "Quên mật khẩu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmQuen_FormClosing);

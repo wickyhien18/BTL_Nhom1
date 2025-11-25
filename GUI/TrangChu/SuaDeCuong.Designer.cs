@@ -233,7 +233,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnThemMon);
             this.Controls.Add(this.btnSua);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "SuaDeCuong";
             this.Text = "Sửa đề cương";
             this.Load += new System.EventHandler(this.SuaDeCuong_Load);

@@ -95,6 +95,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTenLop);
             this.Controls.Add(this.lbTenLop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "SuaThongTin";
             this.Text = "Sửa thông tin";
             this.ResumeLayout(false);

@@ -1,16 +1,17 @@
-﻿using System;
+﻿using BTL___Nhóm_1.DAL;
+using BTL___Nhóm_1.TrangChu;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
-using BTL___Nhóm_1.DAL;
-using BTL___Nhóm_1.TrangChu;
 
 namespace BTL___Nhóm_1.BUS
 {
@@ -441,6 +442,171 @@ WHERE ps.UserId = @userId";
         private void btnXoa_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnTaiXuong_Click(object sender, EventArgs e)
+        {
+            // 1. Lấy dòng đang chọn
+            if (dgvLuuTru == null) return;
+            DataGridViewRow row = null;
+
+            if (dgvLuuTru.SelectedRows != null && dgvLuuTru.SelectedRows.Count > 0)
+                row = dgvLuuTru.SelectedRows[0];
+            else if (dgvLuuTru.CurrentRow != null)
+                row = dgvLuuTru.CurrentRow;
+
+            if (row == null)
+            {
+                MessageBox.Show("Vui lòng chọn một đề cương để tải xuống.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // 2. Lấy đường dẫn file NGUỒN từ ô GridView (Không dùng DAL static)
+            // "SyllabusContext" là tên cột chứa đường dẫn file trong câu lệnh SQL của bạn
+            string relativePath = GetCellValue(row, "SyllabusContext");
+
+            if (string.IsNullOrWhiteSpace(relativePath))
+            {
+                MessageBox.Show("Đề cương này chưa có file đính kèm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Ghép đường dẫn tuyệt đối (Để máy tính hiểu file nằm đâu trong bin/Debug)
+            DirectoryInfo directoryInfo = Directory.GetParent(Application.StartupPath).Parent;
+
+            string sourceFilePath = Path.Combine(directoryInfo.FullName, relativePath);
+
+            // 3. Kiểm tra file nguồn có tồn tại thật không
+            if (!File.Exists(sourceFilePath))
+            {
+                MessageBox.Show("File gốc không tồn tại trên ổ cứng! (Đường dẫn hỏng)\n" + sourceFilePath, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // 4. Cấu hình hộp thoại Lưu
+            // Tốt nhất nên tạo mới SaveFileDialog để tránh lưu lại các setting cũ
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.FileName = Path.GetFileName(sourceFilePath); // Gợi ý tên file gốc
+                sfd.Filter = "De Cuong(WORD,EXCEL)|*.pdf;*.docx;*.xls;*.xlsx";
+                sfd.OverwritePrompt = false; // Tắt cảnh báo trùng của Windows để mình tự xử lý
+
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        string destinationPath = sfd.FileName;
+
+                        // 5. Xử lý trùng tên (Gọi hàm đã sửa bên dưới)
+                        destinationPath = GetUniqueFileName(destinationPath);
+
+                        // 6. Copy file
+                        File.Copy(sourceFilePath, destinationPath, true);
+
+                        if (MessageBox.Show("Tải xuống thành công! Bạn có muốn mở tệp không?", "Thành công", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        {
+                            System.Diagnostics.Process.Start(destinationPath);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi khi tải file: " + ex.Message);
+                    }
+                }
+            }
+        }
+        private string GetUniqueFileName(string originalFileName)
+        {
+            if (!File.Exists(originalFileName)) return originalFileName;
+            string folder = Path.GetDirectoryName(originalFileName);
+            string fileName = Path.GetFileNameWithoutExtension(originalFileName);
+            string ext = Path.GetExtension(originalFileName);
+            int count = 1;
+            string newPath = originalFileName;
+            //Nếu có tệp trùng tên thì thêm (1),(2)... vào tên tệp
+            while (File.Exists(originalFileName))
+            {
+                newPath = Path.Combine(folder, $"{fileName}({count++}){ext}");
+            }
+            return newPath;
+        }
+
+        private void btnTuLuyen_Click(object sender, EventArgs e)
+        {
+            DataGridView dgv = dgvLuuTru;
+
+            if (dgv == null) return;
+            DataGridViewRow row = null;
+
+            if (dgv.SelectedRows != null && dgv.SelectedRows.Count > 0)
+                row = dgv.SelectedRows[0];
+            else if (dgv.CurrentRow != null)
+                row = dgv.CurrentRow;
+
+            if (row == null)
+            {
+                MessageBox.Show("Vui lòng chọn một đề cương để làm bài.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // 2. LẤY ID TỪ DÒNG ĐANG CHỌN (Quan trọng!)
+            // Phải lấy trực tiếp từ ô GridView, không dùng biến DAL static cũ
+            object idValue = row.Cells["SyllabusId"].Value;
+            if (idValue == null)
+            {
+                MessageBox.Show("Không tìm thấy mã đề cương.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int selectedSyllabusId = Convert.ToInt32(idValue);
+
+            // 3. Kiểm tra số lượng câu hỏi trong SQL
+            int questionCount = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM QUESTION WHERE SyllabusId = @SyllabusId", connection))
+                    {
+                        // Dùng ID vừa lấy từ GridView để kiểm tra
+                        cmd.Parameters.AddWithValue("@SyllabusId", selectedSyllabusId);
+                        object result = cmd.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            questionCount = Convert.ToInt32(result);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kiểm tra câu hỏi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (questionCount <= 0)
+            {
+                MessageBox.Show("Đề cương này chưa có câu hỏi nào để luyện tập.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // 4. CẬP NHẬT BIẾN TOÀN CỤC (Để Form con biết đường mà load)
+            // Bây giờ mới gán vào DAL để truyền sang Form CauHoiTuLuyen
+            BTL___Nhóm_1.DAL.Syllabus.Id = selectedSyllabusId;
+
+            // Nếu Form con cần hiển thị tên đề cương, cập nhật luôn
+            BTL___Nhóm_1.DAL.Syllabus.Name = row.Cells["SyllabusName"].Value?.ToString(); // Hoặc tên cột "Tên đề cương"
+
+            // 5. MỞ FORM (Dùng ShowDialog để chờ)
+            // UserControl không có hàm Hide(), ta phải tìm Form cha chứa nó để Hide
+            Form parentForm = this.FindForm();
+            if (parentForm != null) parentForm.Hide();
+
+            CauHoiTuLuyen cauHoiTuLuyen = new CauHoiTuLuyen();
+            cauHoiTuLuyen.ShowDialog(); // Chờ làm bài xong
+
+            // Làm xong thì hiện lại
+            if (parentForm != null) parentForm.Show();
         }
     }
 }

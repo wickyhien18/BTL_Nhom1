@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvLuuTru = new System.Windows.Forms.DataGridView();
             this.SyllabusId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PersonalId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +48,9 @@
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThemMoi = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
+            this.btnTaiXuong = new System.Windows.Forms.Button();
+            this.btnTuLuyen = new System.Windows.Forms.Button();
+            this.sfđDeCuong = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLuuTru)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,14 +61,14 @@
             this.dgvLuuTru.AllowUserToResizeColumns = false;
             this.dgvLuuTru.AllowUserToResizeRows = false;
             this.dgvLuuTru.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DeepSkyBlue;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvLuuTru.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLuuTru.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvLuuTru.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLuuTru.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SyllabusId,
@@ -77,14 +80,14 @@
             this.SyllabusContext,
             this.SyllabusType,
             this.SyllabusStatus});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvLuuTru.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLuuTru.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvLuuTru.EnableHeadersVisualStyles = false;
             this.dgvLuuTru.GridColor = System.Drawing.Color.White;
             this.dgvLuuTru.Location = new System.Drawing.Point(3, 53);
@@ -92,8 +95,8 @@
             this.dgvLuuTru.ReadOnly = true;
             this.dgvLuuTru.RowHeadersVisible = false;
             this.dgvLuuTru.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            this.dgvLuuTru.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            this.dgvLuuTru.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvLuuTru.RowTemplate.Height = 24;
             this.dgvLuuTru.Size = new System.Drawing.Size(942, 300);
             this.dgvLuuTru.TabIndex = 0;
@@ -254,10 +257,34 @@
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
+            // btnTaiXuong
+            // 
+            this.btnTaiXuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTaiXuong.Location = new System.Drawing.Point(649, 384);
+            this.btnTaiXuong.Name = "btnTaiXuong";
+            this.btnTaiXuong.Size = new System.Drawing.Size(141, 57);
+            this.btnTaiXuong.TabIndex = 35;
+            this.btnTaiXuong.Text = "Tải xuống";
+            this.btnTaiXuong.UseVisualStyleBackColor = true;
+            this.btnTaiXuong.Click += new System.EventHandler(this.btnTaiXuong_Click);
+            // 
+            // btnTuLuyen
+            // 
+            this.btnTuLuyen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTuLuyen.Location = new System.Drawing.Point(804, 384);
+            this.btnTuLuyen.Name = "btnTuLuyen";
+            this.btnTuLuyen.Size = new System.Drawing.Size(141, 57);
+            this.btnTuLuyen.TabIndex = 36;
+            this.btnTuLuyen.Text = "Tự luyện";
+            this.btnTuLuyen.UseVisualStyleBackColor = true;
+            this.btnTuLuyen.Click += new System.EventHandler(this.btnTuLuyen_Click);
+            // 
             // LuuTruCaNhan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnTuLuyen);
+            this.Controls.Add(this.btnTaiXuong);
             this.Controls.Add(this.cmbMonHoc);
             this.Controls.Add(this.lblMonHoc);
             this.Controls.Add(this.btnTim);
@@ -299,6 +326,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusContext;
         private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusType;
         private System.Windows.Forms.DataGridViewTextBoxColumn SyllabusStatus;
+        private System.Windows.Forms.Button btnTaiXuong;
+        private System.Windows.Forms.Button btnTuLuyen;
+        private System.Windows.Forms.SaveFileDialog sfđDeCuong;
     }
 }
 #endregion

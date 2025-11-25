@@ -196,7 +196,6 @@
             this.trangChu1.Name = "trangChu1";
             this.trangChu1.Size = new System.Drawing.Size(1080, 662);
             this.trangChu1.TabIndex = 2;
-            //this.trangChu1.Load += new System.EventHandler(this.trangChu1_Load);
             // 
             // lopHoc1
             // 
@@ -224,7 +223,9 @@
             this.Controls.Add(this.btnToggle);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "fmMain";
             this.Text = "Trang chủ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmMain_FormClosing);

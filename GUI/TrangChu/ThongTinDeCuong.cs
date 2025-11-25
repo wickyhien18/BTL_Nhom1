@@ -68,7 +68,7 @@ namespace BTL___Nhóm_1.TrangChu
             }
             sfdDeCuong.FileName = Path.GetFileName(txtFile.Text);
             //CHỉ định rõ loại file được phép lưu
-            sfdDeCuong.Filter = "De Cuong(WORD,PDF,EXCEL)|*.pdf;*.docx;*.xls;*.xlsx";
+            sfdDeCuong.Filter = "De Cuong(WORD,EXCEL)|*.pdf;*.docx;*.xls;*.xlsx";
             //Không cho phép ghi đè file
             sfdDeCuong.OverwritePrompt = false;
             if (sfdDeCuong.ShowDialog() == DialogResult.OK)
