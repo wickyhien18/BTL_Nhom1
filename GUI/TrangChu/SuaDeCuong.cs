@@ -1,4 +1,4 @@
-﻿        using BTL___Nhóm_1.DAL;
+﻿using BTL___Nhóm_1.DAL;
 using Microsoft.Data.SqlClient;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -177,7 +177,12 @@ namespace BTL___Nhóm_1.TrangChu
                                 command.Parameters.AddWithValue("@SyllabusContext", filePath);
                                 command.Parameters.AddWithValue("@SyllabusType", fileType);
                             }
-                            command.Parameters.AddWithValue("@SyllabusStatus", "Công khai");
+
+                            var syllabusStatus = BTL___Nhóm_1.DAL.Syllabus.Status;
+                            if (string.IsNullOrWhiteSpace(syllabusStatus))
+                                syllabusStatus = "Công khai"; 
+                            command.Parameters.AddWithValue("@SyllabusStatus", syllabusStatus);
+
                             command.ExecuteNonQuery();
                         }
 
