@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtTen = new System.Windows.Forms.TextBox();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
@@ -91,6 +92,14 @@
             this.dgvLop.AllowUserToDeleteRows = false;
             this.dgvLop.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvLop.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLop.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvLop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLop.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClassId,
@@ -123,6 +132,7 @@
             this.ClassId.HeaderText = "ClassId";
             this.ClassId.MinimumWidth = 6;
             this.ClassId.Name = "ClassId";
+            this.ClassId.ReadOnly = true;
             this.ClassId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ClassId.Visible = false;
             // 
@@ -133,6 +143,7 @@
             this.ClassName.HeaderText = "Tên lớp";
             this.ClassName.MinimumWidth = 6;
             this.ClassName.Name = "ClassName";
+            this.ClassName.ReadOnly = true;
             this.ClassName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // TeacherName
@@ -142,6 +153,7 @@
             this.TeacherName.HeaderText = "Giảng viên phụ trách";
             this.TeacherName.MinimumWidth = 6;
             this.TeacherName.Name = "TeacherName";
+            this.TeacherName.ReadOnly = true;
             this.TeacherName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // SubjectName
@@ -151,6 +163,7 @@
             this.SubjectName.HeaderText = "Môn học";
             this.SubjectName.MinimumWidth = 6;
             this.SubjectName.Name = "SubjectName";
+            this.SubjectName.ReadOnly = true;
             this.SubjectName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // LopHoc

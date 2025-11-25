@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BTL___Nhóm_1.DAL;
+using BTL___Nhóm_1.GUI.LopHoc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -42,9 +44,9 @@ namespace BTL___Nhóm_1.BUS
                 string query = @"SELECT c.ClassId, c.ClassName, c.TeacherName, sub.SubjectName
                                  FROM Class c
                                  JOIN Class_User cu ON c.ClassId = cu.ClassId
-                                 JOIN Class_Syllabus cs ON c.ClassId = cs.ClassId
-                                 JOIN Syllabus s ON cs.SyllabusId = s.SyllabusId
-                                 JOIN Subject sub ON s.SubjectId = sub.SubjectId
+                                 LEFT JOIN Class_Syllabus cs ON c.ClassId = cs.ClassId
+                                 LEFT JOIN Syllabus s ON cs.SyllabusId = s.SyllabusId
+                                 LEFT JOIN Subject sub ON s.SubjectId = sub.SubjectId
                                  WHERE cu.UserId = @UserId";
                 using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString)){
                     conn.Open();
@@ -96,7 +98,40 @@ namespace BTL___Nhóm_1.BUS
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-
+            ThemLop themLopform = new ThemLop();
+            themLopform.ShowDialog();
+            try
+            {
+                int userId = BTL___Nhóm_1.DAL.User.Id;
+                string query = @"SELECT c.ClassId, c.ClassName, c.TeacherName, sub.SubjectName
+                                 FROM Class c
+                                 JOIN Class_User cu ON c.ClassId = cu.ClassId
+                                 LEFT JOIN Class_Syllabus cs ON c.ClassId = cs.ClassId
+                                 LEFT JOIN Syllabus s ON cs.SyllabusId = s.SyllabusId
+                                 LEFT JOIN Subject sub ON s.SubjectId = sub.SubjectId
+                                 WHERE cu.UserId = @UserId";
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UserId", userId);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            DataTable dt = new DataTable();
+                            dt.Load(reader);
+                            dgvLop.DataSource = dt;
+                        }
+                    }
+                    if (dgvLop.Columns["ClassId"] != null)
+                        dgvLop.Columns["ClassId"].Visible = false;
+                }
+                this.BeginInvoke(new Action(() => SetButtonInRole()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi làm mới dữ liệu lớp học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)

@@ -241,6 +241,12 @@
     <Compile Include="DAL\Question.cs" />
     <Compile Include="DAL\Syllabus.cs" />
     <Compile Include="DAL\User.cs" />
+    <Compile Include="GUI\LopHoc\ThemLop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LopHoc\ThemLop.Designer.cs">
+      <DependentUpon>ThemLop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\DangKy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BUS\TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\LopHoc\ThemLop.resx">
+      <DependentUpon>ThemLop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>
