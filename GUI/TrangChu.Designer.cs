@@ -196,7 +196,7 @@
             this.trangChu1.Name = "trangChu1";
             this.trangChu1.Size = new System.Drawing.Size(1080, 662);
             this.trangChu1.TabIndex = 2;
-            this.trangChu1.Load += new System.EventHandler(this.trangChu1_Load);
+            //this.trangChu1.Load += new System.EventHandler(this.trangChu1_Load);
             // 
             // lopHoc1
             // 

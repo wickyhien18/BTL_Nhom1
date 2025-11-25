@@ -224,14 +224,6 @@ namespace BTL___Nhóm_1.BUS
                             dgvTrangChu.DataSource = dataTable;
                         }
                     }
-                    if (dgvTrangChu.Columns["SyllabusId"] != null)
-                    {
-                        dgvTrangChu.Columns["SyllabusId"].Visible = false; // Ẩn cột SyllabusId
-                    }
-                    if (dgvTrangChu.Columns["SyllabusContext"] != null)
-                    {
-                        dgvTrangChu.Columns["SyllabusContext"].Visible = false; // Ẩn cột SyllabusContext
-                    }
                 }
 
                 // cập nhật layout sau khi thay đổi dữ liệu
@@ -519,6 +511,11 @@ namespace BTL___Nhóm_1.BUS
                 foreach (var child in FindControlsRecursive<T>(c))
                     yield return child;
             }
+        }
+
+        private void dgvTrangChu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

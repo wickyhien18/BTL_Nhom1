@@ -122,10 +122,5 @@ namespace BTL___Nhóm_1
             // Ensure the hamburger stays on top
             btnToggle.BringToFront();
         }
-
-        private void trangChu1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -432,5 +432,10 @@ WHERE ps.UserId = @userId";
                 MessageBox.Show("Lỗi khi mở form sửa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dgvLuuTru_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
