@@ -81,6 +81,7 @@
             this.txtCauHoi.Multiline = true;
             this.txtCauHoi.Name = "txtCauHoi";
             this.txtCauHoi.ReadOnly = true;
+            this.txtCauHoi.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtCauHoi.Size = new System.Drawing.Size(469, 82);
             this.txtCauHoi.TabIndex = 2;
             // 
@@ -146,6 +147,7 @@
             this.txtDapAn.Location = new System.Drawing.Point(28, 383);
             this.txtDapAn.Name = "txtDapAn";
             this.txtDapAn.ReadOnly = true;
+            this.txtDapAn.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDapAn.Size = new System.Drawing.Size(469, 13);
             this.txtDapAn.TabIndex = 5;
             this.txtDapAn.Visible = false;
@@ -158,6 +160,7 @@
             this.txtA.Multiline = true;
             this.txtA.Name = "txtA";
             this.txtA.ReadOnly = true;
+            this.txtA.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtA.Size = new System.Drawing.Size(449, 33);
             this.txtA.TabIndex = 6;
             // 
@@ -169,6 +172,7 @@
             this.txtB.Multiline = true;
             this.txtB.Name = "txtB";
             this.txtB.ReadOnly = true;
+            this.txtB.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtB.Size = new System.Drawing.Size(449, 33);
             this.txtB.TabIndex = 6;
             // 
@@ -179,6 +183,7 @@
             this.txtC.Multiline = true;
             this.txtC.Name = "txtC";
             this.txtC.ReadOnly = true;
+            this.txtC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtC.Size = new System.Drawing.Size(449, 33);
             this.txtC.TabIndex = 6;
             // 
@@ -189,6 +194,7 @@
             this.txtD.Multiline = true;
             this.txtD.Name = "txtD";
             this.txtD.ReadOnly = true;
+            this.txtD.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtD.Size = new System.Drawing.Size(449, 33);
             this.txtD.TabIndex = 6;
             // 
@@ -210,6 +216,7 @@
             this.txtE.Multiline = true;
             this.txtE.Name = "txtE";
             this.txtE.ReadOnly = true;
+            this.txtE.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtE.Size = new System.Drawing.Size(449, 33);
             this.txtE.TabIndex = 6;
             // 
@@ -220,6 +227,7 @@
             this.txtF.Multiline = true;
             this.txtF.Name = "txtF";
             this.txtF.ReadOnly = true;
+            this.txtF.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtF.Size = new System.Drawing.Size(449, 33);
             this.txtF.TabIndex = 6;
             // 
