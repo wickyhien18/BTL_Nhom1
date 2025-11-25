@@ -38,7 +38,6 @@
             this.ClassId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TeacherName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SubjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,6 +89,8 @@
             // 
             this.dgvLop.AllowUserToAddRows = false;
             this.dgvLop.AllowUserToDeleteRows = false;
+            this.dgvLop.AllowUserToResizeColumns = false;
+            this.dgvLop.AllowUserToResizeRows = false;
             this.dgvLop.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvLop.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -104,8 +105,7 @@
             this.dgvLop.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClassId,
             this.ClassName,
-            this.TeacherName,
-            this.SubjectName});
+            this.TeacherName});
             this.dgvLop.Location = new System.Drawing.Point(3, 54);
             this.dgvLop.Name = "dgvLop";
             this.dgvLop.ReadOnly = true;
@@ -156,16 +156,6 @@
             this.TeacherName.ReadOnly = true;
             this.TeacherName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // SubjectName
-            // 
-            this.SubjectName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SubjectName.DataPropertyName = "SubjectName";
-            this.SubjectName.HeaderText = "Môn học";
-            this.SubjectName.MinimumWidth = 6;
-            this.SubjectName.Name = "SubjectName";
-            this.SubjectName.ReadOnly = true;
-            this.SubjectName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
             // LopHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -195,6 +185,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ClassId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClassName;
         private System.Windows.Forms.DataGridViewTextBoxColumn TeacherName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SubjectName;
     }
 }

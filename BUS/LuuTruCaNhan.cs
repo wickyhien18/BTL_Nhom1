@@ -437,5 +437,10 @@ WHERE ps.UserId = @userId";
         {
 
         }
+
+        private void btnXoa_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
