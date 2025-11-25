@@ -344,12 +344,12 @@ namespace BTL___Nhóm_1.TrangChu
 
                             if (isBold || isRed)
                             {
-                                if (textDapAn.StartsWith("A") ||
-                                    textDapAn.StartsWith("B") ||
-                                    textDapAn.StartsWith("C") ||
-                                    textDapAn.StartsWith("D") ||
-                                    textDapAn.StartsWith("E") ||
-                                    textDapAn.StartsWith("F"))
+                                if (textDapAn.ToUpper().StartsWith("A") ||
+                                    textDapAn.ToUpper().StartsWith("B") ||
+                                    textDapAn.ToUpper().StartsWith("C") ||
+                                    textDapAn.ToUpper().StartsWith("D") ||
+                                    textDapAn.ToUpper().StartsWith("E") ||
+                                    textDapAn.ToUpper().StartsWith("F"))
                                 {
                                     tempDapAnDung.Add(textDapAn[0].ToString());
                                 }
