@@ -34,6 +34,10 @@
             this.btnThemSV = new System.Windows.Forms.Button();
             this.btnThemDeCuong = new System.Windows.Forms.Button();
             this.btnDS = new System.Windows.Forms.Button();
+            this.btnTim = new System.Windows.Forms.Button();
+            this.txtTim = new System.Windows.Forms.TextBox();
+            this.cmbMonHoc = new System.Windows.Forms.ComboBox();
+            this.lblMonHoc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,11 +47,12 @@
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
             this.dgv.AllowUserToResizeRows = false;
-            resources.ApplyResources(this.dgv, "dgv");
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            resources.ApplyResources(this.dgv, "dgv");
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Select});
             this.dgv.Name = "dgv";
+            this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
@@ -57,6 +62,7 @@
             // 
             resources.ApplyResources(this.Select, "Select");
             this.Select.Name = "Select";
+            this.Select.ReadOnly = true;
             // 
             // btnThemSV
             // 
@@ -79,10 +85,39 @@
             this.btnDS.UseVisualStyleBackColor = true;
             this.btnDS.Click += new System.EventHandler(this.btnDS_Click);
             // 
+            // btnTim
+            // 
+            resources.ApplyResources(this.btnTim, "btnTim");
+            this.btnTim.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
+            // 
+            // txtTim
+            // 
+            resources.ApplyResources(this.txtTim, "txtTim");
+            this.txtTim.ForeColor = System.Drawing.Color.Gray;
+            this.txtTim.Name = "txtTim";
+            this.txtTim.TabStop = false;
+            // 
+            // cmbMonHoc
+            // 
+            resources.ApplyResources(this.cmbMonHoc, "cmbMonHoc");
+            this.cmbMonHoc.FormattingEnabled = true;
+            this.cmbMonHoc.Name = "cmbMonHoc";
+            // 
+            // lblMonHoc
+            // 
+            resources.ApplyResources(this.lblMonHoc, "lblMonHoc");
+            this.lblMonHoc.Name = "lblMonHoc";
+            // 
             // ThongTinLop
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbMonHoc);
+            this.Controls.Add(this.lblMonHoc);
+            this.Controls.Add(this.btnTim);
+            this.Controls.Add(this.txtTim);
             this.Controls.Add(this.btnDS);
             this.Controls.Add(this.btnThemDeCuong);
             this.Controls.Add(this.btnThemSV);
@@ -91,8 +126,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ThongTinLop";
+            this.Load += new System.EventHandler(this.ThongTinLop_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -103,5 +140,9 @@
         private System.Windows.Forms.Button btnThemSV;
         private System.Windows.Forms.Button btnThemDeCuong;
         private System.Windows.Forms.Button btnDS;
+        private System.Windows.Forms.Button btnTim;
+        private System.Windows.Forms.TextBox txtTim;
+        private System.Windows.Forms.ComboBox cmbMonHoc;
+        private System.Windows.Forms.Label lblMonHoc;
     }
 }
