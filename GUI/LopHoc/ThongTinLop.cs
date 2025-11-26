@@ -20,34 +20,11 @@ namespace BTL___Nhóm_1.GUI.LopHoc
         {
             InitializeComponent();
             this.classId = classId;
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.StartPosition = FormStartPosition.CenterParent;
         }
         private void ThongTinLop_Load(object sender, EventArgs e)
         {
-            try
-            {
-                string query = @"SELECT s.SyllabusId, s.SyllabusName, s.Author, s.PostedDate, s.SyllabusType, s.SyllabusStatus
-                                 FROM Syllabus s JOIN Class_Syllabus cs ON s.SyllabusId = cs.SyllabusId
-                                 WHERE cs.ClassId = @ClassId";
-                using(SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
-                {
-                    connection.Open();
-                    using(SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@ClassId", classId);
-                        DataTable dt = new DataTable();
-                        using(SqlDataReader read = cmd.ExecuteReader())
-                        {
-                            dt.Load(read);
-                        }
-                        dgv.DataSource = dt;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi tải thông tin lớp học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            this.BeginInvoke(new Action(() => LoadSyllabus()));
         }
         private void btnThemSV_Click(object sender, EventArgs e)
         {
@@ -92,6 +69,36 @@ namespace BTL___Nhóm_1.GUI.LopHoc
                 MessageBox.Show("Đã thêm sinh viên vào lớp!");
             }
         }
+        private void LoadSyllabus()
+        {
+            try
+            {
+                string query = @"SELECT s.SyllabusId, s.SyllabusName, s.Author, s.PostedDate, s.SyllabusType, s.SyllabusStatus
+                                 FROM Syllabus s JOIN Class_Syllabus cs ON s.SyllabusId = cs.SyllabusId
+                                 WHERE cs.ClassId = @ClassId";
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@ClassId", classId);
+                        DataTable dt = new DataTable();
+                        using (SqlDataReader read = cmd.ExecuteReader())
+                        {
+                            dt.Load(read);
+                        }
+                        dgv.AutoGenerateColumns = true;
+                        if (dgv.Columns.Contains("Select"))
+                            dgv.Columns.Remove("Select");
+                        dgv.DataSource = dt;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tải thông tin lớp học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         public void RefreshData()
         {
             try
@@ -101,12 +108,12 @@ namespace BTL___Nhóm_1.GUI.LopHoc
                 {
                     this.BeginInvoke(new Action(() =>
                     {
-                        ThongTinLop_Load(this, EventArgs.Empty);
+                        LoadSyllabus();
                     }));
                 }
                 else
                 {
-                    ThongTinLop_Load(this, EventArgs.Empty);
+                    LoadSyllabus();
                 }
             }
             catch
@@ -118,18 +125,14 @@ namespace BTL___Nhóm_1.GUI.LopHoc
         {
             try
             {
-                //request private status and save to PersonalStorage
-                using (var dlg = new ThemVaoDS(defaultStatus: "Riêng tư", saveToPersonal: true))
+                using (var dlg = new ThemDeCuong(classId, defaultStatus: "Riêng tư", saveToPersonal: true))
                 {
                     dlg.ShowDialog(this);
-
-                    //refresh the LuuTru table
                     if (dlg.CreatedSyllabusId.HasValue)
                     {
-                        if (this.IsHandleCreated && this.InvokeRequired)
-                            this.BeginInvoke(new Action(RefreshData));
-                        else
-                            RefreshData();
+                        if (this.IsHandleCreated && this.InvokeRequired) 
+                            this.BeginInvoke(new Action(RefreshData)); 
+                        else RefreshData();
                     }
                 }
             }

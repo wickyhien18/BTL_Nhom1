@@ -117,4 +117,148 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dgv.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dgv.ColumnHeadersHeight" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="Select.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Select.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dgv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="dgv.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="dgv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>776, 384</value>
+  </data>
+  <data name="dgv.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;dgv.Name" xml:space="preserve">
+    <value>dgv</value>
+  </data>
+  <data name="&gt;&gt;dgv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgv.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;dgv.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnThemSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnThemSV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 408</value>
+  </data>
+  <data name="btnThemSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 30</value>
+  </data>
+  <data name="btnThemSV.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="btnThemSV.Text" xml:space="preserve">
+    <value>Thêm sinh viên</value>
+  </data>
+  <data name="&gt;&gt;btnThemSV.Name" xml:space="preserve">
+    <value>btnThemSV</value>
+  </data>
+  <data name="&gt;&gt;btnThemSV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnThemSV.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnThemSV.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnThemDeCuong.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnThemDeCuong.Location" type="System.Drawing.Point, System.Drawing">
+    <value>143, 408</value>
+  </data>
+  <data name="btnThemDeCuong.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 30</value>
+  </data>
+  <data name="btnThemDeCuong.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnThemDeCuong.Text" xml:space="preserve">
+    <value>Thêm đề cương</value>
+  </data>
+  <data name="&gt;&gt;btnThemDeCuong.Name" xml:space="preserve">
+    <value>btnThemDeCuong</value>
+  </data>
+  <data name="&gt;&gt;btnThemDeCuong.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnThemDeCuong.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnThemDeCuong.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnDS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnDS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 408</value>
+  </data>
+  <data name="btnDS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 30</value>
+  </data>
+  <data name="btnDS.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnDS.Text" xml:space="preserve">
+    <value>Danh sách sinh viên</value>
+  </data>
+  <data name="&gt;&gt;btnDS.Name" xml:space="preserve">
+    <value>btnDS</value>
+  </data>
+  <data name="&gt;&gt;btnDS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnDS.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnDS.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 16</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 450</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>ThongTinLop</value>
+  </data>
+  <data name="&gt;&gt;Select.Name" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="&gt;&gt;Select.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ThongTinLop</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
