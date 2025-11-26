@@ -248,7 +248,7 @@ namespace BTL___Nhóm_1.BUS
                 // loop to allow re-selection when duplicates are found
                 while (true)
                 {
-                    using (var dlg = new BTL___Nhóm_1.TrangChu.SelectSyllabiForm())
+                    using (var dlg = new BTL___Nhóm_1.TrangChu.ChonDeCuong())
                     {
                         if (dlg.ShowDialog(this) != DialogResult.OK)
                             return;
