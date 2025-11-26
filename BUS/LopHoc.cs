@@ -20,6 +20,19 @@ namespace BTL___Nhóm_1.BUS
         {
             InitializeComponent();
             this.Load += LopHoc_Load;
+            try
+            {
+                if (this.txtTim != null)
+                {
+                    this.txtTim.Enter -= txtTim_Enter;
+                    this.txtTim.Leave -= txtTim_Leave;
+                    this.txtTim.Enter += txtTim_Enter;
+                    this.txtTim.Leave += txtTim_Leave;
+                }
+            }
+            catch
+            {
+            }
         }
         private void SetButtonInRole()
         {
@@ -222,6 +235,76 @@ namespace BTL___Nhóm_1.BUS
         private void dgvLop_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void txtTim_Enter(object sender, EventArgs e)
+        {
+            if (txtTim.Text == "Tìm kiếm lớp...")
+            {
+                txtTim.Text = "";
+                txtTim.ForeColor = Color.Black;
+            }
+            
+        }
+        private void txtTim_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTim.Text))
+            {
+                txtTim.Text = "Tìm kiếm lớp...";
+                txtTim.ForeColor = Color.Gray;
+            }
+        }
+
+        private void btnTim_Click(object sender, EventArgs e)
+        {
+            string selectBase = "SELECT ClassId, ClassName, TeacherName FROM Class";
+            var conditions = new List<string>();
+            string finalSelect = selectBase;
+            if (!string.IsNullOrEmpty(txtTim.Text.Trim()) && txtTim.Text != "Tìm kiếm lớp...")
+            {
+                conditions.Add("ClassName LIKE @search");
+            }
+            if (conditions.Count > 0)
+            {
+                finalSelect += " WHERE " + string.Join(" AND ", conditions);
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(finalSelect, connection))
+                    {
+                        command.Parameters.AddWithValue("@status", "Công khai");
+                        if (conditions.Contains("ClassName LIKE @search"))
+                        {
+                            command.Parameters.AddWithValue("@search", "%" + txtTim.Text.Trim() + "%");
+                        }
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            dgvLop.DataSource = dataTable;
+                        }
+                    }
+                }
+
+                this.BeginInvoke(new Action(() => SetButtonInRole()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tìm kiếm lớp học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvLop_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            int classId = Convert.ToInt32(dgvLop.Rows[e.RowIndex].Cells["ClassId"].Value); 
+            ThongTinLop thongTinLopForm = new ThongTinLop(classId);
+            thongTinLopForm.ShowDialog();
         }
     }
 }

@@ -517,5 +517,10 @@ namespace BTL___Nhóm_1.BUS
         {
 
         }
+
+        private void txtTenDeCuong_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
