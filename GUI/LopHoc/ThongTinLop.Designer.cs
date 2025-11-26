@@ -36,6 +36,8 @@
             this.btnDS = new System.Windows.Forms.Button();
             this.btnTim = new System.Windows.Forms.Button();
             this.txtTim = new System.Windows.Forms.TextBox();
+            this.cmbMonHoc = new System.Windows.Forms.ComboBox();
+            this.lblMonHoc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,13 +47,13 @@
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
             this.dgv.AllowUserToResizeRows = false;
-            resources.ApplyResources(this.dgv, "dgv");
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.BackgroundColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.dgv, "dgv");
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Select});
             this.dgv.GridColor = System.Drawing.Color.White;
             this.dgv.Name = "dgv";
+            this.dgv.ReadOnly = true;
             this.dgv.RowHeadersVisible = false;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
@@ -61,6 +63,7 @@
             // 
             resources.ApplyResources(this.Select, "Select");
             this.Select.Name = "Select";
+            this.Select.ReadOnly = true;
             // 
             // btnThemSV
             // 
@@ -86,6 +89,7 @@
             // btnTim
             // 
             resources.ApplyResources(this.btnTim, "btnTim");
+            this.btnTim.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
             this.btnTim.Name = "btnTim";
             this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
@@ -94,14 +98,26 @@
             resources.ApplyResources(this.txtTim, "txtTim");
             this.txtTim.ForeColor = System.Drawing.Color.Gray;
             this.txtTim.Name = "txtTim";
-            this.txtTim.Enter += new System.EventHandler(this.txtTim_Enter);
+            this.txtTim.TabStop = false;
             this.txtTim.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTim_KeyPress);
-            this.txtTim.Leave += new System.EventHandler(this.txtTim_Leave);
+            // 
+            // cmbMonHoc
+            // 
+            resources.ApplyResources(this.cmbMonHoc, "cmbMonHoc");
+            this.cmbMonHoc.FormattingEnabled = true;
+            this.cmbMonHoc.Name = "cmbMonHoc";
+            // 
+            // lblMonHoc
+            // 
+            resources.ApplyResources(this.lblMonHoc, "lblMonHoc");
+            this.lblMonHoc.Name = "lblMonHoc";
             // 
             // ThongTinLop
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cmbMonHoc);
+            this.Controls.Add(this.lblMonHoc);
             this.Controls.Add(this.btnTim);
             this.Controls.Add(this.txtTim);
             this.Controls.Add(this.btnDS);
@@ -128,5 +144,7 @@
         private System.Windows.Forms.Button btnDS;
         private System.Windows.Forms.Button btnTim;
         private System.Windows.Forms.TextBox txtTim;
+        private System.Windows.Forms.ComboBox cmbMonHoc;
+        private System.Windows.Forms.Label lblMonHoc;
     }
 }

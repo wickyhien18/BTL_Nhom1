@@ -224,6 +224,7 @@ namespace BTL___Nhóm_1.GUI.LopHoc
 
         private void ThemDeCuong_Load(object sender, EventArgs e)
         {
+            //Load danh sách môn học vào combobox
             try
             {
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetnoi"].ConnectionString))

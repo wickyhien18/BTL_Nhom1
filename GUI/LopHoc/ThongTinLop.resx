@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="dgv.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="dgv.ColumnHeadersHeight" type="System.Int32, mscorlib">
     <value>29</value>
@@ -133,13 +129,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dgv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 53</value>
+    <value>12, 64</value>
   </data>
   <data name="dgv.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="dgv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 370</value>
+    <value>863, 384</value>
   </data>
   <data name="dgv.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -154,13 +150,14 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dgv.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnThemSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnThemSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 429</value>
+    <value>12, 470</value>
   </data>
   <data name="btnThemSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 30</value>
@@ -181,13 +178,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnThemSV.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btnThemDeCuong.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnThemDeCuong.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 429</value>
+    <value>143, 470</value>
   </data>
   <data name="btnThemDeCuong.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 30</value>
@@ -208,13 +205,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnThemDeCuong.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btnDS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 429</value>
+    <value>274, 470</value>
   </data>
   <data name="btnDS.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 30</value>
@@ -235,22 +232,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnDS.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="btnTim.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+    <value>Microsoft Sans Serif, 13.8pt</value>
   </data>
   <data name="btnTim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>370, 12</value>
+    <value>370, 10</value>
   </data>
   <data name="btnTim.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 32</value>
+    <value>60, 40</value>
   </data>
   <data name="btnTim.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="btnTim.Text" xml:space="preserve">
-    <value>Tìm</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;btnTim.Name" xml:space="preserve">
     <value>btnTim</value>
@@ -262,19 +256,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnTim.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="txtTim.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 10.2pt</value>
+    <value>Microsoft Sans Serif, 16.2pt</value>
   </data>
   <data name="txtTim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 14</value>
+    <value>12, 12</value>
   </data>
   <data name="txtTim.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 27</value>
+    <value>352, 38</value>
   </data>
   <data name="txtTim.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="txtTim.Text" xml:space="preserve">
     <value>Tìm kiếm tên đề cương...</value>
@@ -289,6 +283,60 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;txtTim.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmbMonHoc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="cmbMonHoc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>558, 12</value>
+  </data>
+  <data name="cmbMonHoc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 33</value>
+  </data>
+  <data name="cmbMonHoc.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;cmbMonHoc.Name" xml:space="preserve">
+    <value>cmbMonHoc</value>
+  </data>
+  <data name="&gt;&gt;cmbMonHoc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbMonHoc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmbMonHoc.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblMonHoc.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblMonHoc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>464, 14</value>
+  </data>
+  <data name="lblMonHoc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 28</value>
+  </data>
+  <data name="lblMonHoc.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lblMonHoc.Text" xml:space="preserve">
+    <value>Môn học:</value>
+  </data>
+  <data name="lblMonHoc.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblMonHoc.Name" xml:space="preserve">
+    <value>lblMonHoc</value>
+  </data>
+  <data name="&gt;&gt;lblMonHoc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonHoc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblMonHoc.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -298,7 +346,7 @@
     <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 476</value>
+    <value>887, 512</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>ThongTinLop</value>
