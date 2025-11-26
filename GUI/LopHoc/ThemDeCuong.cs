@@ -122,8 +122,7 @@ namespace BTL___Nhóm_1.GUI.LopHoc
                         }
                     }
 
-                    if (_saveToPersonal)
-                    {
+                   
                         int userId = BTL___Nhóm_1.DAL.User.Id;
                         string insertPersonal = "INSERT INTO PersonalStorage (UserId, SyllabusId, SavedDate) VALUES (@userId, @syllabusId, GETDATE())";
                         using (SqlCommand cmd = new SqlCommand(insertPersonal, connection))
@@ -132,7 +131,7 @@ namespace BTL___Nhóm_1.GUI.LopHoc
                             cmd.Parameters.AddWithValue("@syllabusId", newSyllabusId);
                             cmd.ExecuteNonQuery();
                         }
-                    }
+                    
 
                     // set created id for caller
                     CreatedSyllabusId = newSyllabusId;

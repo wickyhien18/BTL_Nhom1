@@ -140,7 +140,10 @@ namespace BTL___Nhóm_1.BUS
             {
                 MessageBox.Show("Lỗi khi làm mới dữ liệu lớp học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
+
+        
 
         private void btnSua_Click(object sender, EventArgs e)
         {

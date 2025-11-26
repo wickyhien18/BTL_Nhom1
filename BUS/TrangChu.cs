@@ -227,7 +227,35 @@ namespace BTL___Nhóm_1.BUS
                         }
                     }
                 }
-
+                 try
+                        {
+                            // Duyệt tất cả các Form đang mở, tìm mọi instance của LuuTruCaNhan và gọi RefreshData()
+                            foreach (Form f in Application.OpenForms)
+                            {
+                                try
+                                {
+                                    foreach (var luu in FindControlsRecursive<LuuTruCaNhan>(f).ToList())
+                                    {
+                                        try
+                                        {
+                                            luu.RefreshData();
+                                        }
+                                        catch
+                                        {
+                                            // ignore individual refresh errors
+                                        }
+                                    }
+                                }
+                                catch
+                                {
+                                    // ignore errors per form
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            // ignore global refresh errors
+                        }
                 // cập nhật layout sau khi thay đổi dữ liệu
                 this.BeginInvoke(new Action(() => UpdateButtonsByRole()));
             }

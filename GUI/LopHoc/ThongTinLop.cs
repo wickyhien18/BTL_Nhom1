@@ -1,4 +1,5 @@
-﻿using BTL___Nhóm_1.TrangChu;
+﻿using BTL___Nhóm_1.BUS;
+using BTL___Nhóm_1.TrangChu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -194,6 +195,46 @@ namespace BTL___Nhóm_1.GUI.LopHoc
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi thêm đề cương riêng tư: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            try
+            {
+                // Duyệt tất cả các Form đang mở, tìm mọi instance của LuuTruCaNhan và gọi RefreshData()
+                foreach (Form f in Application.OpenForms)
+                {
+                    try
+                    {
+                        foreach (var luu in FindControlsRecursive<LuuTruCaNhan>(f).ToList())
+                        {
+                            try
+                            {
+                                luu.RefreshData();
+                            }
+                            catch
+                            {
+                                // ignore individual refresh errors
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        // ignore errors per form
+                    }
+                }
+            }
+            catch
+            {
+                // ignore global refresh errors
+            }
+        }
+
+        private IEnumerable<T> FindControlsRecursive<T>(Control parent) where T : Control
+        {
+            if (parent == null) yield break;
+            foreach (Control c in parent.Controls)
+            {
+                if (c is T t) yield return t;
+                foreach (var child in FindControlsRecursive<T>(c))
+                    yield return child;
             }
         }
 

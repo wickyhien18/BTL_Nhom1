@@ -168,17 +168,15 @@ namespace BTL___Nhóm_1.TrangChu
                         }
                     }
 
-                    if (_saveToPersonal)
-                    {
+             
                         int userId = BTL___Nhóm_1.DAL.User.Id;
                         string insertPersonal = "INSERT INTO PersonalStorage (UserId, SyllabusId, SavedDate) VALUES (@userId, @syllabusId, GETDATE())";
                         using (SqlCommand cmd = new SqlCommand(insertPersonal, connection))
                         {
                             cmd.Parameters.AddWithValue("@userId", userId);
                             cmd.Parameters.AddWithValue("@syllabusId", newSyllabusId);
-                            cmd.ExecuteNonQuery();
+                            cmd.ExecuteNonQuery();                       
                         }
-                    }
 
                     // set created id for caller
                     CreatedSyllabusId = newSyllabusId;
