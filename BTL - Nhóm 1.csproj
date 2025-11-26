@@ -277,6 +277,12 @@
     <Compile Include="GUI\LopHoc\ThongTinLop.Designer.cs">
       <DependentUpon>ThongTinLop.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\TrangChu\ChonLopHoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\TrangChu\ChonLopHoc.Designer.cs">
+      <DependentUpon>ChonLopHoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\DangKy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -380,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\LopHoc\ThongTinLop.resx">
       <DependentUpon>ThongTinLop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\TrangChu\ChonLopHoc.resx">
+      <DependentUpon>ChonLopHoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>

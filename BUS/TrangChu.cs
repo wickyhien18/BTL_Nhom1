@@ -1,17 +1,19 @@
-﻿using System;
+﻿using BTL___Nhóm_1.DAL;
+using BTL___Nhóm_1.GUI.TrangChu;
+using BTL___Nhóm_1.TrangChu;
+using Microsoft.Data;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data;
-using Microsoft.Data.SqlClient;
-using System.Configuration;
-using BTL___Nhóm_1.TrangChu;
-using BTL___Nhóm_1.DAL;
 
 namespace BTL___Nhóm_1.BUS
 {
@@ -237,7 +239,65 @@ namespace BTL___Nhóm_1.BUS
 
         private void btnThemVaoLopHoc_Click(object sender, EventArgs e)
         {
+            try
+            {
+                using (var frm = new ChonLopHoc())
+                {
+                    if (frm.ShowDialog() != DialogResult.OK || !frm.SelectedClassId.HasValue)
+                        return;
+                    int classId = frm.SelectedClassId.Value;
+                    var selectedIds = frm.SelectedSyllabusIds;
 
+                    if (selectedIds.Count == 0)
+                    {
+                        MessageBox.Show("Bạn chưa chọn đề cương nào.");
+                        return;
+                    }
+                    using (SqlConnection conn =
+                        new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
+                    {
+                        conn.Open();
+
+                        foreach (int syllabusId in selectedIds)
+                        {
+                            string checkQuery = @"SELECT COUNT(*) 
+                                          FROM Class_Syllabus 
+                                          WHERE ClassId = @ClassId AND SyllabusId = @SyllabusId";
+
+                            using (SqlCommand checkCmd = new SqlCommand(checkQuery, conn))
+                            {
+                                checkCmd.Parameters.AddWithValue("@ClassId", classId);
+                                checkCmd.Parameters.AddWithValue("@SyllabusId", syllabusId);
+
+                                int exists = Convert.ToInt32(checkCmd.ExecuteScalar());
+                                if (exists > 0)
+                                {
+                                    MessageBox.Show(
+                                        $"Đề cương ID {syllabusId} đã tồn tại trong lớp!",
+                                        "Trùng đề cương",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning
+                                    );
+                                    return;
+                                }
+                            }
+                            string insertQuery = @"INSERT INTO Class_Syllabus (ClassId, SyllabusId) 
+                                           VALUES (@ClassId, @SyllabusId)";
+                            using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
+                            {
+                                insertCmd.Parameters.AddWithValue("@ClassId", classId);
+                                insertCmd.Parameters.AddWithValue("@SyllabusId", syllabusId);
+                                insertCmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                    MessageBox.Show("Đã thêm đề cương vào lớp học!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi thêm vào lớp học: " + ex.Message);
+            }
         }
 
         // Thêm vào "Đề cương của tôi" (Lưu trữ cá nhân)

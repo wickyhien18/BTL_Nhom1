@@ -88,7 +88,7 @@ namespace BTL___Nhóm_1.GUI.LopHoc
         {
             try
             {
-                string query = @"SELECT s.SyllabusId, s.SyllabusName, s.Author, s.PostedDate, sub.SubjectName, s.SyllabusType, s.SyllabusStatus, s.SyllabusContext
+                string query = @"SELECT s.SyllabusId, s.SyllabusName As 'Tên đề cương', s.Author As 'Tác giả', s.PostedDate As 'Ngày đăng', sub.SubjectName As 'Tên môn', s.SyllabusType As 'Loại đề cương', s.SyllabusStatus As 'Tình trạng', s.SyllabusContext As 'Nội dung'
                                  FROM Syllabus s JOIN Class_Syllabus cs ON s.SyllabusId = cs.SyllabusId JOIN Subject sub ON s.SubjectId = sub.SubjectId
                                  WHERE cs.ClassId = @ClassId";
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
@@ -234,16 +234,16 @@ namespace BTL___Nhóm_1.GUI.LopHoc
 
             DataGridViewRow row = dgv.Rows[e.RowIndex];
             BTL___Nhóm_1.DAL.Syllabus.Id = Convert.ToInt32(row.Cells["SyllabusId"].Value);
-            BTL___Nhóm_1.DAL.Syllabus.Name = row.Cells["SyllabusName"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Author = row.Cells["Author"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Date = Convert.ToDateTime(row.Cells["PostedDate"].Value);
-            BTL___Nhóm_1.DAL.Syllabus.SubjectName = row.Cells["SubjectName"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Context = row.Cells["SyllabusContext"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Type = row.Cells["SyllabusType"].Value.ToString();
-            BTL___Nhóm_1.DAL.Syllabus.Status = row.Cells["SyllabusStatus"].Value.ToString();
-
+            BTL___Nhóm_1.DAL.Syllabus.Name = row.Cells["Tên đề cương"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Author = row.Cells["Tác giả"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Date = Convert.ToDateTime(row.Cells["Ngày đăng"].Value);
+            BTL___Nhóm_1.DAL.Syllabus.SubjectName = row.Cells["Tên môn"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Context = row.Cells["Nội dung"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Type = row.Cells["Loại đề cương"].Value.ToString();
+            BTL___Nhóm_1.DAL.Syllabus.Status = row.Cells["Tình trạng"].Value.ToString();
             ThongTinDeCuong thongTinForm = new ThongTinDeCuong();
             thongTinForm.ShowDialog();
+
             ThongTinLop_Load(sender, e);
         }
 
@@ -262,7 +262,7 @@ namespace BTL___Nhóm_1.GUI.LopHoc
         {
             try
             {
-                string selectBase = @"SELECT s.SyllabusId, s.SyllabusName, s.Author, s.PostedDate, sub.SubjectName, s.SyllabusType, s.SyllabusStatus, s.SyllabusContext
+                string selectBase = @"SELECT s.SyllabusId, s.SyllabusName As 'Tên đề cương', s.Author As 'Tác giả', s.PostedDate As 'Ngày đăng', sub.SubjectName As 'Tên môn', s.SyllabusType As 'Loại đề cương', s.SyllabusStatus As 'Tình trạng', s.SyllabusContext As 'Nội dung'
                           FROM Syllabus s 
                           JOIN Class_Syllabus cs ON s.SyllabusId = cs.SyllabusId 
                           JOIN Subject sub ON s.SubjectId = sub.SubjectId
