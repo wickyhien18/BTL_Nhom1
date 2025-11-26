@@ -25,6 +25,7 @@ namespace BTL___Nhóm_1.GUI.LopHoc
         private void ThongTinLop_Load(object sender, EventArgs e)
         {
             this.BeginInvoke(new Action(() => LoadSyllabus()));
+            this.BeginInvoke(new Action(() => SetButtonInRole()));
         }
         private void btnThemSV_Click(object sender, EventArgs e)
         {
@@ -69,11 +70,27 @@ namespace BTL___Nhóm_1.GUI.LopHoc
                 MessageBox.Show("Đã thêm sinh viên vào lớp!");
             }
         }
+        private void SetButtonInRole()
+        {
+            string Role = BTL___Nhóm_1.DAL.User.VaiTro;
+            if (Role == "Sinh viên")
+            {
+                btnThemSV.Visible = false;
+                btnThemDeCuong.Visible = false;
+                btnDS.Visible = false;
+            }
+            else
+            {
+                btnThemSV.Visible = true;
+                btnThemDeCuong.Visible = true;
+                btnDS.Visible = true;
+            }
+        }
         private void LoadSyllabus()
         {
             try
             {
-                string query = @"SELECT s.SyllabusId, s.SyllabusName, s.Author, s.PostedDate, s.SyllabusType, s.SyllabusStatus
+                string query = @"SELECT s.SyllabusName as 'Tên đề cương', s.Author as 'Tác giả', s.PostedDate as 'Ngày xuất bản', s.SyllabusType as 'Loại đề cương', s.SyllabusStatus as 'Trạng thái'
                                  FROM Syllabus s JOIN Class_Syllabus cs ON s.SyllabusId = cs.SyllabusId
                                  WHERE cs.ClassId = @ClassId";
                 using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
@@ -156,6 +173,77 @@ namespace BTL___Nhóm_1.GUI.LopHoc
         {
             DanhSachSinhVien danhSachSinhVienform = new DanhSachSinhVien(classId);
             danhSachSinhVienform.ShowDialog();
+        }
+
+        private void txtTim_Enter(object sender, EventArgs e)
+        {
+            if (txtTim.Text == "Tìm kiếm tên đề cương...")
+            {
+                txtTim.Text = "";
+                txtTim.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtTim_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTim.Text))
+            {
+                txtTim.Text = "Tìm kiếm tên đề cương...";
+                txtTim.ForeColor = Color.Gray;
+            }
+        }
+
+        private void btnTim_Click(object sender, EventArgs e)
+        {
+            string selectBase = @"SELECT s.SyllabusName as 'Tên đề cương', s.Author as 'Tác giả', s.PostedDate as 'Ngày xuất bản', s.SyllabusType as 'Loại đề cương', s.SyllabusStatus as 'Trạng thái'
+                                 FROM Syllabus s JOIN Class_Syllabus cs ON s.SyllabusId = cs.SyllabusId
+                                 WHERE cs.ClassId = @ClassId ";
+            var conditions = new List<string>();
+            string finalSelect = selectBase;
+            if (!string.IsNullOrEmpty(txtTim.Text.Trim()) && txtTim.Text != "Tìm kiếm tên đề cương...")
+            {
+                conditions.Add("s.SyllabusName LIKE @search");
+            }
+            if (conditions.Count > 0)
+            {
+                finalSelect += " AND " + string.Join(" AND ", conditions);
+            }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ChuoiKetNoi"].ConnectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(finalSelect, connection))
+                    {
+                        command.Parameters.AddWithValue("@ClassId", classId);
+                        if (conditions.Contains("s.SyllabusName LIKE @search"))
+                        {
+                            command.Parameters.AddWithValue("@search", "%" + txtTim.Text.Trim() + "%");
+                        }
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+                            dgv.DataSource = dataTable;
+                        }
+                    }
+                }
+
+                this.BeginInvoke(new Action(() => SetButtonInRole()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi tìm kiếm lớp học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtTim_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) || !char.IsLetterOrDigit(e.KeyChar) || e.KeyChar != '_' || e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

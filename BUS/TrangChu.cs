@@ -248,7 +248,7 @@ namespace BTL___Nhóm_1.BUS
                 // loop to allow re-selection when duplicates are found
                 while (true)
                 {
-                    using (var dlg = new BTL___Nhóm_1.TrangChu.ChonDeCuong())
+                    using (var dlg = new BTL___Nhóm_1.TrangChu.SelectSyllabiForm())
                     {
                         if (dlg.ShowDialog(this) != DialogResult.OK)
                             return;
@@ -521,6 +521,14 @@ namespace BTL___Nhóm_1.BUS
         private void txtTenDeCuong_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtTenDeCuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) || !char.IsLetterOrDigit(e.KeyChar) || e.KeyChar != '_' || e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

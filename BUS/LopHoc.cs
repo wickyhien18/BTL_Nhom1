@@ -306,5 +306,13 @@ namespace BTL___Nhóm_1.BUS
             ThongTinLop thongTinLopForm = new ThongTinLop(classId);
             thongTinLopForm.ShowDialog();
         }
+
+        private void txtTim_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) || !char.IsLetterOrDigit(e.KeyChar) || e.KeyChar != '_' || e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

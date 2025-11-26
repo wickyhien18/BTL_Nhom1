@@ -93,6 +93,7 @@
             this.txtTim.TabIndex = 14;
             this.txtTim.TabStop = false;
             this.txtTim.Text = "Tìm kiếm tài khoản...";
+            this.txtTim.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTim_KeyPress);
             // 
             // ChonSinhVien
             // 

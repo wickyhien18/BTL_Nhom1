@@ -53,6 +53,7 @@
             this.txtTim.Size = new System.Drawing.Size(352, 38);
             this.txtTim.TabIndex = 12;
             this.txtTim.Text = "Tìm kiếm lớp...";
+            this.txtTim.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTim_KeyPress);
             // 
             // btnXoa
             // 

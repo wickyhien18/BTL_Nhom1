@@ -55,6 +55,7 @@
             this.txtGV.Name = "txtGV";
             this.txtGV.Size = new System.Drawing.Size(353, 38);
             this.txtGV.TabIndex = 22;
+            this.txtGV.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTenLop_KeyPress);
             // 
             // label1
             // 
@@ -74,6 +75,7 @@
             this.txtTenLop.Name = "txtTenLop";
             this.txtTenLop.Size = new System.Drawing.Size(353, 38);
             this.txtTenLop.TabIndex = 20;
+            this.txtTenLop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTenLop_KeyPress);
             // 
             // lbTenLop
             // 

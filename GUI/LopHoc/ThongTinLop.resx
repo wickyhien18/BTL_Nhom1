@@ -133,13 +133,13 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="dgv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>12, 53</value>
   </data>
   <data name="dgv.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="dgv.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 384</value>
+    <value>776, 370</value>
   </data>
   <data name="dgv.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -154,13 +154,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;dgv.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btnThemSV.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnThemSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 408</value>
+    <value>11, 429</value>
   </data>
   <data name="btnThemSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 30</value>
@@ -181,13 +181,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnThemSV.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="btnThemDeCuong.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnThemDeCuong.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 408</value>
+    <value>142, 429</value>
   </data>
   <data name="btnThemDeCuong.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 30</value>
@@ -208,13 +208,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnThemDeCuong.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="btnDS.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 408</value>
+    <value>273, 429</value>
   </data>
   <data name="btnDS.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 30</value>
@@ -235,7 +235,61 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnDS.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnTim.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 7.8pt, style=Bold</value>
+  </data>
+  <data name="btnTim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>370, 12</value>
+  </data>
+  <data name="btnTim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 32</value>
+  </data>
+  <data name="btnTim.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="btnTim.Text" xml:space="preserve">
+    <value>Tìm</value>
+  </data>
+  <data name="&gt;&gt;btnTim.Name" xml:space="preserve">
+    <value>btnTim</value>
+  </data>
+  <data name="&gt;&gt;btnTim.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnTim.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnTim.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="txtTim.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10.2pt</value>
+  </data>
+  <data name="txtTim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 14</value>
+  </data>
+  <data name="txtTim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>352, 27</value>
+  </data>
+  <data name="txtTim.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="txtTim.Text" xml:space="preserve">
+    <value>Tìm kiếm tên đề cương...</value>
+  </data>
+  <data name="&gt;&gt;txtTim.Name" xml:space="preserve">
+    <value>txtTim</value>
+  </data>
+  <data name="&gt;&gt;txtTim.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTim.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtTim.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -244,7 +298,7 @@
     <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 450</value>
+    <value>800, 476</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>ThongTinLop</value>

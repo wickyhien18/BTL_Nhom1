@@ -227,6 +227,7 @@
             this.txtTenDeCuong.Text = "Tìm kiếm tên đề cương...";
             this.txtTenDeCuong.TextChanged += new System.EventHandler(this.txtTenDeCuong_TextChanged);
             this.txtTenDeCuong.Enter += new System.EventHandler(this.txtTenDeCuong_Enter);
+            this.txtTenDeCuong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTenDeCuong_KeyPress);
             this.txtTenDeCuong.Leave += new System.EventHandler(this.txtTenDeCuong_Leave);
             // 
             // lblMonHoc

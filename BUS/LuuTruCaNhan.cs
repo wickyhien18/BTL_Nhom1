@@ -608,5 +608,13 @@ WHERE ps.UserId = @userId";
             // Làm xong thì hiện lại
             if (parentForm != null) parentForm.Show();
         }
+
+        private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) || !char.IsLetterOrDigit(e.KeyChar) || e.KeyChar != '_' || e.KeyChar != ' ')
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

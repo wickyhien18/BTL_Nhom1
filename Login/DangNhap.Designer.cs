@@ -42,6 +42,7 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -187,6 +188,11 @@
             this.label3.Text = "ĐĂNG NHẬP";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // sqlCommand1
+            // 
+            this.sqlCommand1.CommandTimeout = 30;
+            this.sqlCommand1.EnableOptimizedParameterBinding = false;
+            // 
             // fmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -235,6 +241,7 @@
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label3;
+        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
     }
 }
 
