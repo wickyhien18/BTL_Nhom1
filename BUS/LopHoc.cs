@@ -214,6 +214,12 @@ namespace BTL___Nhóm_1.BUS
                         cmd.Parameters.AddWithValue("@ClassId", classId);
                         cmd.ExecuteNonQuery();
                     }
+                    string deleteSy = @"DELETE FROM Class_Syllabus WHERE ClassId = @ClassId";
+                    using (SqlCommand cmd = new SqlCommand(deleteSy, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@ClassId", classId);
+                        cmd.ExecuteNonQuery();
+                    }
                     //Xoá Class
                     string deleteClass = @"DELETE FROM Class WHERE ClassId = @ClassId";
                     using (SqlCommand cmd = new SqlCommand(deleteClass, conn))
