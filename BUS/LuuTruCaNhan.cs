@@ -611,7 +611,7 @@ WHERE ps.UserId = @userId";
 
         private void txtTen_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) || !char.IsLetterOrDigit(e.KeyChar) || e.KeyChar != '_' || e.KeyChar != ' ')
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && e.KeyChar != '_' && e.KeyChar != ' ')
             {
                 e.Handled = true;
             }
