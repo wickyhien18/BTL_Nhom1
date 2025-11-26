@@ -241,6 +241,18 @@
     <Compile Include="DAL\Question.cs" />
     <Compile Include="DAL\Syllabus.cs" />
     <Compile Include="DAL\User.cs" />
+    <Compile Include="GUI\LopHoc\ChonSinhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LopHoc\ChonSinhVien.Designer.cs">
+      <DependentUpon>ChonSinhVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\LopHoc\DanhSachSinhVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LopHoc\DanhSachSinhVien.Designer.cs">
+      <DependentUpon>DanhSachSinhVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\LopHoc\SuaThongTin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +264,12 @@
     </Compile>
     <Compile Include="GUI\LopHoc\ThemLop.Designer.cs">
       <DependentUpon>ThemLop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\LopHoc\ThongTinLop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LopHoc\ThongTinLop.Designer.cs">
+      <DependentUpon>ThongTinLop.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\DangKy.cs">
       <SubType>Form</SubType>
@@ -339,11 +357,20 @@
     <EmbeddedResource Include="BUS\TrangChu.resx">
       <DependentUpon>TrangChu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\LopHoc\ChonSinhVien.resx">
+      <DependentUpon>ChonSinhVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\LopHoc\DanhSachSinhVien.resx">
+      <DependentUpon>DanhSachSinhVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\LopHoc\SuaThongTin.resx">
       <DependentUpon>SuaThongTin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\LopHoc\ThemLop.resx">
       <DependentUpon>ThemLop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\LopHoc\ThongTinLop.resx">
+      <DependentUpon>ThongTinLop.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\DangKy.resx">
       <DependentUpon>DangKy.cs</DependentUpon>

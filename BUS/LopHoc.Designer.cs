@@ -29,27 +29,30 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.txtTen = new System.Windows.Forms.TextBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.txtTim = new System.Windows.Forms.TextBox();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.dgvLop = new System.Windows.Forms.DataGridView();
-            this.btnTim = new System.Windows.Forms.Button();
             this.ClassId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TeacherName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnTim = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLop)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtTen
+            // txtTim
             // 
-            this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
-            this.txtTen.ForeColor = System.Drawing.Color.Gray;
-            this.txtTen.Location = new System.Drawing.Point(3, 2);
-            this.txtTen.Name = "txtTen";
-            this.txtTen.Size = new System.Drawing.Size(352, 38);
-            this.txtTen.TabIndex = 12;
-            this.txtTen.Text = "Tìm kiếm lớp...";
+            this.txtTim.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F);
+            this.txtTim.ForeColor = System.Drawing.Color.Gray;
+            this.txtTim.Location = new System.Drawing.Point(3, 2);
+            this.txtTim.Name = "txtTim";
+            this.txtTim.Size = new System.Drawing.Size(352, 38);
+            this.txtTim.TabIndex = 12;
+            this.txtTim.Text = "Tìm kiếm lớp...";
             // 
             // btnXoa
             // 
@@ -92,7 +95,6 @@
             this.dgvLop.AllowUserToResizeColumns = false;
             this.dgvLop.AllowUserToResizeRows = false;
             this.dgvLop.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvLop.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.DeepSkyBlue;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -106,24 +108,36 @@
             this.ClassId,
             this.ClassName,
             this.TeacherName});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvLop.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvLop.EnableHeadersVisualStyles = false;
+            this.dgvLop.GridColor = System.Drawing.Color.White;
             this.dgvLop.Location = new System.Drawing.Point(3, 54);
             this.dgvLop.Name = "dgvLop";
             this.dgvLop.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SkyBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLop.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvLop.RowHeadersVisible = false;
             this.dgvLop.RowHeadersWidth = 100;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.dgvLop.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvLop.RowTemplate.Height = 24;
             this.dgvLop.Size = new System.Drawing.Size(936, 306);
-            this.dgvLop.TabIndex = 8;
+            this.dgvLop.TabIndex = 0;
+            this.dgvLop.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLop_CellClick);
             this.dgvLop.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLop_CellContentClick);
-            // 
-            // btnTim
-            // 
-            this.btnTim.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
-            this.btnTim.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
-            this.btnTim.Location = new System.Drawing.Point(361, 0);
-            this.btnTim.Name = "btnTim";
-            this.btnTim.Size = new System.Drawing.Size(60, 40);
-            this.btnTim.TabIndex = 13;
             // 
             // ClassId
             // 
@@ -156,12 +170,22 @@
             this.TeacherName.ReadOnly = true;
             this.TeacherName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // btnTim
+            // 
+            this.btnTim.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F);
+            this.btnTim.Image = global::BTL___Nhóm_1.Properties.Resources.search_interface_symbol;
+            this.btnTim.Location = new System.Drawing.Point(361, 0);
+            this.btnTim.Name = "btnTim";
+            this.btnTim.Size = new System.Drawing.Size(60, 40);
+            this.btnTim.TabIndex = 13;
+            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
+            // 
             // LopHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnTim);
-            this.Controls.Add(this.txtTen);
+            this.Controls.Add(this.txtTim);
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
@@ -177,7 +201,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnTim;
-        private System.Windows.Forms.TextBox txtTen;
+        private System.Windows.Forms.TextBox txtTim;
         private System.Windows.Forms.Button btnXoa;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Button btnThem;

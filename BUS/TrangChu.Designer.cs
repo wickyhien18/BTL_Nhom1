@@ -225,6 +225,7 @@
             this.txtTenDeCuong.Size = new System.Drawing.Size(352, 38);
             this.txtTenDeCuong.TabIndex = 4;
             this.txtTenDeCuong.Text = "Tìm kiếm tên đề cương...";
+            this.txtTenDeCuong.TextChanged += new System.EventHandler(this.txtTenDeCuong_TextChanged);
             this.txtTenDeCuong.Enter += new System.EventHandler(this.txtTenDeCuong_Enter);
             this.txtTenDeCuong.Leave += new System.EventHandler(this.txtTenDeCuong_Leave);
             // 
