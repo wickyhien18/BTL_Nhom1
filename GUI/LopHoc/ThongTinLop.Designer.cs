@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThongTinLop));
             this.dgv = new System.Windows.Forms.DataGridView();
             this.Select = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.btnThemSV = new System.Windows.Forms.Button();
@@ -42,70 +43,54 @@
             this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AllowUserToResizeColumns = false;
             this.dgv.AllowUserToResizeRows = false;
-            this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.dgv, "dgv");
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv.ColumnHeadersHeight = 29;
             this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Select});
-            this.dgv.Location = new System.Drawing.Point(12, 12);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
-            this.dgv.RowHeadersWidth = 51;
             this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv.Size = new System.Drawing.Size(774, 427);
-            this.dgv.TabIndex = 3;
             this.dgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellClick);
             this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick);
             // 
             // Select
             // 
-            this.Select.HeaderText = "";
-            this.Select.MinimumWidth = 6;
+            resources.ApplyResources(this.Select, "Select");
             this.Select.Name = "Select";
             // 
             // btnThemSV
             // 
-            this.btnThemSV.Location = new System.Drawing.Point(12, 448);
+            resources.ApplyResources(this.btnThemSV, "btnThemSV");
             this.btnThemSV.Name = "btnThemSV";
-            this.btnThemSV.Size = new System.Drawing.Size(125, 44);
-            this.btnThemSV.TabIndex = 4;
-            this.btnThemSV.Text = "Thêm sinh viên";
             this.btnThemSV.UseVisualStyleBackColor = true;
             this.btnThemSV.Click += new System.EventHandler(this.btnThemSV_Click);
             // 
             // btnThemDeCuong
             // 
-            this.btnThemDeCuong.Location = new System.Drawing.Point(143, 448);
+            resources.ApplyResources(this.btnThemDeCuong, "btnThemDeCuong");
             this.btnThemDeCuong.Name = "btnThemDeCuong";
-            this.btnThemDeCuong.Size = new System.Drawing.Size(125, 44);
-            this.btnThemDeCuong.TabIndex = 5;
-            this.btnThemDeCuong.Text = "Thêm đề cương";
             this.btnThemDeCuong.UseVisualStyleBackColor = true;
             this.btnThemDeCuong.Click += new System.EventHandler(this.btnThemDeCuong_Click);
             // 
             // btnDS
             // 
-            this.btnDS.Location = new System.Drawing.Point(274, 448);
+            resources.ApplyResources(this.btnDS, "btnDS");
             this.btnDS.Name = "btnDS";
-            this.btnDS.Size = new System.Drawing.Size(125, 44);
-            this.btnDS.TabIndex = 6;
-            this.btnDS.Text = "Danh sách sinh viên";
             this.btnDS.UseVisualStyleBackColor = true;
             this.btnDS.Click += new System.EventHandler(this.btnDS_Click);
             // 
             // ThongTinLop
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 501);
             this.Controls.Add(this.btnDS);
             this.Controls.Add(this.btnThemDeCuong);
             this.Controls.Add(this.btnThemSV);
             this.Controls.Add(this.dgv);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ThongTinLop";
-            this.Text = "ThongTinLop";
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
 

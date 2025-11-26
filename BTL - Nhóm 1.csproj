@@ -259,6 +259,12 @@
     <Compile Include="GUI\LopHoc\SuaThongTin.Designer.cs">
       <DependentUpon>SuaThongTin.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\LopHoc\ThemDeCuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\LopHoc\ThemDeCuong.Designer.cs">
+      <DependentUpon>ThemDeCuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\LopHoc\ThemLop.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -365,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\LopHoc\SuaThongTin.resx">
       <DependentUpon>SuaThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\LopHoc\ThemDeCuong.resx">
+      <DependentUpon>ThemDeCuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\LopHoc\ThemLop.resx">
       <DependentUpon>ThemLop.cs</DependentUpon>
